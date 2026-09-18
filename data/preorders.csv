@@ -1,0 +1,9 @@
+id,branch_id,date,customer_name,dish_id,dish_name,quantity,note
+1,BRANCH_01,2026-09-18,Công ty TechCorp (Họp sáng),D15,Cà Phê Sữa Đá Sài Gòn,25,Giao lúc 8h30
+2,BRANCH_01,2026-09-18,Văn phòng Luật Mekong (Cơm trưa),D06,Cơm Gà Xối Mỡ Giòn Da,18,Giao lúc 11h45
+3,BRANCH_01,2026-09-18,Anh Minh (Đặt ăn trưa),D01,Phở Bò Tái Nạm,12,Giao 12h00
+4,BRANCH_02,2026-09-18,CLB Tiếng Anh ĐH Quốc Gia (Offline),D20,Trà Sữa Trân Châu Ô Long,30,Lấy lúc 14h30
+5,BRANCH_02,2026-09-18,Nhóm sinh viên Bách Khoa,D13,Gà Popcorn Giòn Cay,15,Ăn tại quán 16h00
+6,BRANCH_02,2026-09-18,Chị Phương (Sinh nhật),D19,Trà Đào Cam Sả Tươi,16,Giao 15h00
+7,BRANCH_03,2026-09-18,Gia đình Bác Hùng (Tiệc mừng),D01,Phở Bò Tái Nạm,20,Ăn tại quán 18h30
+8,BRANCH_03,2026-09-18,Bàn tiệc cô Mai,D04,Bún Bò Huế Cốt Đậm,14,Ăn tại quán 19h00
