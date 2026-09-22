@@ -4,6 +4,12 @@ Sinh dữ liệu quy mô lớn cho FoodFlow AI (3 Chi Nhánh, 22 Món Ăn/Đồ 
 - Chi nhánh 1: FoodFlow Quận 1 (Bistro & Cơm Trưa Văn Phòng)
 - Chi nhánh 2: FoodFlow Cầu Giấy (Trà Sữa & Ăn Vặt Giới Trẻ)
 - Chi nhánh 3: FoodFlow Tây Hồ (Ẩm Thực Truyền Thống Gia Đình)
+
+v2 — Cải thiện độ phức tạp dữ liệu:
+- Nhiễu Gauss tăng từ 5% → 12%
+- Event spikes (4 loại sự kiện bất thường) + cột event_flag
+- Tương tác phi tuyến branch_type × weekend × weather
+- Tết Nguyên Đán 2025/2026 (hệ số tất niên + mở cửa xuyên Tết)
 """
 
 import os
@@ -22,6 +28,14 @@ if hasattr(sys.stderr, 'reconfigure'):
 
 random.seed(42)
 
+# Import vn_calendar từ backend (dùng chung VIETNAM_HOLIDAYS, Tết multiplier)
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from backend.app.forecasting.vn_calendar import (
+    VIETNAM_HOLIDAYS,
+    get_tet_date,
+    get_tet_synthetic_multiplier,
+)
+
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend", "foodflow.db")
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -33,6 +47,13 @@ BRANCHES = [
     {"id": "BRANCH_02", "name": "FoodFlow Cầu Giấy", "address": "88 Cầu Giấy, Quan Hoa, Cầu Giấy, Hà Nội", "type": "Trà Sữa & Ăn Vặt Sinh Viên"},
     {"id": "BRANCH_03", "name": "FoodFlow Tây Hồ", "address": "45 Xuân Diệu, Quảng An, Tây Hồ, Hà Nội", "type": "Ẩm Thực Truyền Thống & Gia Đình"},
 ]
+
+# Mapping branch_id → branch_type cho tương tác phi tuyến
+BRANCH_TYPE_MAP = {
+    "BRANCH_01": "bistro",
+    "BRANCH_02": "tra_sua",
+    "BRANCH_03": "am_thuc_truyen_thong",
+}
 
 # 2. Danh mục 22 Món Ăn & Đồ Uống (Dishes)
 DISHES = [
@@ -229,28 +250,43 @@ RECIPES = [
     {"dish_id": "D22", "ingredient_id": "ING12", "quantity": 0.02},
 ]
 
-VIETNAM_HOLIDAYS = {
-    "01-01": "Tết Dương Lịch",
-    "02-14": "Lễ Tình Nhân Valentine",
-    "03-08": "Quốc tế Phụ nữ",
-    "04-30": "Giải phóng miền Nam",
-    "05-01": "Quốc tế Lao động",
-    "09-02": "Quốc khánh 2/9",
-    "10-20": "Ngày Phụ nữ VN",
-    "11-20": "Ngày Nhà giáo VN",
-    "12-24": "Đêm Giáng Sinh",
-    "12-25": "Lễ Giáng Sinh",
-}
+# ============================================================
+# 5. Event Spikes — sự kiện bất thường (MỚI v2)
+# ============================================================
+EVENT_TYPES = [
+    {"name": "don_tiec_dot_xuat", "prob": 0.02, "mult_range": (1.6, 2.3)},    # đơn đặt tiệc đột xuất
+    {"name": "su_kien_dia_phuong", "prob": 0.015, "mult_range": (1.4, 1.9)},  # sự kiện gần chi nhánh
+    {"name": "thoi_tiet_cuc_doan", "prob": 0.02, "mult_range": (0.4, 0.65)},  # mưa bão lớn, giảm mạnh
+    {"name": "su_co_von_hanh", "prob": 0.01, "mult_range": (0.3, 0.5)},       # sự cố vận hành
+]
+
+def get_event_multiplier():
+    """Trả về (multiplier, event_name hoặc None) cho 1 ngày."""
+    for event in EVENT_TYPES:
+        if random.random() < event["prob"]:
+            return random.uniform(*event["mult_range"]), event["name"]
+    return 1.0, None
+
 
 def generate_big_dataset():
     print("=" * 70)
-    print("BẮT ĐẦU SINH DỮ LIỆU ĐA DẠNG (3 CHI NHÁNH, 22 MÓN, 730 NGÀY)")
+    print("BẮT ĐẦU SINH DỮ LIỆU ĐA DẠNG v2 (3 CHI NHÁNH, 22 MÓN, 730 NGÀY)")
+    print("Cải tiến: +event spikes, +tương tác phi tuyến, +Tết Nguyên Đán, nhiễu 12%")
     print("=" * 70)
 
     # 730 ngày (2 năm lịch sử kết thúc hôm qua 2026-09-17)
     end_date = datetime(2026, 9, 17)
     start_date = end_date - timedelta(days=729)
     total_days = 730
+
+    # Pre-compute Tết dates cho các năm trong range
+    tet_dates_in_range = {}
+    for year in range(start_date.year, end_date.year + 1):
+        try:
+            tet_dates_in_range[year] = get_tet_date(year)
+        except (ValueError, KeyError):
+            pass
+    print(f"-> Tết dates: {tet_dates_in_range}")
 
     calendar_rows = []
     sales_rows = []
@@ -279,9 +315,21 @@ def generate_big_dataset():
         trend = 1.0 + (day_idx / total_days) * 0.20
         month = current_date.month
 
+        # Tết multiplier cho ngày này (tìm Tết gần nhất)
+        tet_mult = 1.0
+        for year, tet_date in tet_dates_in_range.items():
+            m = get_tet_synthetic_multiplier(current_date, tet_date)
+            if m != 1.0:
+                tet_mult = m
+                break
+
         # Sinh sales cho 3 chi nhánh x 22 món
         for branch in BRANCHES:
             b_id = branch["id"]
+            branch_type = BRANCH_TYPE_MAP[b_id]
+
+            # Event spike — RIÊNG theo từng chi nhánh (mỗi chi nhánh có event độc lập)
+            event_mult, event_name = get_event_multiplier()
 
             for dish in DISHES:
                 base = dish["base_sales"]
@@ -295,10 +343,25 @@ def generate_big_dataset():
                 if month in [5, 6, 7, 8] and dish["category"] in ["Trà & Trái Cây", "Cà Phê"]:
                     weather_mult = 1.20
 
-                # Nhiễu Gauss 5%
-                noise = random.gauss(1.0, 0.05)
+                # Tương tác phi tuyến: branch_type × weekend × weather (MỚI v2)
+                interaction_mult = 1.0
+                if is_wknd and weather_mult > 1.0:
+                    # Cuối tuần + mùa hè nóng → đồ uống tăng THÊM tùy loại quán
+                    if branch_type == "tra_sua":
+                        interaction_mult = 1.15   # trà sữa sinh viên: cuối tuần nóng → tăng mạnh
+                    elif branch_type == "bistro":
+                        interaction_mult = 1.05   # bistro: tăng nhẹ
+                elif is_wknd and month in [11, 12, 1, 2]:
+                    # Cuối tuần + mùa đông → ảnh hưởng khác nhau theo loại quán
+                    if branch_type == "tra_sua":
+                        interaction_mult = 0.85   # trà sữa: cuối tuần lạnh → giảm (sinh viên ngại ra ngoài)
+                    elif branch_type == "am_thuc_truyen_thong":
+                        interaction_mult = 1.10   # ẩm thực truyền thống: cuối tuần lạnh → gia đình tụ tập → tăng
 
-                qty = int(round(base * b_weight * day_mult * hol_mult * trend * weather_mult * noise))
+                # Nhiễu Gauss 12% (tăng từ 5% cũ)
+                noise = random.gauss(1.0, 0.12)
+
+                qty = int(round(base * b_weight * day_mult * hol_mult * trend * weather_mult * event_mult * interaction_mult * tet_mult * noise))
                 qty = max(qty, 4)
 
                 sales_rows.append({
@@ -309,7 +372,8 @@ def generate_big_dataset():
                     "dish_name": dish["name"],
                     "category": dish["category"],
                     "quantity": qty,
-                    "revenue": qty * dish["price"]
+                    "revenue": qty * dish["price"],
+                    "event_flag": event_name   # MỚI: None nếu không có event
                 })
 
         current_date += timedelta(days=1)
@@ -317,19 +381,24 @@ def generate_big_dataset():
 
     print(f"-> Đã sinh {len(sales_rows)} bản ghi doanh số ({total_days} ngày x 3 chi nhánh x 22 món).")
 
+    # Đếm event flags
+    event_counts = {}
+    for row in sales_rows:
+        ef = row.get("event_flag")
+        if ef:
+            event_counts[ef] = event_counts.get(ef, 0) + 1
+    print(f"-> Event flags: {event_counts}")
+
     # Sinh Tồn Kho (Inventory) theo từng chi nhánh
     inventory_rows = []
-    # Phân bổ tồn kho thực tế cho từng chi nhánh
     for branch in BRANCHES:
         b_id = branch["id"]
         for ing in INGREDIENTS:
-            # Ngẫu nhiên hóa mức tồn kho (một số thiếu, một số đủ)
             min_stk = ing["min_stock"]
-            # Tạo tình huống thiếu hụt có chủ đích cho các mặt hàng tươi sống
             if ing["id"] in ["ING13", "ING14", "ING15", "ING17", "ING18", "ING24", "ING25", "ING27", "ING03", "ING09", "ING11"]:
-                qty = round(min_stk * random.uniform(0.3, 0.7), 1) # Thiếu hụt
+                qty = round(min_stk * random.uniform(0.3, 0.7), 1)
             else:
-                qty = round(min_stk * random.uniform(1.2, 2.5), 1) # Đủ hoặc Dư
+                qty = round(min_stk * random.uniform(1.2, 2.5), 1)
 
             inventory_rows.append({
                 "branch_id": b_id,
@@ -337,7 +406,7 @@ def generate_big_dataset():
                 "quantity": qty
             })
 
-    # Sinh Pre-orders phong phú cho ngày mai (2026-09-18)
+    # Sinh Pre-orders cho ngày mai (2026-09-18)
     tomorrow_str = (end_date + timedelta(days=1)).strftime("%Y-%m-%d")
     preorders = [
         {"id": 1, "branch_id": "BRANCH_01", "date": tomorrow_str, "customer_name": "Công ty TechCorp (Họp sáng)", "dish_id": "D15", "dish_name": "Cà Phê Sữa Đá Sài Gòn", "quantity": 25, "note": "Giao lúc 8h30"},
@@ -357,7 +426,7 @@ def generate_big_dataset():
         {"id": 3, "branch_id": "BRANCH_02", "ingredient_id": "ING09", "batch_code": "LOT-ORANGE-01", "quantity_remaining": 4.0, "received_date": "2026-09-14", "expiry_date": "2026-09-21"},
         {"id": 4, "branch_id": "BRANCH_02", "ingredient_id": "ING11", "batch_code": "LOT-MELON-01", "quantity_remaining": 8.0, "received_date": "2026-09-15", "expiry_date": "2026-09-19"},
         {"id": 5, "branch_id": "BRANCH_03", "ingredient_id": "ING14", "batch_code": "LOT-SHANK-01", "quantity_remaining": 4.0, "received_date": "2026-09-16", "expiry_date": "2026-09-19"},
-        {"id": 6, "branch_id": "BRANCH_03", "ingredient_id": "ING15", "branch_id": "BRANCH_03", "batch_code": "LOT-CHICK-01", "quantity_remaining": 6.0, "received_date": "2026-09-16", "expiry_date": "2026-09-19"},
+        {"id": 6, "branch_id": "BRANCH_03", "ingredient_id": "ING15", "batch_code": "LOT-CHICK-01", "quantity_remaining": 6.0, "received_date": "2026-09-16", "expiry_date": "2026-09-19"},
         {"id": 7, "branch_id": "BRANCH_01", "ingredient_id": "ING01", "batch_code": "LOT-COFFEE-01", "quantity_remaining": 12.0, "received_date": "2026-08-01", "expiry_date": "2027-02-01"},
         {"id": 8, "branch_id": "BRANCH_02", "ingredient_id": "ING08", "batch_code": "LOT-PEACH-01", "quantity_remaining": 20.0, "received_date": "2026-07-01", "expiry_date": "2027-07-01"},
     ]
@@ -376,7 +445,7 @@ def generate_big_dataset():
     save_csv("ingredients.csv", ["id", "name", "unit", "cost_per_unit", "shelf_life_days", "min_stock"], INGREDIENTS)
     save_csv("recipes.csv", ["dish_id", "ingredient_id", "quantity"], RECIPES)
     save_csv("calendar.csv", ["date", "day_of_week", "day_name", "is_weekend", "is_holiday", "holiday_name"], calendar_rows)
-    save_csv("sales.csv", ["date", "branch_id", "branch_name", "dish_id", "dish_name", "category", "quantity", "revenue"], sales_rows)
+    save_csv("sales.csv", ["date", "branch_id", "branch_name", "dish_id", "dish_name", "category", "quantity", "revenue", "event_flag"], sales_rows)
     save_csv("inventory.csv", ["branch_id", "ingredient_id", "quantity"], inventory_rows)
     save_csv("inventory_batches.csv", ["id", "branch_id", "ingredient_id", "batch_code", "quantity_remaining", "received_date", "expiry_date"], batches)
     save_csv("preorders.csv", ["id", "branch_id", "date", "customer_name", "dish_id", "dish_name", "quantity", "note"], preorders)
@@ -450,7 +519,8 @@ def generate_big_dataset():
         dish_name TEXT NOT NULL,
         category TEXT NOT NULL,
         quantity INTEGER NOT NULL,
-        revenue REAL NOT NULL
+        revenue REAL NOT NULL,
+        event_flag TEXT
     )""")
 
     cur.execute("""
@@ -504,8 +574,8 @@ def generate_big_dataset():
     cur.executemany("INSERT INTO calendar (date, day_of_week, day_name, is_weekend, is_holiday, holiday_name) VALUES (?, ?, ?, ?, ?, ?)",
                     [(c["date"], c["day_of_week"], c["day_name"], c["is_weekend"], c["is_holiday"], c["holiday_name"]) for c in calendar_rows])
 
-    cur.executemany("INSERT INTO sales (date, branch_id, branch_name, dish_id, dish_name, category, quantity, revenue) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    [(s["date"], s["branch_id"], s["branch_name"], s["dish_id"], s["dish_name"], s["category"], s["quantity"], s["revenue"]) for s in sales_rows])
+    cur.executemany("INSERT INTO sales (date, branch_id, branch_name, dish_id, dish_name, category, quantity, revenue, event_flag) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [(s["date"], s["branch_id"], s["branch_name"], s["dish_id"], s["dish_name"], s["category"], s["quantity"], s["revenue"], s.get("event_flag")) for s in sales_rows])
 
     cur.executemany("INSERT INTO inventory (branch_id, ingredient_id, quantity) VALUES (?, ?, ?)",
                     [(inv["branch_id"], inv["ingredient_id"], inv["quantity"]) for inv in inventory_rows])
@@ -533,6 +603,7 @@ def generate_big_dataset():
     print("=" * 70)
     print(f"NẠP THÀNH CÔNG VÀO SQLITE: {DB_PATH}")
     print(f"Tổng kết: 3 Chi Nhánh | 22 Món Ăn/Uống | 35 Nguyên Liệu | {len(sales_rows)} Bản ghi Sales (730 ngày)")
+    print(f"Cải tiến v2: event_flag column, Tết Nguyên Đán, nhiễu 12%, tương tác phi tuyến")
     print("=" * 70)
 
 if __name__ == "__main__":
