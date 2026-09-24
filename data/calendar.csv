@@ -1,4 +1,4 @@
-date,day_of_week,day_name,is_weekend,is_holiday,holiday_name
+﻿date,day_of_week,day_name,is_weekend,is_holiday,holiday_name
 2024-09-18,2,T4,0,0,
 2024-09-19,3,T5,0,0,
 2024-09-20,4,T6,0,0,

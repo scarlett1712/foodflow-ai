@@ -31,6 +31,7 @@ from .forecasting.predictor import get_forecast_for_next_days
 from .forecasting.pipeline import train_and_evaluate_all
 from .services.recommendation_service import get_purchase_recommendations
 from .services.ai_variance_evaluator import evaluate_purchase_variance
+from .services.insight_service import generate_store_insights
 from .services.solana_service import (
     compute_batch_hash,
     compute_po_hash,
@@ -585,7 +586,7 @@ def parse_tabular_file(file_content: bytes, filename: str) -> pd.DataFrame:
 # ==========================================
 
 @app.get("/api/sales/template")
-def download_sales_template(format: str = Query("excel", regex="^(excel|csv)$")):
+def download_sales_template(format: str = Query("excel", pattern="^(excel|csv)$")):
     sample_data = [
         {"date": "2026-09-17", "branch_id": "BRANCH_01", "dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "category": "Phở & Bún", "quantity": 95, "revenue": 5700000},
         {"date": "2026-09-17", "branch_id": "BRANCH_01", "dish_id": "D06", "dish_name": "Cơm Gà Xối Mỡ", "category": "Cơm & Bánh Mì", "quantity": 80, "revenue": 4160000},
@@ -615,7 +616,7 @@ def download_sales_template(format: str = Query("excel", regex="^(excel|csv)$"))
         )
 
 @app.get("/api/recipes/template")
-def download_recipes_template(format: str = Query("excel", regex="^(excel|csv)$")):
+def download_recipes_template(format: str = Query("excel", pattern="^(excel|csv)$")):
     sample_data = [
         {"dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "dish_category": "Phở & Bún", "dish_price": 60000, "ingredient_name": "Thịt bò nạm/tái tươi", "quantity": 0.15, "unit": "kg", "cost_per_unit": 260000},
         {"dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "dish_category": "Phở & Bún", "dish_price": 60000, "ingredient_name": "Bánh phở tươi", "quantity": 0.25, "unit": "kg", "cost_per_unit": 18000},
@@ -1276,10 +1277,32 @@ def delete_preorder(order_id: int):
 # 7. API DỰ BÁO, GỢI Ý MUA HÀNG & DASHBOARD
 # ==========================================
 
+@app.get("/api/weather/locations")
+def get_weather_locations():
+    return [
+        {"id": "ho_chi_minh", "name": "TP. Hồ Chí Minh", "region": "Miền Nam"},
+        {"id": "ha_noi", "name": "Hà Nội", "region": "Miền Bắc"},
+        {"id": "da_nang", "name": "Đà Nẵng", "region": "Miền Trung"},
+        {"id": "can_tho", "name": "Cần Thơ", "region": "Miền Tây"},
+        {"id": "hai_phong", "name": "Hải Phòng", "region": "Miền Bắc"},
+        {"id": "da_lat", "name": "Đà Lạt (Lâm Đồng)", "region": "Tây Nguyên"},
+    ]
+
 @app.get("/api/forecast")
-def get_forecast(n_days: int = Query(7, ge=1, le=14), branch_id: Optional[str] = "BRANCH_01"):
+def get_forecast(
+    n_days: int = Query(7, ge=1, le=14),
+    branch_id: Optional[str] = "BRANCH_01",
+    city: Optional[str] = "ho_chi_minh"
+):
     try:
-        return get_forecast_for_next_days(n_days=n_days, branch_id=branch_id, db_path=DB_PATH)
+        return get_forecast_for_next_days(n_days=n_days, branch_id=branch_id, db_path=DB_PATH, city=city)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/insights")
+def get_insights(branch_id: str = "BRANCH_01", city: str = "ho_chi_minh"):
+    try:
+        return generate_store_insights(branch_id=branch_id, db_path=DB_PATH, city=city)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

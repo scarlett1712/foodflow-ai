@@ -1,36 +1,36 @@
-id,name,unit,cost_per_unit,shelf_life_days,min_stock
-ING01,Cà phê hạt Arabica-Robusta,kg,220000,180,8.0
-ING02,Sữa đặc Ông Thọ / Ngôi Sao,lon,18000,365,25.0
-ING03,Sữa tươi tiệt trùng,lít,32000,60,20.0
-ING04,Kem béo thực vật Rich's,hộp (454ml),28000,90,10.0
-ING05,Trà Ô Long Bảo Lộc,kg,250000,365,4.0
-ING06,Bột Matcha Uji,kg,450000,180,2.0
+﻿id,name,unit,cost_per_unit,shelf_life_days,min_stock
+ING01,Cà phê hạt Robusta Buôn Ma Thuột,kg,180000,180,5.0
+ING02,Sữa đặc Ông Thọ / Ngôi Sao,lon,24000,365,20.0
+ING03,Sữa tươi tiệt trùng,lít,32000,30,15.0
+ING04,Kem béo thực vật Rich lùn,hộp,36000,180,10.0
+ING05,Trà đen / Trà Ô long,kg,220000,365,4.0
+ING06,Bột Matcha Uji Nhật Bản,kg,650000,180,1.5
 ING07,Trân châu đen Đài Loan,kg,45000,180,8.0
-ING08,Đào ngâm đóng hộp,hộp,35000,730,12.0
-ING09,Cam vàng nhập khẩu,kg,42000,14,10.0
-ING10,Cây sả tươi,kg,20000,10,4.0
-ING11,Dưa hấu tươi,kg,15000,7,15.0
-ING12,Đường nước Syrup,lít,25000,180,15.0
-ING13,Thịt bò nạm/tái tươi,kg,260000,3,15.0
-ING14,Thịt bắp bò hoa,kg,280000,3,10.0
-ING15,Thịt gà ta thả vườn,kg,95000,3,12.0
-ING16,Ức gà phi lê,kg,75000,5,10.0
-ING17,Thịt ba chỉ heo tươi,kg,130000,3,12.0
-ING18,Sườn cốt lết heo,kg,140000,3,12.0
-ING19,Chả lụa / Chả bì,kg,110000,7,6.0
-ING20,Giò heo bún bò,kg,100000,3,8.0
-ING21,Nem chua / Chả giò sống,kg,120000,7,6.0
-ING22,Trứng gà tươi,quả,3200,30,60.0
-ING23,Xúc xích tiệt trùng/hun khói,kg,110000,60,6.0
-ING24,Bánh phở tươi Hà Nội,kg,18000,1,18.0
-ING25,Bún tươi sợi nhỏ,kg,16000,1,15.0
-ING26,Bún bò sợi to,kg,17000,1,12.0
+ING08,Đào ngâm đóng hộp,hộp,38000,365,12.0
+ING09,Cam sành tươi,kg,25000,7,10.0
+ING10,Sả cây tươi,kg,18000,10,4.0
+ING11,Dưa hấu tươi,kg,16000,7,15.0
+ING12,Đường mía tinh luyện,kg,22000,365,15.0
+ING13,Thịt bò nạm/tái tươi,kg,260000,3,12.0
+ING14,Bắp bò / Nạm bò hầm,kg,280000,3,8.0
+ING15,Thịt gà ta thả vườn,kg,135000,3,10.0
+ING16,Gà góc tư làm sẵn,kg,75000,3,15.0
+ING17,Thịt ba chỉ heo tươi,kg,140000,3,12.0
+ING18,Sườn cốt lết heo,kg,130000,3,10.0
+ING19,Thịt nạc vai xay,kg,115000,3,8.0
+ING20,Tôm thẻ tươi bóc vỏ,kg,210000,3,6.0
+ING21,Chả lụa / Chả huế,kg,160000,7,5.0
+ING22,Trứng gà tươi,quả,3200,21,50.0
+ING23,Pate gan thượng hạng,kg,150000,10,4.0
+ING24,Bánh phở tươi Hà Nội,kg,18000,2,15.0
+ING25,Bún tươi sợi nhỏ,kg,16000,2,15.0
+ING26,Gạo thơm ST25,kg,28000,180,25.0
 ING27,Ổ Bánh mì giòn,ổ,4000,1,40.0
-ING28,Gạo thơm Jasmine,kg,22000,180,30.0
-ING29,Gạo tấm Sài Gòn,kg,24000,180,25.0
-ING30,Khoai tây cắt sợi đông lạnh,kg,55000,180,10.0
-ING31,Rau sống & Xà lách,kg,25000,3,12.0
-ING32,Dưa cải chua muối,kg,20000,14,8.0
-ING33,Hành lá & Ngò rí,kg,30000,4,5.0
-ING34,Chanh tươi & Ớt xiêm,kg,35000,10,5.0
-ING35,Sốt mè rang Kewpie,chai (1L),135000,180,3.0
+ING28,Bánh tráng cuốn / Bánh đa nem,gói,15000,180,10.0
+ING29,Khoai tây cọng đông lạnh,kg,55000,180,10.0
+ING30,Bột phô mai lắc,kg,140000,180,2.0
+ING31,Rau sống & Thảo mộc tổng hợp,kg,35000,3,8.0
+ING32,Dưa cải chua muối,kg,20000,14,6.0
+ING33,Hành lá & Ngò rí,kg,30000,4,4.0
+ING34,Nước mắm cá cơm Phan Thiết,lít,65000,365,8.0
+ING35,Gia vị & Dầu ăn tổng hợp,lít,45000,180,10.0

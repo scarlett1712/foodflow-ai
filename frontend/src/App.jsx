@@ -32,6 +32,7 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState('dashboard');
   const [branches, setBranches] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState('BRANCH_01');
+  const [selectedCity, setSelectedCity] = useState('ho_chi_minh');
   
   // Data States
   const [summaryData, setSummaryData] = useState(null);
@@ -70,13 +71,13 @@ export default function App() {
     fetchBranches();
   }, []);
 
-  // Load all branch data whenever selectedBranch changes
-  const fetchAllBranchData = async (branchId) => {
+  // Load all branch data whenever selectedBranch or selectedCity changes
+  const fetchAllBranchData = async (branchId, city = selectedCity) => {
     try {
       setLoading(true);
       const [sumRes, fcRes, purRes, invRes, dishRes, recRes, ingRes, preRes] = await Promise.all([
         getDashboardSummary(branchId),
-        getForecast(branchId, 7),
+        getForecast(branchId, 7, city),
         getPurchaseRecommendations(branchId),
         getInventory(branchId),
         getDishes(),
@@ -102,9 +103,9 @@ export default function App() {
 
   useEffect(() => {
     if (selectedBranch) {
-      fetchAllBranchData(selectedBranch);
+      fetchAllBranchData(selectedBranch, selectedCity);
     }
-  }, [selectedBranch]);
+  }, [selectedBranch, selectedCity]);
 
   // Handle Retrain AI
   const handleRetrain = async () => {
@@ -196,6 +197,8 @@ export default function App() {
                 <ForecastPage
                   forecastData={forecastData}
                   branchId={selectedBranch}
+                  selectedCity={selectedCity}
+                  onCityChange={setSelectedCity}
                 />
               )}
 

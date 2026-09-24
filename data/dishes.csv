@@ -1,23 +1,23 @@
-id,name,category,price,base_sales,weekend_mult,weekday_mult
-D01,Phở Bò Tái Nạm,Phở & Bún,60000,80,1.45,0.9
-D02,Phở Gà Ta Lá Chanh,Phở & Bún,55000,65,1.35,0.95
-D03,Bún Chả Hà Nội,Phở & Bún,55000,70,1.3,1.1
-D04,Bún Bò Huế Cốt Đậm,Phở & Bún,65000,60,1.4,0.9
-D05,Bún Thịt Nướng Chả Giò,Phở & Bún,50000,55,1.2,1.05
-D06,Cơm Gà Xối Mỡ Giòn Da,Cơm & Bánh Mì,52000,85,0.9,1.25
-D07,Cơm Rang Dưa Bò Hà Nội,Cơm & Bánh Mì,55000,65,0.95,1.2
-D08,Cơm Tấm Sườn Bì Chả,Cơm & Bánh Mì,55000,75,1.05,1.2
-D09,Bánh Mì Thịt Nướng Giòn,Cơm & Bánh Mì,35000,70,0.85,1.25
-D10,Bánh Mì Chảo Thập Cẩm,Cơm & Bánh Mì,48000,45,1.4,0.9
-D11,Khoai Tây Chiên Bơ Tỏi,Ăn Vặt,32000,50,1.6,0.8
-D12,Nem Rán Hà Nội (3 Cuốn),Ăn Vặt,35000,40,1.3,0.95
-D13,Gà Popcorn Giòn Cay,Ăn Vặt,38000,55,1.5,0.85
-D14,Salad Ức Gà Sốt Mè Rang,Ăn Vặt,45000,35,0.9,1.2
-D15,Cà Phê Sữa Đá Sài Gòn,Cà Phê,28000,130,1.1,1.35
-D16,Bạc Xỉu Đá Ngọt Ngào,Cà Phê,32000,80,1.2,1.1
-D17,Cà Phê Muối Xứ Huế,Cà Phê,35000,70,1.35,1.1
-D18,Americano Đá Tươi Mát,Cà Phê,30000,50,0.9,1.3
-D19,Trà Đào Cam Sả Tươi,Trà & Trái Cây,42000,75,1.5,0.9
-D20,Trà Sữa Trân Châu Ô Long,Trà & Trái Cây,45000,95,1.6,0.85
-D21,Matcha Latte Sữa Tươi,Trà & Trái Cây,48000,50,1.4,0.95
-D22,Nước Ép Dưa Hấu Tươi,Trà & Trái Cây,38000,45,1.3,0.95
+﻿id,name,category,price,base_sales,weekend_mult,weekday_mult
+D01,Phở Bò Tái Nạm,Món Nước,60000,80,1.45,1.0
+D02,Phở Gà Ta Lá Chanh,Món Nước,55000,60,1.4,1.0
+D03,Bún Chả Hà Nội,Món Khô,65000,90,1.35,1.1
+D04,Bún Bò Huế Cốt Đậm,Món Nước,65000,65,1.5,1.0
+D05,Bún Thịt Nướng Chả Giò,Món Khô,55000,70,1.4,1.0
+D06,Cơm Gà Xối Mỡ Giòn Da,Món Khô,55000,110,1.25,1.3
+D07,Cơm Rang Dưa Bò Hà Nội,Món Khô,60000,80,1.3,1.2
+D08,Cơm Tấm Sườn Bì Chả,Món Khô,65000,105,1.4,1.1
+D09,Bánh Mì Thịt Nướng Giòn,Món Khô,35000,120,1.2,1.4
+D10,Bánh Mì Chảo Thập Cẩm,Món Khô,50000,55,1.6,0.9
+D11,Nem Rán Hà Nội (10 cái),Đồ Ăn Nhẹ,60000,45,1.5,0.9
+D12,Gỏi Cuốn Tôm Thịt (4 cuốn),Đồ Ăn Nhẹ,40000,50,1.35,1.0
+D13,Khoai Tây Chiên Lắc Phô Mai,Đồ Ăn Nhẹ,35000,60,1.7,0.8
+D14,Gà Rán Giòn Cay (2 miếng),Đồ Ăn Nhẹ,50000,70,1.6,0.9
+D15,Cà Phê Sữa Đá Sài Gòn,Cà Phê,28000,150,1.1,1.5
+D16,Bạc Xỉu Đá,Cà Phê,30000,80,1.2,1.3
+D17,Cà Phê Muối Xứ Huế,Cà Phê,35000,75,1.3,1.2
+D18,Americano Đá,Cà Phê,30000,50,1.0,1.4
+D19,Trà Đào Cam Sả Tươi,Trà & Trái Cây,38000,95,1.5,1.1
+D20,Trà Sữa Trân Châu Ô Long,Trà & Trái Cây,42000,130,1.7,1.0
+D21,Matcha Latte Sữa Tươi,Trà & Trái Cây,45000,60,1.5,1.0
+D22,Nước Ép Dưa Hấu Tươi,Trà & Trái Cây,35000,55,1.4,1.0

@@ -12,7 +12,11 @@ export const createBranch = (payload) => api.post('/branches', payload);
 export const deleteBranch = (id) => api.delete(`/branches/${id}`);
 
 export const getDashboardSummary = (branchId = 'BRANCH_01') => api.get(`/dashboard/summary?branch_id=${branchId}`);
-export const getForecast = (branchId = 'BRANCH_01', nDays = 7) => api.get(`/forecast?branch_id=${branchId}&n_days=${nDays}`);
+export const getWeatherLocations = () => api.get('/weather/locations');
+export const getForecast = (branchId = 'BRANCH_01', nDays = 7, city = 'ho_chi_minh') => 
+  api.get(`/forecast?branch_id=${branchId}&n_days=${nDays}&city=${city}`);
+export const getStoreInsights = (branchId = 'BRANCH_01', city = 'ho_chi_minh') =>
+  api.get(`/insights?branch_id=${branchId}&city=${city}`);
 
 export const getPurchaseRecommendations = (branchId = 'BRANCH_01', targetDate = null) => {
   const url = targetDate 

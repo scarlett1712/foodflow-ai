@@ -1,11 +1,11 @@
 """
 backend/app/forecasting/pipeline.py
-Pipeline huấn luyện mô hình XGBoost Global Model v2:
-- 1 model duy nhất cho toàn bộ hệ thống (3 chi nhánh × 22 món)
-- XGBoost với enable_categorical=True (native categorical, không one-hot)
-- Baseline: Moving Average cùng thứ trong 4 tuần gần nhất
-- Chỉ số đánh giá: MAE, WAPE (tổng thể + theo từng branch/dish)
-- Lưu model + category mapping cho predictor
+Pipeline huấn luyện Universal F&B XGBoost Model:
+- 1 Universal Model duy nhất học mối tương quan giữa Metadata (category, branch_type, price),
+  Động lượng chuỗi thời gian (Lags, Rolling, Trend Ratios), và Ngữ cảnh Lịch (Thứ, Lễ, Tết VN, Events).
+- Khử phụ thuộc vào ID cố định -> Hoạt động cho bất kỳ chi nhánh, món ăn mới, hoặc dataset người dùng nhập.
+- Baseline: Moving Average cùng thứ trong 4 tuần gần nhất.
+- Đánh giá: WAPE và MAE.
 """
 
 import os
@@ -14,7 +14,7 @@ import sqlite3
 import joblib
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 import xgboost as xgb
 from sklearn.metrics import mean_absolute_error
 
@@ -23,7 +23,14 @@ if hasattr(sys.stdout, 'reconfigure'):
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
-from .features import build_features_for_dish, prepare_categorical_dtypes, FEATURE_COLUMNS
+from .features import (
+    build_features_for_dish,
+    prepare_categorical_dtypes,
+    FEATURE_COLUMNS,
+    STANDARD_CATEGORIES,
+    STANDARD_BRANCH_TYPES,
+    STANDARD_EVENT_FLAGS,
+)
 
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "foodflow.db")
 MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "saved_models")
@@ -42,9 +49,11 @@ def load_data_from_db(db_path=DB_PATH):
         s.date,
         s.branch_id,
         s.branch_name,
+        COALESCE(b.type, 'general') as branch_type,
         s.dish_id,
         s.dish_name,
         s.category,
+        COALESCE(d.price, 50000.0) as price,
         s.quantity,
         s.revenue,
         s.event_flag,
@@ -53,6 +62,8 @@ def load_data_from_db(db_path=DB_PATH):
         c.day_of_week
     FROM sales s
     JOIN calendar c ON s.date = c.date
+    LEFT JOIN branches b ON s.branch_id = b.id
+    LEFT JOIN dishes d ON s.dish_id = d.id
     ORDER BY s.date ASC, s.branch_id ASC, s.dish_id ASC
     """
     df = pd.read_sql_query(query, conn)
@@ -60,25 +71,24 @@ def load_data_from_db(db_path=DB_PATH):
     return df
 
 def train_and_evaluate_all():
-    print("=" * 80)
-    print("HUẤN LUYỆN GLOBAL MODEL v2 (1 MODEL DUY NHẤT — 3 CHI NHÁNH × 22 MÓN × 730 NGÀY)")
-    print("=" * 80)
+    print("=" * 85)
+    print("HUẤN LUYỆN UNIVERSAL F&B DEMAND MODEL (TỔNG QUÁT CHO MỌI QUÁN / MỌI MÓN / DATASET MỚI)")
+    print("=" * 85)
 
     df_all = load_data_from_db()
     unique_dates = sorted(df_all["date"].unique())
     split_idx = int(len(unique_dates) * 0.85) # ~620 ngày train, ~110 ngày test
     split_date = unique_dates[split_idx]
 
-    print(f"-> Tổng số ngày: {len(unique_dates)} ngày (730 ngày)")
-    print(f"-> Train set: Từ {unique_dates[0]} đến {unique_dates[split_idx-1]} ({split_idx} ngày)")
-    print(f"-> Test/Val set: Từ {split_date} đến {unique_dates[-1]} ({len(unique_dates) - split_idx} ngày)")
-    print("-" * 80)
+    print(f"-> Tổng số ngày: {len(unique_dates)} ngày ({unique_dates[0]} -> {unique_dates[-1]})")
+    print(f"-> Train set: {split_idx} ngày ({unique_dates[0]} -> {unique_dates[split_idx-1]})")
+    print(f"-> Test set : {len(unique_dates) - split_idx} ngày ({split_date} -> {unique_dates[-1]})")
+    print("-" * 85)
 
     branches = df_all[["branch_id", "branch_name"]].drop_duplicates().values
 
     # =========================================================================
-    # BƯỚC 1: Build features RIÊNG từng chuỗi (branch, dish) — giữ nguyên logic cũ
-    #         rồi GỘP lại thành 1 DataFrame lớn duy nhất
+    # BƯỚC 1: Build features RIÊNG từng chuỗi (branch, dish) để đảm bảo lag/rolling chuẩn
     # =========================================================================
     all_features = []
     baseline_results = []
@@ -91,14 +101,14 @@ def train_and_evaluate_all():
             df_dish = df_branch[df_branch["dish_id"] == dish_id].copy()
             dish_name = df_dish["dish_name"].iloc[0]
 
-            # Feature Engineering — lag/rolling tính RIÊNG từng chuỗi
+            # Trích xuất Universal Features
             df_features = build_features_for_dish(df_dish)
             df_features["branch_id"] = b_id
             df_features["dish_id"] = dish_id
 
             all_features.append(df_features)
 
-            # Tính baseline RIÊNG theo từng (branch, dish) — baseline vẫn cần xử lý cá nhân
+            # Tính Baseline (Moving average 4 tuần cùng thứ)
             test_df_baseline = df_features[df_features["date"] >= split_date].copy()
             baseline_preds = []
             for _, row in test_df_baseline.iterrows():
@@ -125,16 +135,18 @@ def train_and_evaluate_all():
                 })
 
     # =========================================================================
-    # BƯỚC 2: Gộp toàn bộ → 1 DataFrame lớn, chuẩn bị categorical
+    # BƯỚC 2: Gộp thành tập huấn luyện Universal & Thiết lập Categoricals chuẩn
     # =========================================================================
     df_global = pd.concat(all_features, ignore_index=True)
     df_global = prepare_categorical_dtypes(df_global)
 
-    # Lưu category mapping (cần cho predictor)
     category_mapping = {
-        "branch_id": df_global["branch_id"].cat.categories.tolist(),
-        "dish_id": df_global["dish_id"].cat.categories.tolist(),
-        "event_flag": df_global["event_flag"].cat.categories.tolist(),
+        "category": STANDARD_CATEGORIES,
+        "branch_type": STANDARD_BRANCH_TYPES,
+        "event_flag": STANDARD_EVENT_FLAGS,
+        "weather_condition": [
+            "nang_dep", "nang_nong", "mua_rao", "mua_bao", "lanh_ret"
+        ]
     }
 
     train_df = df_global[df_global["date"] < split_date].copy()
@@ -146,15 +158,15 @@ def train_and_evaluate_all():
     y_test = test_df["quantity"]
 
     print(f"-> Train samples: {len(X_train):,} | Test samples: {len(X_test):,}")
-    print(f"-> Features: {len(FEATURE_COLUMNS)} ({FEATURE_COLUMNS[:5]}...)")
+    print(f"-> Số lượng đặc trưng: {len(FEATURE_COLUMNS)}")
 
     # =========================================================================
-    # BƯỚC 3: Train 1 Global XGBoost Model
+    # BƯỚC 3: Train Universal XGBoost Model
     # =========================================================================
     model = xgb.XGBRegressor(
-        n_estimators=100,
-        max_depth=4,
-        learning_rate=0.07,
+        n_estimators=120,
+        max_depth=5,
+        learning_rate=0.06,
         subsample=0.85,
         colsample_bytree=0.85,
         enable_categorical=True,
@@ -167,18 +179,12 @@ def train_and_evaluate_all():
     xgb_preds = np.maximum(xgb_preds, 0)
 
     # =========================================================================
-    # BƯỚC 4: Đánh giá — tổng thể + theo từng (branch, dish)
+    # BƯỚC 4: Đánh giá WAPE & MAE
     # =========================================================================
-
-    # 4a. WAPE tổng thể
     overall_mae_xgb = mean_absolute_error(y_test, xgb_preds)
     overall_wape_xgb = calculate_wape(y_test, xgb_preds) * 100
 
     baseline_df = pd.DataFrame(baseline_results)
-    overall_wape_base = baseline_df["baseline_wape"].mean()
-    overall_mae_base = baseline_df["baseline_mae"].mean()
-
-    # 4b. WAPE theo từng (branch, dish)
     test_df = test_df.copy()
     test_df["xgb_prediction"] = xgb_preds
 
@@ -213,15 +219,15 @@ def train_and_evaluate_all():
         })
 
     # =========================================================================
-    # BƯỚC 5: Train Full Model (trên toàn bộ dữ liệu) để lưu vào production
+    # BƯỚC 5: Train Full Model trên toàn bộ dữ liệu & Lưu Model
     # =========================================================================
     X_full = df_global[FEATURE_COLUMNS]
     y_full = df_global["quantity"]
 
     full_model = xgb.XGBRegressor(
-        n_estimators=100,
-        max_depth=4,
-        learning_rate=0.07,
+        n_estimators=120,
+        max_depth=5,
+        learning_rate=0.06,
         subsample=0.85,
         colsample_bytree=0.85,
         enable_categorical=True,
@@ -230,44 +236,32 @@ def train_and_evaluate_all():
     )
     full_model.fit(X_full, y_full)
 
-    # Lưu model + category mapping
     model_save_path = os.path.join(MODEL_DIR, "global_model.joblib")
     mapping_save_path = os.path.join(MODEL_DIR, "category_mapping.joblib")
     joblib.dump(full_model, model_save_path)
     joblib.dump(category_mapping, mapping_save_path)
 
-    # =========================================================================
-    # BƯỚC 6: In kết quả
-    # =========================================================================
+    # In kết quả
     res_df = pd.DataFrame(results)
-
-    print(f"\n{'CHI NHÁNH':<18} | {'MÃ':<5} | {'TÊN MÓN':<25} | {'AVG SALE':<8} | {'BASE WAPE':<10} | {'XGB WAPE':<10} | {'CẢI THIỆN':<10}")
-    print("-" * 100)
-    for r in results[:12]:
-        print(f"{r['branch_name']:<18} | {r['dish_id']:<5} | {r['dish_name']:<25} | {r['avg_test_sales']:<8} | {r['baseline_wape']}%{'':<4} | {r['xgb_wape']}% | {r['improvement_pct']}%")
-    print(f"... (và {len(results) - 12} cặp chi nhánh-món ăn khác)")
-    print("-" * 100)
-
-    # Kiểm tra món nào XGBoost thua baseline quá 0.5 điểm %
-    losers = [r for r in results if r["xgb_wape"] > r["baseline_wape"] + 0.5]
-    if losers:
-        print(f"\n⚠️  CÓ {len(losers)} MÓN XGBOOST THUA BASELINE > 0.5 ĐIỂM %:")
-        for r in losers:
-            print(f"   {r['branch_id']}_{r['dish_id']} ({r['dish_name']}): Base {r['baseline_wape']}% vs XGB {r['xgb_wape']}%")
-        print("   → Ghi log để xử lý ở bước GridSearchCV/hyperparameter tuning sau.")
-
     avg_base_wape = res_df["baseline_wape"].mean()
     avg_xgb_wape = res_df["xgb_wape"].mean()
     improvement = ((avg_base_wape - avg_xgb_wape) / avg_base_wape) * 100 if avg_base_wape > 0 else 0
 
-    print(f"\nTỔNG KẾT GLOBAL MODEL v2:")
-    print(f"-> Baseline WAPE: {avg_base_wape:.2f}% (Sai số TB: {res_df['baseline_mae'].mean():.2f} phần)")
-    print(f"-> XGBoost WAPE : {avg_xgb_wape:.2f}% (Sai số TB: {res_df['xgb_mae'].mean():.2f} phần)")
+    print(f"\n{'CHI NHÁNH':<18} | {'MÃ':<5} | {'TÊN MÓN':<25} | {'AVG SALE':<8} | {'BASE WAPE':<10} | {'XGB WAPE':<10} | {'CẢI THIỆN':<10}")
+    print("-" * 100)
+    for r in results[:10]:
+        print(f"{r['branch_name']:<18} | {r['dish_id']:<5} | {r['dish_name']:<25} | {r['avg_test_sales']:<8} | {r['baseline_wape']}%{'':<4} | {r['xgb_wape']}% | {r['improvement_pct']}%")
+    print(f"... (và {len(results) - 10} cặp chi nhánh-món ăn khác)")
+    print("-" * 100)
+
+    print(f"\nTỔNG KẾT UNIVERSAL F&B MODEL:")
+    print(f"-> Baseline WAPE     : {avg_base_wape:.2f}% (Sai số TB: {res_df['baseline_mae'].mean():.2f} phần)")
+    print(f"-> Universal XGB WAPE: {avg_xgb_wape:.2f}% (Sai số TB: {res_df['xgb_mae'].mean():.2f} phần)")
     print(f"-> Cải thiện tương đối: {improvement:.1f}%")
-    print(f"-> Overall XGBoost WAPE (tính trên toàn bộ test set gộp): {overall_wape_xgb:.2f}%")
-    print(f"-> Đã lưu 1 Global Model tại: {model_save_path}")
+    print(f"-> Overall Test WAPE : {overall_wape_xgb:.2f}%")
+    print(f"-> Đã lưu Universal Model tại: {model_save_path}")
     print(f"-> Đã lưu category mapping tại: {mapping_save_path}")
-    print("=" * 100)
+    print("=" * 85)
 
     return res_df
 

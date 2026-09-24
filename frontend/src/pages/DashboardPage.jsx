@@ -21,6 +21,7 @@ import {
   Tooltip, 
   CartesianGrid 
 } from 'recharts';
+import DataInsightCard from '../components/DataInsightCard';
 
 export default function DashboardPage({ summary, onNavigateTab }) {
   if (!summary) {
@@ -172,6 +173,9 @@ export default function DashboardPage({ summary, onNavigateTab }) {
         </div>
 
       </div>
+
+      {/* AI Store Data Insights Section */}
+      <DataInsightCard branchId={branch?.id || 'BRANCH_01'} selectedCity="ho_chi_minh" />
 
       {/* Main Content 2 Columns */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
