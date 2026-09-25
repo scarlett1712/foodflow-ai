@@ -135,12 +135,8 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
     weather_list = get_weather_forecast(city_key=city, days=n_days + 2)
     weather_by_date = {w["date"]: w for w in weather_list}
 
-    # Ngày bắt đầu dự báo
-    if len(df_sales) > 0:
-        last_date_str = df_sales["date"].max()
-        last_date = datetime.strptime(last_date_str, "%Y-%m-%d")
-    else:
-        last_date = datetime.now()
+    # Ngày bắt đầu dự báo: neo theo ngày hiện tại thực tế (datetime.now()) để dự báo đúng ngày mai theo thời gian thực
+    last_date = datetime.now()
 
     branch_results = []
 
