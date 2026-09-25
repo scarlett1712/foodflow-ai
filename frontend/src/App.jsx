@@ -75,7 +75,7 @@ export default function App() {
   const fetchAllBranchData = async (branchId, city = selectedCity) => {
     try {
       setLoading(true);
-      const [sumRes, fcRes, purRes, invRes, dishRes, recRes, ingRes, preRes] = await Promise.all([
+      const results = await Promise.allSettled([
         getDashboardSummary(branchId),
         getForecast(branchId, 7, city),
         getPurchaseRecommendations(branchId),
@@ -86,14 +86,14 @@ export default function App() {
         getPreorders(branchId),
       ]);
 
-      setSummaryData(sumRes.data);
-      setForecastData(fcRes.data);
-      setPurchaseData(purRes.data);
-      setInventoryData(invRes.data);
-      setDishesData(dishRes.data);
-      setRecipesData(recRes.data);
-      setIngredientsData(ingRes.data);
-      setPreordersData(preRes.data);
+      if (results[0].status === 'fulfilled') setSummaryData(results[0].value.data);
+      if (results[1].status === 'fulfilled') setForecastData(results[1].value.data);
+      if (results[2].status === 'fulfilled') setPurchaseData(results[2].value.data);
+      if (results[3].status === 'fulfilled') setInventoryData(results[3].value.data);
+      if (results[4].status === 'fulfilled') setDishesData(results[4].value.data);
+      if (results[5].status === 'fulfilled') setRecipesData(results[5].value.data);
+      if (results[6].status === 'fulfilled') setIngredientsData(results[6].value.data);
+      if (results[7].status === 'fulfilled') setPreordersData(results[7].value.data);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
     } finally {
