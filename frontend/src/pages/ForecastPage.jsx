@@ -82,7 +82,17 @@ export default function ForecastPage({ forecastData, branchId, selectedCity = 'h
     );
   }
 
-  const categories = ['ALL', 'Phở & Bún', 'Cơm & Bánh Mì', 'Ăn Vặt', 'Cà Phê', 'Trà & Trái Cây', 'Hải Sản', 'Món Nước', 'Món Khô'];
+  // Reset state khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    setSelectedCategory('ALL');
+    setSearchTerm('');
+    if (allDishes.length > 0) {
+      setSelectedDishId(allDishes[0].dish_id);
+    }
+  }, [branchId, allDishes.length]);
+
+  const categories = ['ALL', ...new Set(allDishes.map((d) => d.category).filter(Boolean))];
 
   const filteredDishes = allDishes.filter((d) => {
     const matchCat = selectedCategory === 'ALL' || d.category === selectedCategory;

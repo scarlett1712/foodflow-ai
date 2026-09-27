@@ -25,6 +25,13 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
   const [selectedProof, setSelectedProof] = useState(null);
   const [isProofModalOpen, setIsProofModalOpen] = useState(false);
 
+  // Reset pagination và filter khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    setSelectedTag('ALL');
+    setSearchTerm('');
+  }, [branchId]);
+
   if (!inventoryData || !inventoryData.items) {
     return (
       <div className="flex items-center justify-center h-64">

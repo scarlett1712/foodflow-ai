@@ -1,0 +1,32 @@
+dish_id,dish_name,dish_price,ingredient_name,quantity,unit,cost_per_unit
+BUFFET_01,Set Buffet Nướng Lẩu Classic,229000,Ba chỉ bò Mỹ đông lạnh,0.25,kg,185000
+BUFFET_01,Set Buffet Nướng Lẩu Classic,229000,Thịt ba chỉ heo tươi,0.2,kg,130000
+BUFFET_01,Set Buffet Nướng Lẩu Classic,229000,Nấm kim châm tươi,0.15,kg,35000
+BUFFET_01,Set Buffet Nướng Lẩu Classic,229000,Rau lẩu thập cẩm,0.2,kg,20000
+BUFFET_01,Set Buffet Nướng Lẩu Classic,229000,Cốt lẩu Tomyum Thái,0.08,lít,65000
+BUFFET_02,Set Buffet Nướng Lẩu Premium,299000,Ba chỉ bò Mỹ đông lạnh,0.25,kg,185000
+BUFFET_02,Set Buffet Nướng Lẩu Premium,299000,Dẻ sườn bò rút xương,0.18,kg,280000
+BUFFET_02,Set Buffet Nướng Lẩu Premium,299000,Bạch tuộc tươi sống,0.15,kg,160000
+BUFFET_02,Set Buffet Nướng Lẩu Premium,299000,Nấm kim châm tươi,0.15,kg,35000
+BUFFET_02,Set Buffet Nướng Lẩu Premium,299000,Sốt ướp Bulgogi Hàn Quốc,0.05,lít,70000
+BUFFET_03,Set Buffet Hải Sản Thượng Hạng,389000,Tôm càng xanh tươi,0.25,kg,240000
+BUFFET_03,Set Buffet Hải Sản Thượng Hạng,389000,Bạch tuộc tươi sống,0.2,kg,160000
+BUFFET_03,Set Buffet Hải Sản Thượng Hạng,389000,Dẻ sườn bò rút xương,0.15,kg,280000
+BUFFET_03,Set Buffet Hải Sản Thượng Hạng,389000,Muối ớt xanh Nha Trang,0.04,lít,50000
+DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,89000,Ba chỉ bò Mỹ đông lạnh,0.2,kg,185000
+DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,89000,Sốt ướp Bulgogi Hàn Quốc,0.04,lít,70000
+DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,119000,Dẻ sườn bò rút xương,0.2,kg,280000
+DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,119000,Sốt ướp Bulgogi Hàn Quốc,0.04,lít,70000
+DISH_03,Nầm Heo Nướng Sốt Chao,79000,Nầm heo tươi,0.2,kg,140000
+DISH_03,Nầm Heo Nướng Sốt Chao,79000,Chao môn đỏ pha sốt,0.03,hũ,25000
+DISH_04,Bạch Tuộc Nướng Sa Tế,89000,Bạch tuộc tươi sống,0.22,kg,160000
+DISH_04,Bạch Tuộc Nướng Sa Tế,89000,Sa tế tôm cay đặc biệt,0.03,lít,60000
+DISH_05,Tôm Càng Xanh Nướng Muối Ớt,115000,Tôm càng xanh tươi,0.25,kg,240000
+DISH_05,Tôm Càng Xanh Nướng Muối Ớt,115000,Muối ớt xanh Nha Trang,0.03,lít,50000
+DISH_06,Nước Lẩu Thái Tomyum Chua Cay,59000,Cốt lẩu Tomyum Thái,0.15,lít,65000
+DISH_06,Nước Lẩu Thái Tomyum Chua Cay,59000,Sả chanh ớt tươi,0.05,kg,25000
+DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,35000,Nấm kim châm tươi,0.15,kg,35000
+DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,35000,Rau lẩu thập cẩm,0.25,kg,20000
+DRINK_01,Bia Tươi Tiger Bạc,35000,Bia lon Tiger Crystal,1.0,lon,18500
+DRINK_02,Trà Hoa Cúc Mật Ong,28000,Trà túi lọc hoa cúc,1.0,gói,4000
+DRINK_02,Trà Hoa Cúc Mật Ong,28000,Mật ong rừng nguyên chất,0.02,lít,180000

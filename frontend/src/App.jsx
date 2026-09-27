@@ -84,7 +84,7 @@ export default function App() {
         getForecast(branchId, 7, city),       // 1
         getPurchaseRecommendations(branchId), // 2
         getInventory(branchId),              // 3
-        getDishes(),                          // 4
+        getDishes(null, branchId),            // 4: Lấy danh mục món của chi nhánh
         getRecipes(),                         // 5
         getIngredients(),                     // 6
         getPreorders(branchId),              // 7
@@ -263,6 +263,8 @@ export default function App() {
                   dishes={dishesData}
                   recipes={recipesData}
                   ingredients={ingredientsData}
+                  branchId={selectedBranch}
+                  branchName={activeBranchMeta?.name}
                   onRefresh={() => fetchAllBranchData(selectedBranch)}
                 />
               )}

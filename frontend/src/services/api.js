@@ -53,7 +53,13 @@ export const smartTagIngredients = (names) => api.post('/ingredients/smart-tag',
 export const createIngredient = (payload, branchId = 'BRANCH_01') => api.post(`/ingredients?branch_id=${branchId}`, payload);
 export const deleteIngredient = (id) => api.delete(`/ingredients/${id}`);
 
-export const getDishes = (category = null) => api.get(category ? `/dishes?category=${category}` : '/dishes');
+export const getDishes = (category = null, branchId = null) => {
+  const params = new URLSearchParams();
+  if (category) params.append('category', category);
+  if (branchId) params.append('branch_id', branchId);
+  const qs = params.toString();
+  return api.get(qs ? `/dishes?${qs}` : '/dishes');
+};
 export const createDish = (payload) => api.post('/dishes', payload);
 export const createDishWithRecipe = (payload) => api.post('/dishes/with-recipe', payload);
 export const deleteDish = (dishId) => api.delete(`/dishes/${dishId}`);

@@ -12,7 +12,8 @@ import {
   Check, 
   PackageCheck,
   Calendar,
-  ShieldCheck
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import { getPurchaseHistory, recordManualPurchase } from '../services/api';
 import Pagination from '../components/Pagination';
@@ -31,6 +32,12 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
   const [isRecordingManual, setIsRecordingManual] = useState(false);
   const [recPage, setRecPage] = useState(1);
   const [recPageSize, setRecPageSize] = useState(10);
+
+  // BUG-06 FIX: Reset checkbox khi đổi chi nhánh → tránh gán nhầm nguyên liệu
+  useEffect(() => {
+    setCheckedItems({});
+    setRecPage(1);
+  }, [branchId]);
 
   // Variance Modal State
   const [isVarianceModalOpen, setIsVarianceModalOpen] = useState(false);
@@ -404,92 +411,111 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
               </div>
             </div>
 
-            {/* Recommendations Table */}
-            <div className="w-full">
-              <table className="w-full text-left text-xs table-fixed">
-                <thead>
-                  <tr className="border-b border-slate-200 font-bold text-slate-500 uppercase bg-slate-50/80">
-                    <th className="py-2.5 px-2 w-[4%] text-center">Mua</th>
-                    <th className="py-2.5 px-2 w-[22%]">Nguyên Liệu</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Cần Dùng</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Tồn Kho</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Thiếu Hụt</th>
-                    <th className="py-2.5 px-2 w-[14%] text-right bg-emerald-50/70 text-emerald-900 font-bold">CẦN MUA</th>
-                    <th className="py-2.5 px-2 w-[10%] text-right">Đơn Giá</th>
-                    <th className="py-2.5 px-2 w-[11%] text-right">Thành Tiền</th>
-                    <th className="py-2.5 px-2 w-[12%] text-center">Trạng Thái</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {paginatedRecs.map((item) => {
-                    const isChecked = !!checkedItems[item.ingredient_id];
-                    return (
-                      <tr 
-                        key={item.ingredient_id} 
-                        className={`hover:bg-slate-50/80 transition-colors ${
-                          isChecked ? 'bg-slate-50 opacity-60 line-through' : ''
-                        }`}
-                      >
-                        <td className="py-2.5 px-2 text-center align-middle">
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleToggleCheck(item.ingredient_id)}
-                            className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer w-4 h-4"
-                          />
-                        </td>
-                        <td className="py-2.5 px-2 font-semibold text-slate-900 break-words leading-tight align-middle">
-                          {item.ingredient_name}
-                          <span className="block text-[10px] font-normal text-slate-400">Mã: {item.ingredient_id} • {item.unit}</span>
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
-                          {item.required_quantity} {item.unit}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
-                          {item.current_stock} {item.unit}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-red-600 align-middle">
-                          {item.shortage > 0 ? `${item.shortage} ${item.unit}` : '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-right bg-emerald-50/60 align-middle">
-                          <span className={`text-xs font-bold ${
-                            item.recommended_purchase > 0 ? 'text-emerald-700' : 'text-slate-400 font-normal'
-                          }`}>
-                            {item.recommended_purchase > 0 ? `${item.recommended_purchase} ${item.unit}` : '0'}
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-2 text-right text-slate-500 align-middle">
-                          {formatVND(item.cost_per_unit)}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-semibold text-slate-900 align-middle">
-                          {item.estimated_cost > 0 ? formatVND(item.estimated_cost) : '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-center align-middle">
-                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-tight ${
-                            item.status === 'CRITICAL' ? 'bg-red-100 text-red-700 border border-red-200' :
-                            item.status === 'WARNING' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                            item.status === 'EXCESS' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                            'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                          }`}>
-                            {item.status === 'CRITICAL' && <AlertTriangle className="w-3 h-3 shrink-0" />}
-                            {item.status === 'SUFFICIENT' && <CheckCircle2 className="w-3 h-3 shrink-0" />}
-                            <span className="truncate">{item.status_text}</span>
-                          </span>
-                        </td>
+            {/* Recommendations Table or Empty BOM Guide */}
+            {recommendations.length === 0 ? (
+              <div className="py-12 px-6 text-center space-y-4 bg-slate-50/70 rounded-xl my-4 mx-4 border border-dashed border-slate-300">
+                <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto shadow-xs">
+                  <Sparkles className="w-7 h-7" />
+                </div>
+                <div className="max-w-lg mx-auto space-y-2">
+                  <h4 className="text-base font-bold text-slate-800">Chưa có công thức định lượng (BOM) cho món ăn của quán</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Mô hình AI đã dự báo thành công nhu cầu các món ăn ngày mai, nhưng cần thêm <strong>công thức định lượng (Recipe / BOM)</strong> để quy đổi ra khối lượng nguyên liệu (thịt bò, tôm, sốt, rau...) cần mua đi chợ.
+                  </p>
+                  <p className="text-xs text-emerald-800 font-medium bg-emerald-50 py-2 px-3 rounded-lg border border-emerald-200">
+                    💡 Hãy bấm nút <strong>"Nhập File Excel / CSV"</strong> ở góc trên và tải file công thức định lượng để kích hoạt tính toán mua hàng tự động!
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="w-full">
+                  <table className="w-full text-left text-xs table-fixed">
+                    <thead>
+                      <tr className="border-b border-slate-200 font-bold text-slate-500 uppercase bg-slate-50/80">
+                        <th className="py-2.5 px-2 w-[4%] text-center">Mua</th>
+                        <th className="py-2.5 px-2 w-[22%]">Nguyên Liệu</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Cần Dùng</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Tồn Kho</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Thiếu Hụt</th>
+                        <th className="py-2.5 px-2 w-[14%] text-right bg-emerald-50/70 text-emerald-900 font-bold">CẦN MUA</th>
+                        <th className="py-2.5 px-2 w-[10%] text-right">Đơn Giá</th>
+                        <th className="py-2.5 px-2 w-[11%] text-right">Thành Tiền</th>
+                        <th className="py-2.5 px-2 w-[12%] text-center">Trạng Thái</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {paginatedRecs.map((item) => {
+                        const isChecked = !!checkedItems[item.ingredient_id];
+                        return (
+                          <tr 
+                            key={item.ingredient_id} 
+                            className={`hover:bg-slate-50/80 transition-colors ${
+                              isChecked ? 'bg-slate-50 opacity-60 line-through' : ''
+                            }`}
+                          >
+                            <td className="py-2.5 px-2 text-center align-middle">
+                              <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={() => handleToggleCheck(item.ingredient_id)}
+                                className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer w-4 h-4"
+                              />
+                            </td>
+                            <td className="py-2.5 px-2 font-semibold text-slate-900 break-words leading-tight align-middle">
+                              {item.ingredient_name}
+                              <span className="block text-[10px] font-normal text-slate-400">Mã: {item.ingredient_id} • {item.unit}</span>
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
+                              {item.required_quantity} {item.unit}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
+                              {item.current_stock} {item.unit}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-red-600 align-middle">
+                              {item.shortage > 0 ? `${item.shortage} ${item.unit}` : '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-right bg-emerald-50/60 align-middle">
+                              <span className={`text-xs font-bold ${
+                                item.recommended_purchase > 0 ? 'text-emerald-700' : 'text-slate-400 font-normal'
+                              }`}>
+                                {item.recommended_purchase > 0 ? `${item.recommended_purchase} ${item.unit}` : '0'}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-2 text-right text-slate-500 align-middle">
+                              {formatVND(item.cost_per_unit)}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-semibold text-slate-900 align-middle">
+                              {item.estimated_cost > 0 ? formatVND(item.estimated_cost) : '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-center align-middle">
+                              <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-tight ${
+                                item.status === 'CRITICAL' ? 'bg-red-100 text-red-700 border border-red-200' :
+                                item.status === 'WARNING' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
+                                item.status === 'EXCESS' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
+                                'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                              }`}>
+                                {item.status === 'CRITICAL' && <AlertTriangle className="w-3 h-3 shrink-0" />}
+                                {item.status === 'SUFFICIENT' && <CheckCircle2 className="w-3 h-3 shrink-0" />}
+                                <span className="truncate">{item.status_text}</span>
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
 
-            <Pagination
-              totalItems={filteredRecs.length}
-              pageSize={recPageSize}
-              currentPage={recPage}
-              onPageChange={setRecPage}
-              onPageSizeChange={setRecPageSize}
-            />
+                <Pagination
+                  totalItems={filteredRecs.length}
+                  pageSize={recPageSize}
+                  currentPage={recPage}
+                  onPageChange={setRecPage}
+                  onPageSizeChange={setRecPageSize}
+                />
+              </>
+            )}
           </div>
         </>
       ) : (

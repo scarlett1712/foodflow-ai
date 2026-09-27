@@ -17,6 +17,7 @@ import sqlite3
 import io
 import uuid
 import logging
+import unicodedata
 import pandas as pd
 from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
@@ -32,7 +33,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
-from .forecasting.predictor import get_forecast_for_next_days
+from .forecasting.predictor import get_forecast_for_next_days, clear_forecast_cache
 from .forecasting.pipeline import train_and_evaluate_all
 from .services.recommendation_service import get_purchase_recommendations
 from .services.ai_variance_evaluator import evaluate_purchase_variance
@@ -233,6 +234,21 @@ class DishWithRecipeCreate(BaseModel):
     price: float
     ingredients: List[DishIngredientInput] = []
 
+    # BUG-01 FIX: Chặn giá âm → tránh NaN từ np.log1p(price) phá sập mô hình XGBoost
+    @field_validator('price')
+    @classmethod
+    def validate_price(cls, v):
+        if v < 0:
+            raise ValueError('Giá bán không được âm!')
+        return v
+
+    @field_validator('name')
+    @classmethod
+    def validate_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Tên món ăn không được để trống!')
+        return v.strip()
+
 class PreorderItemSchema(BaseModel):
     dish_id: str
     dish_name: str
@@ -301,12 +317,17 @@ def get_branches():
 
 @app.post("/api/branches")
 def create_branch(b: BranchCreate):
+    import unicodedata
+    b_id = unicodedata.normalize("NFC", b.id.strip())
+    b_name = unicodedata.normalize("NFC", b.name.strip())
+    b_addr = unicodedata.normalize("NFC", b.address.strip())
+    b_type = unicodedata.normalize("NFC", b.type.strip())
     with get_db() as conn:
         cur = conn.cursor()
         cur.execute("INSERT OR REPLACE INTO branches (id, name, address, type) VALUES (?, ?, ?, ?)",
-                    (b.id, b.name, b.address, b.type))
+                    (b_id, b_name, b_addr, b_type))
         conn.commit()
-    return {"status": "success", "message": f"Đã thêm chi nhánh '{b.name}'"}
+    return {"status": "success", "message": f"Đã thêm chi nhánh '{b_name}'"}
 
 @app.delete("/api/branches/{branch_id}")
 def delete_branch(branch_id: str):
@@ -411,13 +432,29 @@ def delete_ingredient(ingredient_id: str):
 # ==========================================
 
 @app.get("/api/dishes")
-def get_dishes(category: Optional[str] = None):
+def get_dishes(category: Optional[str] = None, branch_id: Optional[str] = None):
     with get_db() as conn:
         cur = conn.cursor()
-        if category:
-            cur.execute("SELECT * FROM dishes WHERE category = ?", (category,))
+        if branch_id and branch_id != "ALL":
+            cur.execute("""
+                SELECT DISTINCT d.* FROM dishes d
+                WHERE d.id IN (
+                    SELECT DISTINCT dish_id FROM sales WHERE branch_id = ?
+                    UNION
+                    SELECT DISTINCT dish_id FROM preorders WHERE branch_id = ?
+                )
+                ORDER BY d.id ASC
+            """, (branch_id, branch_id))
+            rows = [dict(r) for r in cur.fetchall()]
+            if rows:
+                if category and category != "ALL":
+                    rows = [r for r in rows if r["category"] == category]
+                return rows
+
+        if category and category != "ALL":
+            cur.execute("SELECT * FROM dishes WHERE category = ? ORDER BY id ASC", (category,))
         else:
-            cur.execute("SELECT * FROM dishes")
+            cur.execute("SELECT * FROM dishes ORDER BY id ASC")
         rows = [dict(r) for r in cur.fetchall()]
     return rows
 
@@ -694,8 +731,14 @@ def process_sales_dataframe(df: pd.DataFrame) -> int:
     cat_col = next((c for c in df.columns if c in ["category", "phan_loai", "phân_loại", "nhom"]), None)
     rev_col = next((c for c in df.columns if c in ["revenue", "doanh_thu", "doanh_thu_vnd"]), None)
 
+    import unicodedata
     with get_db() as conn:
         cur = conn.cursor()
+        cur.execute("SELECT id, name FROM branches")
+        existing_branches = cur.fetchall()
+        id_to_name = {unicodedata.normalize("NFC", str(r["id"]).strip()): unicodedata.normalize("NFC", str(r["name"]).strip()) for r in existing_branches}
+        name_to_id = {unicodedata.normalize("NFC", str(r["name"]).strip().lower()): unicodedata.normalize("NFC", str(r["id"]).strip()) for r in existing_branches}
+
         saved_count = 0
 
         for _, row in df.iterrows():
@@ -713,9 +756,39 @@ def process_sales_dataframe(df: pd.DataFrame) -> int:
             if qty <= 0:  # BUG-020 FIX: Reject cả qty=0 (noise data)
                 continue
 
-            d_name = str(row[dish_name_col]).strip() if dish_name_col and pd.notnull(row[dish_name_col]) else "Món Ăn"
+            d_name = unicodedata.normalize("NFC", str(row[dish_name_col]).strip()) if dish_name_col and pd.notnull(row[dish_name_col]) else "Món Ăn"
             d_id = str(row[dish_id_col]).strip() if dish_id_col and pd.notnull(row[dish_id_col]) else f"D_{d_name[:3].upper()}"
-            b_id = str(row[branch_id_col]).strip() if branch_id_col and pd.notnull(row[branch_id_col]) else "BRANCH_01"
+            
+            raw_b = unicodedata.normalize("NFC", str(row[branch_id_col]).strip()) if branch_id_col and pd.notnull(row[branch_id_col]) else ""
+            raw_b_lower = raw_b.lower()
+
+            if raw_b in id_to_name:
+                b_id = raw_b
+                b_name = id_to_name[b_id]
+            elif raw_b_lower in name_to_id:
+                b_id = name_to_id[raw_b_lower]
+                b_name = id_to_name[b_id]
+            else:
+                # Tìm tương đối theo tên (ví dụ: 'Hà Đông' khớp với 'FoodFlow Hà Đông')
+                matched_id = None
+                for b_name_db, bid in name_to_id.items():
+                    if raw_b_lower in b_name_db or b_name_db in raw_b_lower:
+                        matched_id = bid
+                        break
+                if matched_id:
+                    b_id = matched_id
+                    b_name = id_to_name[b_id]
+                elif raw_b:
+                    b_id = raw_b
+                    b_name = raw_b
+                    cur.execute("INSERT OR IGNORE INTO branches (id, name, address, type) VALUES (?, ?, ?, ?)",
+                                (b_id, b_name, "Hà Nội", "buffet"))
+                    id_to_name[b_id] = b_name
+                    name_to_id[b_name.lower()] = b_id
+                else:
+                    b_id = "BRANCH_01"
+                    b_name = "FoodFlow Quận 1"
+
             cat = str(row[cat_col]).strip() if cat_col and pd.notnull(row[cat_col]) else "Món Ăn"
             rev = float(row[rev_col]) if rev_col and pd.notnull(row[rev_col]) else (qty * 50000.0)
 
@@ -737,7 +810,7 @@ def process_sales_dataframe(df: pd.DataFrame) -> int:
             cur.execute("""
                 INSERT INTO sales (date, branch_id, branch_name, dish_id, dish_name, category, quantity, revenue)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (date_str, b_id, b_id, d_id, d_name, cat, qty, rev))
+            """, (date_str, b_id, b_name, d_id, d_name, cat, qty, rev))
             
             saved_count += 1
 
@@ -764,6 +837,13 @@ def process_recipes_dataframe(df: pd.DataFrame) -> dict:
     with get_db() as conn:
         cur = conn.cursor()
 
+        # Preload existing dishes and ingredients with NFC lowercase normalization
+        cur.execute("SELECT id, name FROM dishes")
+        dish_map = {unicodedata.normalize('NFC', str(r[1])).strip().lower(): r[0] for r in cur.fetchall()}
+
+        cur.execute("SELECT id, name FROM ingredients")
+        ing_map = {unicodedata.normalize('NFC', str(r[1])).strip().lower(): r[0] for r in cur.fetchall()}
+
         dishes_created = 0
         ingredients_created = 0
         recipes_created = 0
@@ -778,13 +858,14 @@ def process_recipes_dataframe(df: pd.DataFrame) -> dict:
             if qty <= 0:
                 continue
 
+            d_name_norm = unicodedata.normalize('NFC', d_name).strip().lower()
+            ing_name_norm = unicodedata.normalize('NFC', ing_name).strip().lower()
+
             # 1. Quản lý Dish
             d_id = str(row[dish_id_col]).strip() if dish_id_col and pd.notnull(row[dish_id_col]) else None
             if not d_id:
-                cur.execute("SELECT id FROM dishes WHERE LOWER(TRIM(name)) = LOWER(TRIM(?))", (d_name,))
-                existing_dish = cur.fetchone()
-                if existing_dish:
-                    d_id = existing_dish[0]
+                if d_name_norm in dish_map:
+                    d_id = dish_map[d_name_norm]
                 else:
                     cur.execute("SELECT count(*) FROM dishes")
                     dc = cur.fetchone()[0] + 1
@@ -792,17 +873,17 @@ def process_recipes_dataframe(df: pd.DataFrame) -> dict:
                     d_cat = str(row[cat_col]).strip() if cat_col and pd.notnull(row[cat_col]) else "Món Ăn"
                     d_price = float(row[price_col]) if price_col and pd.notnull(row[price_col]) else 50000.0
                     cur.execute("INSERT INTO dishes (id, name, category, price) VALUES (?, ?, ?, ?)", (d_id, d_name, d_cat, d_price))
+                    dish_map[d_name_norm] = d_id
                     dishes_created += 1
             else:
                 d_cat = str(row[cat_col]).strip() if cat_col and pd.notnull(row[cat_col]) else "Món Ăn"
                 d_price = float(row[price_col]) if price_col and pd.notnull(row[price_col]) else 50000.0
                 cur.execute("INSERT OR REPLACE INTO dishes (id, name, category, price) VALUES (?, ?, ?, ?)", (d_id, d_name, d_cat, d_price))
+                dish_map[d_name_norm] = d_id
 
             # 2. Quản lý Ingredient
-            cur.execute("SELECT id FROM ingredients WHERE LOWER(TRIM(name)) = LOWER(TRIM(?))", (ing_name,))
-            existing_ing = cur.fetchone()
-            if existing_ing:
-                target_ing_id = existing_ing[0]
+            if ing_name_norm in ing_map:
+                target_ing_id = ing_map[ing_name_norm]
             else:
                 cur.execute("SELECT count(*) FROM ingredients")
                 ic = cur.fetchone()[0] + 1
@@ -814,6 +895,7 @@ def process_recipes_dataframe(df: pd.DataFrame) -> dict:
                     INSERT INTO ingredients (id, name, unit, cost_per_unit, shelf_life_days, min_stock, category_tag)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, (target_ing_id, ing_name, unit, cost, 7, 2.0, tag))
+                ing_map[ing_name_norm] = target_ing_id
                 
                 # Kho khởi tạo
                 cur.execute("SELECT id FROM branches")
@@ -840,6 +922,7 @@ async def upload_sales_file(file: UploadFile = File(...)):
         content = await file.read()
         df = parse_tabular_file(content, file.filename)
         saved_count = process_sales_dataframe(df)
+        clear_forecast_cache()
 
         return {
             "status": "success",
@@ -855,6 +938,7 @@ async def upload_recipes_file(file: UploadFile = File(...)):
         content = await file.read()
         df = parse_tabular_file(content, file.filename)
         res = process_recipes_dataframe(df)
+        clear_forecast_cache()
 
         return {
             "status": "success",
@@ -888,6 +972,8 @@ async def upload_data_package(
 
         if not results:
             raise HTTPException(status_code=400, detail="Vui lòng chọn ít nhất 1 file (Doanh số hoặc Công thức) để tải lên!")
+
+        clear_forecast_cache()
 
         msg_parts = []
         if "recipes" in results:
@@ -1343,6 +1429,7 @@ def get_recommendations(branch_id: str = "BRANCH_01", target_date: Optional[str]
 def get_inventory(branch_id: str = "BRANCH_01"):
     with get_db() as conn:
         cur = conn.cursor()
+        # BRANCH ISOLATION: Lọc các nguyên liệu có tồn kho > 0 hoặc thuộc công thức món ăn của chi nhánh này
         cur.execute("""
             SELECT inv.branch_id, inv.ingredient_id, i.name, i.unit, i.cost_per_unit,
                    i.shelf_life_days, i.min_stock, i.category_tag, inv.quantity as current_stock,
@@ -1350,9 +1437,33 @@ def get_inventory(branch_id: str = "BRANCH_01"):
             FROM inventory inv
             JOIN ingredients i ON inv.ingredient_id = i.id
             WHERE inv.branch_id = ?
+              AND (
+                  inv.quantity > 0
+                  OR inv.ingredient_id IN (
+                      SELECT DISTINCT r.ingredient_id
+                      FROM recipes r
+                      WHERE r.dish_id IN (
+                          SELECT DISTINCT dish_id FROM sales WHERE branch_id = ?
+                          UNION
+                          SELECT DISTINCT dish_id FROM preorders WHERE branch_id = ?
+                      )
+                  )
+              )
             ORDER BY inv.ingredient_id ASC
-        """, (branch_id,))
+        """, (branch_id, branch_id, branch_id))
         inventory_items = [dict(r) for r in cur.fetchall()]
+        if not inventory_items:
+            # Fallback nếu chi nhánh chưa có món ăn trong sales/recipes: lấy tất cả mục trong inventory của chi nhánh
+            cur.execute("""
+                SELECT inv.branch_id, inv.ingredient_id, i.name, i.unit, i.cost_per_unit,
+                       i.shelf_life_days, i.min_stock, i.category_tag, inv.quantity as current_stock,
+                       ROUND(inv.quantity * i.cost_per_unit, 0) as total_value
+                FROM inventory inv
+                JOIN ingredients i ON inv.ingredient_id = i.id
+                WHERE inv.branch_id = ?
+                ORDER BY inv.ingredient_id ASC
+            """, (branch_id,))
+            inventory_items = [dict(r) for r in cur.fetchall()]
 
         cur.execute("""
             SELECT b.id, b.branch_id, b.ingredient_id, i.name as ingredient_name,
@@ -1484,6 +1595,8 @@ def trigger_retrain():
 def reset_to_demo_data():
     from scripts.generate_data import generate_big_dataset
     generate_big_dataset()
+    # BUG-02 FIX: Đồng bộ schema sau khi generate_data tạo lại bảng (thiếu category_tag, items_json, purchase_history)
+    init_db_schema()
     train_and_evaluate_all()
     return {"status": "success", "message": "Đã nạp lại bộ dữ liệu mẫu F&B (3 chi nhánh, 22 món, 35 nguyên liệu, 2 năm lịch sử) thành công!"}
 

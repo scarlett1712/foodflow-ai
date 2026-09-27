@@ -24,6 +24,14 @@ export default function PreordersPage({ preorders, dishes, branchId, onRefresh }
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  // Reset pagination và món mặc định khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    if (dishes?.length > 0) {
+      setOrderItems([{ dish_id: dishes[0].id, quantity: 10 }]);
+    }
+  }, [branchId, dishes?.length]);
+
   const paginatedPreorders = (preorders || []).slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   const handleAddItemRow = () => {

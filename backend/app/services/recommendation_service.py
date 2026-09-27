@@ -49,8 +49,9 @@ def get_purchase_recommendations(target_date=None, branch_id="BRANCH_01", db_pat
 
     conn.close()
 
-    # 5. Lấy dự báo nhu cầu từ Predictor
-    forecast_data = get_forecast_for_next_days(n_days=7, branch_id=branch_id, db_path=db_path)
+    # PERF FIX: Truyền city="ho_chi_minh" để cache_key khớp với /api/forecast
+    # (trước đó thiếu city → dùng default → cache vẫn match, nhưng cần tường minh)
+    forecast_data = get_forecast_for_next_days(n_days=7, branch_id=branch_id, db_path=db_path, city="ho_chi_minh")
     
     # Tìm branch forecast
     b_forecast = None
@@ -120,7 +121,19 @@ def get_purchase_recommendations(target_date=None, branch_id="BRANCH_01", db_pat
     total_shortage_items = 0
     total_critical_items = 0
 
-    for _, ing in df_ingredients.iterrows():
+    # BRANCH ISOLATION: Chỉ đề xuất nguyên liệu thuộc thực đơn hoặc đang có tồn kho tại chi nhánh này
+    branch_dish_ids = set(dish_demands.keys())
+    branch_recipe_ings = set(df_recipes[df_recipes["dish_id"].isin(branch_dish_ids)]["ingredient_id"].unique()) if len(branch_dish_ids) > 0 else set()
+    branch_inv_ings = set(df_inventory[df_inventory["current_stock"] > 0]["ingredient_id"].unique())
+    relevant_ing_ids = branch_recipe_ings | branch_inv_ings
+
+    if len(relevant_ing_ids) > 0:
+        df_target_ingredients = df_ingredients[df_ingredients["id"].isin(relevant_ing_ids)]
+    else:
+        # Nếu chi nhánh chưa có công thức nào khớp với các món và chưa có tồn kho, không đề xuất bừa bãi nguyên liệu từ chi nhánh khác
+        df_target_ingredients = df_ingredients.iloc[0:0]
+
+    for _, ing in df_target_ingredients.iterrows():
         ing_id = ing["id"]
         ing_name = ing["name"]
         unit = ing["unit"]
