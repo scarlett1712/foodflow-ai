@@ -4,8 +4,24 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 25000,
+  timeout: 120000,  // PERF FIX: 120s cho các API nặng (ML forecast) trên Render Free Tier
 });
+
+// Retry interceptor: tự động retry 1 lần khi gặp timeout hoặc network error
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config || config.__retryCount >= 1) return Promise.reject(error);
+    
+    const isRetryable = !error.response || error.code === 'ECONNABORTED' || error.response?.status >= 500;
+    if (!isRetryable) return Promise.reject(error);
+    
+    config.__retryCount = (config.__retryCount || 0) + 1;
+    console.warn(`Retrying request (${config.__retryCount}/1):`, config.url);
+    return api(config);
+  }
+);
 
 export const getBranches = () => api.get('/branches');
 export const createBranch = (payload) => api.post('/branches', payload);

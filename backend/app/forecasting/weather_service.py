@@ -9,9 +9,15 @@ Dịch vụ Dự báo Thời tiết & Tác động Nhu cầu F&B (Weather Foreca
 
 import urllib.request
 import json
-import random
+import hashlib
+import time
 from datetime import datetime, timedelta
 import pandas as pd
+from typing import Dict, Any, List, Tuple
+
+# BUG-008 FIX: Cache thời tiết TTL 30 phút, tránh gọi API mỗi request
+_WEATHER_CACHE: Dict[str, Tuple[float, list]] = {}
+WEATHER_CACHE_TTL = 1800  # 30 phút
 
 # Toạ độ các thành phố lớn tại Việt Nam
 VIETNAM_CITIES = {
@@ -62,7 +68,16 @@ def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
     """
     Lấy dự báo thời tiết cho N ngày tiếp theo.
     Ưu tiên gọi Open-Meteo API thực tế, nếu offline sẽ dùng cơ chế mô phỏng khí hậu chuẩn VN.
+    Có TTL cache 30 phút.
     """
+    # Kiểm tra cache
+    cache_key = f"{city_key}_{days}"
+    now = time.time()
+    if cache_key in _WEATHER_CACHE:
+        cached_time, cached_result = _WEATHER_CACHE[cache_key]
+        if now - cached_time < WEATHER_CACHE_TTL:
+            return cached_result
+
     city = VIETNAM_CITIES.get(city_key.lower(), VIETNAM_CITIES["ho_chi_minh"])
     lat = city["lat"]
     lon = city["lon"]
@@ -95,22 +110,27 @@ def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
                     "weather_desc": get_weather_description(cond)
                 })
     except Exception:
-        # Fallback mô phỏng khí hậu chuẩn theo mùa tại Việt Nam
+        # BUG-008 FIX: Fallback DETERMINISTIC thay vì random
+        # Sử dụng giá trị trung bình theo mùa tại Việt Nam (hash ngày để tạo variation ổn định)
         today = datetime.now()
         for i in range(1, days + 1):
             target_d = today + timedelta(days=i)
             d_str = target_d.strftime("%Y-%m-%d")
             month = target_d.month
 
-            # Khí hậu mùa hè / mùa mưa
+            # Hash deterministic: cùng ngày luôn cho cùng kết quả
+            day_hash = int(hashlib.md5(d_str.encode()).hexdigest(), 16)
+            hash_frac = (day_hash % 1000) / 1000.0  # 0.0 - 0.999
+
+            # Khí hậu mùa hè / mùa mưa (deterministic)
             if month in [5, 6, 7, 8, 9, 10]:
-                is_rain = random.random() < 0.35
-                temp = random.uniform(32.0, 36.0) if not is_rain else random.uniform(28.0, 31.0)
-                precip = random.uniform(5.0, 25.0) if is_rain else 0.0
+                is_rain = hash_frac < 0.35
+                temp = 33.0 + (hash_frac * 3.0) if not is_rain else 29.0 + (hash_frac * 2.0)
+                precip = 10.0 + (hash_frac * 15.0) if is_rain else 0.0
             else:
-                is_rain = random.random() < 0.10
-                temp = random.uniform(29.0, 33.0)
-                precip = random.uniform(3.0, 10.0) if is_rain else 0.0
+                is_rain = hash_frac < 0.10
+                temp = 30.0 + (hash_frac * 3.0)
+                precip = 5.0 + (hash_frac * 5.0) if is_rain else 0.0
 
             cond = classify_weather(temp, precip)
             forecasts.append({
@@ -122,6 +142,8 @@ def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
                 "weather_desc": get_weather_description(cond)
             })
 
+    # Lưu cache
+    _WEATHER_CACHE[cache_key] = (now, forecasts)
     return forecasts
 
 

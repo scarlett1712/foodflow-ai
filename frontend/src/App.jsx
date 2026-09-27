@@ -51,6 +51,7 @@ export default function App() {
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isRetraining, setIsRetraining] = useState(false);
   const [lastRetrainInfo, setLastRetrainInfo] = useState(null);
 
@@ -71,31 +72,51 @@ export default function App() {
     fetchBranches();
   }, []);
 
-  // Load all branch data whenever selectedBranch or selectedCity changes
+  // Load all branch data — PERF FIX: Promise.allSettled thay vì Promise.all
+  // Nếu 1 API lỗi → các API khác vẫn trả kết quả, không infinite spinner
   const fetchAllBranchData = async (branchId, city = selectedCity) => {
     try {
       setLoading(true);
-      const [sumRes, fcRes, purRes, invRes, dishRes, recRes, ingRes, preRes] = await Promise.all([
-        getDashboardSummary(branchId),
-        getForecast(branchId, 7, city),
-        getPurchaseRecommendations(branchId),
-        getInventory(branchId),
-        getDishes(),
-        getRecipes(),
-        getIngredients(),
-        getPreorders(branchId),
+      setError(null);
+
+      const results = await Promise.allSettled([
+        getDashboardSummary(branchId),       // 0
+        getForecast(branchId, 7, city),       // 1
+        getPurchaseRecommendations(branchId), // 2
+        getInventory(branchId),              // 3
+        getDishes(),                          // 4
+        getRecipes(),                         // 5
+        getIngredients(),                     // 6
+        getPreorders(branchId),              // 7
       ]);
 
-      setSummaryData(sumRes.data);
-      setForecastData(fcRes.data);
-      setPurchaseData(purRes.data);
-      setInventoryData(invRes.data);
-      setDishesData(dishRes.data);
-      setRecipesData(recRes.data);
-      setIngredientsData(ingRes.data);
-      setPreordersData(preRes.data);
+      // Hàm helper: lấy data hoặc null nếu rejected
+      const safeGet = (idx) => results[idx].status === 'fulfilled' ? results[idx].value.data : null;
+
+      setSummaryData(safeGet(0));
+      setForecastData(safeGet(1));
+      setPurchaseData(safeGet(2));
+      setInventoryData(safeGet(3));
+      setDishesData(safeGet(4) || []);
+      setRecipesData(safeGet(5) || []);
+      setIngredientsData(safeGet(6) || []);
+      setPreordersData(safeGet(7) || []);
+
+      // Kiểm tra nếu TẤT CẢ API lỗi → hiển thị error
+      const allFailed = results.every(r => r.status === 'rejected');
+      if (allFailed) {
+        setError('Không thể kết nối server. Vui lòng kiểm tra backend hoặc thử lại.');
+      } else {
+        // Log partial failures (không block UI)
+        results.forEach((r, i) => {
+          if (r.status === 'rejected') {
+            console.warn(`API call ${i} failed:`, r.reason?.message || r.reason);
+          }
+        });
+      }
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
+      setError('Lỗi tải dữ liệu: ' + (err.message || 'Không xác định'));
     } finally {
       setLoading(false);
     }
@@ -183,6 +204,23 @@ export default function App() {
             <div className="flex flex-col items-center justify-center h-96 space-y-3">
               <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
               <p className="text-sm font-medium text-slate-500">Đang tải dữ liệu FoodFlow AI...</p>
+            </div>
+          ) : error ? (
+            /* ERROR FALLBACK UI — FIX: Thay vì infinite spinner, hiển thị lỗi + nút retry */
+            <div className="flex flex-col items-center justify-center h-96 space-y-4">
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-700">Không thể tải dữ liệu</h3>
+              <p className="text-sm text-slate-500 text-center max-w-md">{error}</p>
+              <button
+                onClick={() => fetchAllBranchData(selectedBranch, selectedCity)}
+                className="px-5 py-2.5 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+              >
+                🔄 Thử lại
+              </button>
             </div>
           ) : (
             <>

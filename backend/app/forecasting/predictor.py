@@ -11,11 +11,14 @@ Dịch vụ dự báo nhu cầu tương lai (Universal Weather-Aware Forecast Se
 
 import os
 import sys
+import json
 import sqlite3
+import time
 import joblib
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from typing import Dict, Any, Tuple
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
@@ -80,11 +83,36 @@ def _load_universal_model(model_path=MODEL_PATH):
     return None
 
 
+# ==========================================
+# PERFORMANCE FIX: In-Memory TTL Cache cho Forecast
+# Khi Frontend gọi cùng lúc 3 API (dashboard/summary, forecast, purchase-recommendations),
+# chỉ 1 phép tính duy nhất được thực hiện, 2 API còn lại nhận ngay kết quả từ cache.
+# ==========================================
+_FORECAST_CACHE: Dict[str, Tuple[float, Any]] = {}
+CACHE_TTL = 600  # Lưu kết quả trong 10 phút
+
+
 def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
     """
     Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database.
     Hỗ trợ tích hợp Dự báo thời tiết tự động theo từng ngày.
+    Có In-Memory TTL Cache để tránh tính toán trùng lặp.
     """
+    # 1. Kiểm tra cache
+    cache_key = f"{branch_id}_{city}_{n_days}"
+    now = time.time()
+    if cache_key in _FORECAST_CACHE:
+        cached_time, cached_result = _FORECAST_CACHE[cache_key]
+        if now - cached_time < CACHE_TTL:
+            return cached_result
+
+    # 2. Nếu chưa có cache → Tính toán
+    result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
+    _FORECAST_CACHE[cache_key] = (now, result)
+    return result
+
+
+def _execute_raw_forecast(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
     conn = sqlite3.connect(db_path)
     
     # Query branches động
@@ -116,7 +144,7 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
     for row in preorders_rows:
         b_id, p_date, d_id, qty, items_json = row
         if items_json:
-            import json
+            # BUG-009 FIX: import json đã được di chuyển ra đầu file
             try:
                 items = json.loads(items_json)
                 for itm in items:

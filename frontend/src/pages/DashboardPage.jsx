@@ -26,8 +26,18 @@ import DataInsightCard from '../components/DataInsightCard';
 export default function DashboardPage({ summary, onNavigateTab }) {
   if (!summary) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        </div>
+        <h3 className="text-base font-semibold text-slate-700">Chưa có dữ liệu Tổng quan chi nhánh</h3>
+        <p className="text-sm text-slate-500 text-center">Dữ liệu có thể đang được tính toán hoặc chưa hoàn thành tải về.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition shadow-sm"
+        >
+          🔄 Tải lại trang
+        </button>
       </div>
     );
   }

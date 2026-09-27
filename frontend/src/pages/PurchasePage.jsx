@@ -85,8 +85,18 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
 
   if (!purchaseData || !purchaseData.recommendations) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        </div>
+        <h3 className="text-base font-semibold text-slate-700">Chưa có dữ liệu Đề xuất mua hàng</h3>
+        <p className="text-sm text-slate-500 text-center">Không thể tải danh sách gợi ý nhập kho cho chi nhánh này.</p>
+        <button
+          onClick={onRefresh || (() => window.location.reload())}
+          className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition shadow-sm"
+        >
+          🔄 Tải lại dữ liệu
+        </button>
       </div>
     );
   }
