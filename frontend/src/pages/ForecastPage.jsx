@@ -215,7 +215,7 @@ export default function ForecastPage({ forecastData, branchId, selectedCity = 'h
                     <span className="text-xs font-bold text-slate-900">{day.temperature || 32}°C</span>
                   </div>
 
-                  <div className="text-[11px] text-slate-600 font-medium truncate mb-1" title={day.weather_desc}>
+                  <div className="text-[11px] text-slate-600 font-medium line-clamp-2 min-h-[2rem] leading-tight flex items-center mb-1" title={day.weather_desc}>
                     {day.weather_desc || 'Nắng đẹp'}
                   </div>
 

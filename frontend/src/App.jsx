@@ -194,7 +194,7 @@ export default function App() {
         />
 
         {/* Content Area */}
-        <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
           {loading ? (
             <div className="flex flex-col items-center justify-center h-96 space-y-3">
               <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>

@@ -282,7 +282,7 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
           {/* Upload Purchase CSV Button */}
           <button
             onClick={onOpenPurchaseUploadModal}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer shadow-emerald-600/20"
             title="Tải lên file CSV lịch sử đi chợ để cập nhật tồn kho tự động"
           >
             <UploadCloud className="w-4 h-4" />
@@ -345,79 +345,81 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
             
             {/* Filter & Action Toolbar */}
-            <div className="p-5 pb-3 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-1.5">
+            <div className="p-4 sm:p-5 border-b border-slate-100 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3.5">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0 scrollbar-none">
                 <button
                   onClick={() => { setFilterStatus('ALL'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'ALL' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'ALL' ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   Tất cả ({recommendations.length})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('TO_BUY'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'TO_BUY' ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'TO_BUY' ? 'bg-amber-600 text-white shadow-xs' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
                   }`}
                 >
                   Cần Nhập Hàng ({summary.total_items_to_buy})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('CRITICAL'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'CRITICAL' ? 'bg-red-600 text-white' : 'bg-red-50 text-red-700 hover:bg-red-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'CRITICAL' ? 'bg-red-600 text-white shadow-xs' : 'bg-red-50 text-red-700 hover:bg-red-100'
                   }`}
                 >
                   Thiếu Khẩn Cấp ({summary.critical_shortage_items})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('SUFFICIENT'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'SUFFICIENT' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'SUFFICIENT' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
                   }`}
                 >
                   Đủ / Tồn Dư ({recommendations.length - summary.total_items_to_buy})
                 </button>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className="relative">
+              <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap justify-between sm:justify-end">
+                <div className="relative flex-1 sm:flex-initial">
                   <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   <input
                     type="text"
                     placeholder="Tìm nguyên liệu..."
                     value={searchTerm}
                     onChange={(e) => { setSearchTerm(e.target.value); setRecPage(1); }}
-                    className="pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-48"
+                    className="pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-48"
                   />
                 </div>
 
-                <button
-                  onClick={handleExportText}
-                  className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-                  title="Sao chép danh sách đi chợ"
-                >
-                  <Download className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleExportText}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                    title="Sao chép danh sách đi chợ"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
 
-                <button
-                  onClick={handlePrint}
-                  className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-                  title="In phiếu đi chợ"
-                >
-                  <Printer className="w-4 h-4" />
-                </button>
+                  <button
+                    onClick={handlePrint}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                    title="In phiếu đi chợ"
+                  >
+                    <Printer className="w-4 h-4" />
+                  </button>
 
-                <button
-                  onClick={handleConfirmStockIn}
-                  disabled={isRecordingManual}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-all cursor-pointer"
-                  title="Xác nhận đã mua và tự động cộng dồn số lượng vào kho"
-                >
-                  <PackageCheck className="w-4 h-4" />
-                  <span>{isRecordingManual ? 'Đang cập nhật kho...' : 'Xác Nhận Nhập Kho'}</span>
-                </button>
+                  <button
+                    onClick={handleConfirmStockIn}
+                    disabled={isRecordingManual}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
+                    title="Xác nhận đã mua và tự động cộng dồn số lượng vào kho"
+                  >
+                    <PackageCheck className="w-4 h-4" />
+                    <span>{isRecordingManual ? 'Đang cập nhật kho...' : 'Xác Nhận Nhập Kho'}</span>
+                  </button>
+                </div>
               </div>
             </div>
 

@@ -135,8 +135,8 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
                       : 'bg-slate-50 border-slate-200'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-slate-900 truncate">{b.ingredient_name}</span>
+                  <div className="flex items-start justify-between gap-1.5 mb-1.5">
+                    <span className="text-xs font-bold text-slate-900 leading-tight break-words flex-1 pr-1" title={b.ingredient_name}>{b.ingredient_name}</span>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
                       isNearExp ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
                     }`}>
