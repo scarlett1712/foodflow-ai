@@ -38,12 +38,22 @@ const CITY_OPTIONS = [
   { id: 'da_lat', name: 'Đà Lạt (Lâm Đồng)', region: 'Tây Nguyên' },
 ];
 
-export default function ForecastPage({ forecastData, branchId, selectedCity = 'ho_chi_minh', onCityChange }) {
+export default function ForecastPage({ forecastData, branchId, selectedCity = 'ho_chi_minh', onCityChange, heavyLoading = false }) {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDishId, setSelectedDishId] = useState('D01');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính dự báo AI…</h3>
+        <p className="text-sm text-slate-500 text-center">Mô hình XGBoost đang dự báo nhu cầu kết hợp thời tiết. Các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
 
   if (!forecastData || !forecastData.branches) {
     return (

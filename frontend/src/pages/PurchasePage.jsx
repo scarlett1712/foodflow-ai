@@ -21,7 +21,7 @@ import SolanaBadge from '../components/SolanaBadge';
 import SolanaVerificationModal from '../components/SolanaVerificationModal';
 import VarianceExplanationModal from '../components/VarianceExplanationModal';
 
-export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpenPurchaseUploadModal }) {
+export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpenPurchaseUploadModal, heavyLoading = false }) {
   const [subTab, setSubTab] = useState('recommendations'); // 'recommendations' | 'history'
   
   // Recommendations state
@@ -89,6 +89,16 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
       fetchHistory();
     }
   }, [subTab, branchId]);
+
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính gợi ý mua hàng AI…</h3>
+        <p className="text-sm text-slate-500 text-center">AI đang phân tích tồn kho và dự báo để đề xuất nhập hàng. Các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
 
   if (!purchaseData || !purchaseData.recommendations) {
     return (

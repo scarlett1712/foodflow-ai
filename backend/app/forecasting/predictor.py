@@ -14,6 +14,8 @@ import sys
 import json
 import sqlite3
 import time
+import threading
+import logging
 import joblib
 import pandas as pd
 import numpy as np
@@ -24,6 +26,8 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
+_log = logging.getLogger("foodflow.forecast")
 
 from .features import (
     build_features_for_dish,
@@ -92,12 +96,30 @@ def _load_universal_model(model_path=MODEL_PATH):
 
 
 # ==========================================
-# PERFORMANCE FIX: In-Memory TTL Cache cho Forecast
+# PERFORMANCE FIX: In-Memory TTL Cache + Single-Flight Lock cho Forecast
 # Khi Frontend gọi cùng lúc 3 API (dashboard/summary, forecast, purchase-recommendations),
-# chỉ 1 phép tính duy nhất được thực hiện, 2 API còn lại nhận ngay kết quả từ cache.
+# chỉ 1 phép tính duy nhất được thực hiện, 2 API còn lại chờ lock rồi lấy cache.
 # ==========================================
 _FORECAST_CACHE: Dict[str, Tuple[float, Any]] = {}
-CACHE_TTL = 600  # Lưu kết quả trong 10 phút
+CACHE_TTL = 1800  # PERF FIX: 30 phút (tăng từ 600s) — pre-warm sẽ refresh trước khi hết hạn
+
+# P0-1: Single-flight lock chống stampede (thundering herd)
+_KEY_LOCKS: Dict[str, threading.Lock] = {}
+_KEY_LOCKS_GUARD = threading.Lock()
+
+
+def _get_key_lock(key: str) -> threading.Lock:
+    """Lấy hoặc tạo lock riêng cho mỗi cache_key."""
+    with _KEY_LOCKS_GUARD:
+        return _KEY_LOCKS.setdefault(key, threading.Lock())
+
+
+def _read_cache(key: str):
+    """Đọc cache entry nếu còn hạn TTL, trả None nếu miss."""
+    entry = _FORECAST_CACHE.get(key)
+    if entry and time.time() - entry[0] < CACHE_TTL:
+        return entry[1]
+    return None
 
 
 def clear_forecast_cache():
@@ -109,25 +131,40 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
     """
     Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database.
     Hỗ trợ tích hợp Dự báo thời tiết tự động theo từng ngày.
-    Có In-Memory TTL Cache để tránh tính toán trùng lặp.
+    Có In-Memory TTL Cache + Single-Flight Lock để tránh tính toán trùng lặp.
     """
-    # 1. Kiểm tra cache
     cache_key = f"{branch_id}_{city}_{n_days}"
-    now = time.time()
-    if cache_key in _FORECAST_CACHE:
-        cached_time, cached_result = _FORECAST_CACHE[cache_key]
-        if now - cached_time < CACHE_TTL:
-            return cached_result
 
-    # 2. Nếu chưa có cache → Tính toán
-    result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
-    _FORECAST_CACHE[cache_key] = (now, result)
-    return result
+    # 1. Fast path: cache hit (không cần lock)
+    hit = _read_cache(cache_key)
+    if hit is not None:
+        return hit
+
+    # 2. Slow path: lấy lock per-key → double-checked locking
+    with _get_key_lock(cache_key):
+        # Kiểm tra lại: request khác có thể đã tính xong trong lúc chờ lock
+        hit = _read_cache(cache_key)
+        if hit is not None:
+            _log.info(f"[PERF] Cache hit after lock wait (key={cache_key})")
+            return hit
+
+        # 3. Thực sự tính toán (chỉ 1 request duy nhất tới đây)
+        _log.info(f"[PERF] Cache miss — computing forecast (key={cache_key})")
+        result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
+        _FORECAST_CACHE[cache_key] = (time.time(), result)  # ghi thời điểm HOÀN THÀNH
+        return result
+
+
+def refresh_forecast_cache(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
+    """Tính lại bất kể TTL — dùng cho pre-warm/refresh nền."""
+    cache_key = f"{branch_id}_{city}_{n_days}"
+    with _get_key_lock(cache_key):
+        result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
+        _FORECAST_CACHE[cache_key] = (time.time(), result)
+        return result
 
 
 def _execute_raw_forecast(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
-    import logging
-    _log = logging.getLogger("foodflow.forecast")
     t0 = time.time()
 
     conn = sqlite3.connect(db_path)

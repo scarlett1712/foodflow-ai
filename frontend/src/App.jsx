@@ -72,54 +72,49 @@ export default function App() {
     fetchBranches();
   }, []);
 
-  // Load all branch data — PERF FIX: Promise.allSettled thay vì Promise.all
-  // Nếu 1 API lỗi → các API khác vẫn trả kết quả, không infinite spinner
-  const fetchAllBranchData = async (branchId, city = selectedCity) => {
-    try {
-      setLoading(true);
-      setError(null);
+  // P0-3: Trạng thái loading riêng cho nhóm nặng (skeleton thay vì block toàn bộ UI)
+  const [heavyLoading, setHeavyLoading] = useState({ summary: true, forecast: true, purchase: true });
 
-      const results = await Promise.allSettled([
-        getDashboardSummary(branchId),       // 0
-        getForecast(branchId, 7, city),       // 1
-        getPurchaseRecommendations(branchId), // 2
-        getInventory(branchId),              // 3
-        getDishes(null, branchId),            // 4: Lấy danh mục món của chi nhánh
-        getRecipes(),                         // 5
-        getIngredients(),                     // 6
-        getPreorders(branchId),              // 7
-      ]);
+  // Load all branch data — P0-3: Tách nhóm NHẸ (chặn UI) và NẶNG (tự cập nhật khi xong)
+  const fetchAllBranchData = (branchId, city = selectedCity) => {
+    setError(null);
+    setLoading(true);  // Chỉ chờ nhóm NHẸ
 
-      // Hàm helper: lấy data hoặc null nếu rejected
-      const safeGet = (idx) => results[idx].status === 'fulfilled' ? results[idx].value.data : null;
-
-      setSummaryData(safeGet(0));
-      setForecastData(safeGet(1));
-      setPurchaseData(safeGet(2));
-      setInventoryData(safeGet(3));
-      setDishesData(safeGet(4) || []);
-      setRecipesData(safeGet(5) || []);
-      setIngredientsData(safeGet(6) || []);
-      setPreordersData(safeGet(7) || []);
-
-      // Kiểm tra nếu TẤT CẢ API lỗi → hiển thị error
-      const allFailed = results.every(r => r.status === 'rejected');
-      if (allFailed) {
-        setError('Không thể kết nối server. Vui lòng kiểm tra backend hoặc thử lại.');
-      } else {
-        // Log partial failures (không block UI)
-        results.forEach((r, i) => {
-          if (r.status === 'rejected') {
-            console.warn(`API call ${i} failed:`, r.reason?.message || r.reason);
-          }
-        });
-      }
-    } catch (err) {
-      console.error('Error fetching dashboard data:', err);
+    // === NHÓM NHẸ: inventory, dishes, recipes, ingredients, preorders ===
+    Promise.allSettled([
+      getInventory(branchId),
+      getDishes(null, branchId),
+      getRecipes(),
+      getIngredients(),
+      getPreorders(branchId),
+    ]).then(([inv, dishes, recipes, ings, po]) => {
+      setInventoryData(inv.status === 'fulfilled' ? inv.value.data : null);
+      setDishesData(dishes.status === 'fulfilled' ? dishes.value.data : []);
+      setRecipesData(recipes.status === 'fulfilled' ? recipes.value.data : []);
+      setIngredientsData(ings.status === 'fulfilled' ? ings.value.data : []);
+      setPreordersData(po.status === 'fulfilled' ? po.value.data : []);
+    }).catch(err => {
+      console.error('Error fetching light data:', err);
       setError('Lỗi tải dữ liệu: ' + (err.message || 'Không xác định'));
-    } finally {
-      setLoading(false);
-    }
+    }).finally(() => setLoading(false));
+
+    // === NHÓM NẶNG: mỗi cái tự cập nhật khi xong, KHÔNG chặn UI ===
+    setHeavyLoading({ summary: true, forecast: true, purchase: true });
+
+    getDashboardSummary(branchId)
+      .then(r => setSummaryData(r.data))
+      .catch(() => setSummaryData(null))
+      .finally(() => setHeavyLoading(p => ({ ...p, summary: false })));
+
+    getForecast(branchId, 7, city)
+      .then(r => setForecastData(r.data))
+      .catch(() => setForecastData(null))
+      .finally(() => setHeavyLoading(p => ({ ...p, forecast: false })));
+
+    getPurchaseRecommendations(branchId)
+      .then(r => setPurchaseData(r.data))
+      .catch(() => setPurchaseData(null))
+      .finally(() => setHeavyLoading(p => ({ ...p, purchase: false })));
   };
 
   useEffect(() => {
@@ -228,6 +223,7 @@ export default function App() {
                 <DashboardPage
                   summary={summaryData}
                   onNavigateTab={setCurrentTab}
+                  heavyLoading={heavyLoading.summary}
                 />
               )}
 
@@ -237,6 +233,7 @@ export default function App() {
                   branchId={selectedBranch}
                   selectedCity={selectedCity}
                   onCityChange={setSelectedCity}
+                  heavyLoading={heavyLoading.forecast}
                 />
               )}
 
@@ -246,6 +243,7 @@ export default function App() {
                   branchId={selectedBranch}
                   onRefresh={() => fetchAllBranchData(selectedBranch)}
                   onOpenPurchaseUploadModal={() => setIsPurchaseUploadModalOpen(true)}
+                  heavyLoading={heavyLoading.purchase}
                 />
               )}
 

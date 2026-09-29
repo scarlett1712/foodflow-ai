@@ -17,11 +17,13 @@ import sqlite3
 import io
 import uuid
 import logging
+import threading
+import time
 import unicodedata
 import pandas as pd
 from typing import Optional, List, Dict, Any
 from datetime import datetime, timedelta
-from contextlib import contextmanager
+from contextlib import contextmanager, asynccontextmanager
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Form, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, field_validator
@@ -33,7 +35,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
-from .forecasting.predictor import get_forecast_for_next_days, clear_forecast_cache
+from .forecasting.predictor import get_forecast_for_next_days, clear_forecast_cache, refresh_forecast_cache, DB_PATH as PREDICTOR_DB_PATH
 from .forecasting.pipeline import train_and_evaluate_all
 from .services.recommendation_service import get_purchase_recommendations
 from .services.ai_variance_evaluator import evaluate_purchase_variance
@@ -52,10 +54,45 @@ from .services.solana_service import (
 
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "foodflow.db")
 
+# ==========================================
+# P0-2: Pre-warm cache khi khởi động + refresh nền mỗi 10 phút
+# P0-4: /health endpoint cho UptimeRobot keep-alive
+# ==========================================
+WARM_INTERVAL = 600  # Refresh cache nền mỗi 10 phút (trước khi CACHE_TTL=1800s hết hạn)
+
+def _warm_all():
+    """Pre-warm forecast cache cho tất cả chi nhánh."""
+    try:
+        with get_db() as conn:
+            branch_ids = [r["id"] for r in conn.execute("SELECT id FROM branches").fetchall()]
+        for b in branch_ids:
+            refresh_forecast_cache(n_days=7, branch_id=b, db_path=DB_PATH, city="ho_chi_minh")
+            logger.info(f"[WARM] Pre-warmed cache for branch={b}")
+    except Exception as e:
+        logger.warning(f"[WARM] thất bại: {e}")
+
+def _warm_loop():
+    """Background loop: warm cache liên tục."""
+    while True:
+        _warm_all()
+        time.sleep(WARM_INTERVAL)
+
+def _warm_in_background():
+    """Kick off _warm_all() trong thread nền (không chặn request hiện tại)."""
+    threading.Thread(target=_warm_all, daemon=True).start()
+
+@asynccontextmanager
+async def lifespan(app):
+    """FastAPI lifespan: khởi động pre-warm loop khi server start."""
+    logger.info("[STARTUP] Starting background cache warm loop...")
+    threading.Thread(target=_warm_loop, daemon=True).start()
+    yield
+
 app = FastAPI(
     title="FoodFlow AI API",
     description="Hệ thống AI Dự đoán Nhu cầu Nguyên liệu & Gợi ý Mua hàng cho Nhà hàng F&B (Tích hợp Solana Devnet Audit)",
-    version="2.1.0"
+    version="2.1.0",
+    lifespan=lifespan
 )
 
 # BUG-004 FIX: CORS whitelist thay vì wildcard
@@ -72,6 +109,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# P0-4: Health check endpoint cho UptimeRobot / cron-job.org keep-alive
+@app.get("/health")
+def health_check():
+    """Lightweight health check — ping mỗi 5 phút để chống Render cold start."""
+    return {"ok": True}
 
 # BUG-003 FIX: Context manager để tự động đóng connection, tránh leak
 @contextmanager
@@ -923,6 +966,7 @@ async def upload_sales_file(file: UploadFile = File(...)):
         df = parse_tabular_file(content, file.filename)
         saved_count = process_sales_dataframe(df)
         clear_forecast_cache()
+        _warm_in_background()  # P0-2: warm cache ngay sau upload
 
         return {
             "status": "success",
@@ -939,6 +983,7 @@ async def upload_recipes_file(file: UploadFile = File(...)):
         df = parse_tabular_file(content, file.filename)
         res = process_recipes_dataframe(df)
         clear_forecast_cache()
+        _warm_in_background()  # P0-2: warm cache ngay sau upload
 
         return {
             "status": "success",
@@ -974,6 +1019,7 @@ async def upload_data_package(
             raise HTTPException(status_code=400, detail="Vui lòng chọn ít nhất 1 file (Doanh số hoặc Công thức) để tải lên!")
 
         clear_forecast_cache()
+        _warm_in_background()  # P0-2: warm cache ngay sau upload
 
         msg_parts = []
         if "recipes" in results:

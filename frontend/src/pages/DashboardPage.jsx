@@ -23,7 +23,17 @@ import {
 } from 'recharts';
 import DataInsightCard from '../components/DataInsightCard';
 
-export default function DashboardPage({ summary, onNavigateTab }) {
+export default function DashboardPage({ summary, onNavigateTab, heavyLoading = false }) {
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính dự báo AI…</h3>
+        <p className="text-sm text-slate-500 text-center">Dữ liệu tổng quan đang được AI xử lý, các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
+
   if (!summary) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
