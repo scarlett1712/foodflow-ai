@@ -66,12 +66,14 @@ def get_weather_description(condition: str) -> str:
 
 def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
     """
-    Lấy dự báo thời tiết cho N ngày tiếp theo.
+    Lấy dự báo thời tiết cho N ngày tiếp theo (bắt đầu từ ngày mai = today + 1).
     Ưu tiên gọi Open-Meteo API thực tế, nếu offline sẽ dùng cơ chế mô phỏng khí hậu chuẩn VN.
+    Đồng bộ 100% ngày với mô hình XGBoost và giao diện.
     Có TTL cache 30 phút.
     """
-    # Kiểm tra cache
-    cache_key = f"{city_key}_{days}"
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    today_str = today.strftime("%Y-%m-%d")
+    cache_key = f"{city_key.lower()}_{days}_{today_str}"
     now = time.time()
     if cache_key in _WEATHER_CACHE:
         cached_time, cached_result = _WEATHER_CACHE[cache_key]
@@ -82,9 +84,10 @@ def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
     lat = city["lat"]
     lon = city["lon"]
     
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FBangkok"
+    # Yêu cầu Open-Meteo trả về đủ số ngày (thêm 3 ngày đệm)
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=Asia%2FBangkok&forecast_days={days + 3}"
     
-    forecasts = []
+    api_weather_map = {}
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'FoodFlowAI/1.0'})
         with urllib.request.urlopen(req, timeout=3) as response:
@@ -95,34 +98,37 @@ def get_weather_forecast(city_key: str = "ho_chi_minh", days: int = 7) -> list:
             precips = daily.get("precipitation_sum", [])
             wcodes = daily.get("weathercode", [])
 
-            for i in range(min(days, len(dates))):
+            for i in range(len(dates)):
+                d = dates[i]
                 t_max = float(temp_maxs[i]) if i < len(temp_maxs) else 32.0
                 precip = float(precips[i]) if i < len(precips) else 0.0
                 wcode = int(wcodes[i]) if i < len(wcodes) else 0
                 cond = classify_weather(t_max, precip, wcode)
-
-                forecasts.append({
-                    "date": dates[i],
+                api_weather_map[d] = {
+                    "date": d,
                     "temperature": round(t_max, 1),
                     "precipitation_mm": round(precip, 1),
                     "is_rainy": 1 if precip >= 3.0 else 0,
                     "weather_condition": cond,
                     "weather_desc": get_weather_description(cond)
-                })
+                }
     except Exception:
-        # BUG-008 FIX: Fallback DETERMINISTIC thay vì random
-        # Sử dụng giá trị trung bình theo mùa tại Việt Nam (hash ngày để tạo variation ổn định)
-        today = datetime.now()
-        for i in range(1, days + 1):
-            target_d = today + timedelta(days=i)
-            d_str = target_d.strftime("%Y-%m-%d")
-            month = target_d.month
+        pass
 
-            # Hash deterministic: cùng ngày luôn cho cùng kết quả
+    # Chuẩn hoá N ngày dự báo chính xác bắt đầu từ ngày mai (today + 1..days)
+    forecasts = []
+    for i in range(1, days + 1):
+        target_d = today + timedelta(days=i)
+        d_str = target_d.strftime("%Y-%m-%d")
+
+        if d_str in api_weather_map:
+            forecasts.append(api_weather_map[d_str])
+        else:
+            # Fallback deterministic theo khí hậu mùa tại Việt Nam
+            month = target_d.month
             day_hash = int(hashlib.md5(d_str.encode()).hexdigest(), 16)
             hash_frac = (day_hash % 1000) / 1000.0  # 0.0 - 0.999
 
-            # Khí hậu mùa hè / mùa mưa (deterministic)
             if month in [5, 6, 7, 8, 9, 10]:
                 is_rain = hash_frac < 0.35
                 temp = 33.0 + (hash_frac * 3.0) if not is_rain else 29.0 + (hash_frac * 2.0)

@@ -54,6 +54,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [isRetraining, setIsRetraining] = useState(false);
   const [lastRetrainInfo, setLastRetrainInfo] = useState(null);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState(null); // P3: timestamp cập nhật lần cuối
 
   // Load Branches initially
   const fetchBranches = async () => {
@@ -114,13 +115,43 @@ export default function App() {
     getPurchaseRecommendations(branchId)
       .then(r => setPurchaseData(r.data))
       .catch(() => setPurchaseData(null))
-      .finally(() => setHeavyLoading(p => ({ ...p, purchase: false })));
+      .finally(() => {
+        setHeavyLoading(p => ({ ...p, purchase: false }));
+        setLastUpdatedAt(new Date()); // P3: ghi nhận thời điểm cập nhật xong
+      });
+  };
+
+  // P1: Hàm chỉ refresh nhóm NẶNG (không reload inventory/dishes/etc) — dùng cho polling
+  const refreshHeavyData = (branchId = selectedBranch, city = selectedCity) => {
+    if (document.visibilityState !== 'visible') return; // chỉ refresh khi tab đang active
+    getDashboardSummary(branchId)
+      .then(r => setSummaryData(r.data))
+      .catch(() => {});
+    getForecast(branchId, 7, city)
+      .then(r => setForecastData(r.data))
+      .catch(() => {});
+    getPurchaseRecommendations(branchId)
+      .then(r => {
+        setPurchaseData(r.data);
+        setLastUpdatedAt(new Date());
+      })
+      .catch(() => {});
   };
 
   useEffect(() => {
     if (selectedBranch) {
       fetchAllBranchData(selectedBranch, selectedCity);
     }
+  }, [selectedBranch, selectedCity]);
+
+  // P1: Auto-polling mỗi 15 phút, chỉ khi tab active
+  const POLL_INTERVAL_MS = 15 * 60 * 1000; // 15 phút
+  useEffect(() => {
+    if (!selectedBranch) return;
+    const intervalId = setInterval(() => {
+      refreshHeavyData(selectedBranch, selectedCity);
+    }, POLL_INTERVAL_MS);
+    return () => clearInterval(intervalId); // cleanup khi unmount hoặc branch/city thay đổi
   }, [selectedBranch, selectedCity]);
 
   // Handle Retrain AI
@@ -224,6 +255,8 @@ export default function App() {
                   summary={summaryData}
                   onNavigateTab={setCurrentTab}
                   heavyLoading={heavyLoading.summary}
+                  lastUpdatedAt={lastUpdatedAt}
+                  onRefresh={() => refreshHeavyData(selectedBranch, selectedCity)}
                 />
               )}
 

@@ -40,10 +40,9 @@ from backend.app.forecasting.vn_calendar import (
 )
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend", "foodflow.db")
-ROOT_DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "foodflow.db")
+# DB duy nhất: root foodflow.db — nơi server FastAPI đọc
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "foodflow.db")
 os.makedirs(DATA_DIR, exist_ok=True)
-os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 # 1. Danh sách Chi Nhánh (Branches)
 BRANCHES = [
@@ -301,9 +300,9 @@ def generate_big_dataset():
     print("Cải tiến: +Làm mượt Thời tiết & Khí hậu, +Event spikes, +Tết VN, nhiễu 12%")
     print("=" * 75)
 
-    end_date = datetime(2026, 9, 17)
+    end_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     start_date = end_date - timedelta(days=729)
-    total_days = 730
+    total_days = (end_date - start_date).days + 1
 
     # Sinh chuỗi thời tiết 730 ngày mượt mà
     weather_series = generate_smooth_weather_series(start_date, total_days)
@@ -466,16 +465,20 @@ def generate_big_dataset():
         {"id": 6, "branch_id": "BRANCH_03", "date": tomorrow_str, "customer_name": "Đoàn khách du lịch Đà Nẵng", "dish_id": "D03", "dish_name": "Bún Chả Hà Nội", "quantity": 35, "note": "Giao lúc 12h00"},
     ]
 
-    # Sinh Lô Hàng FEFO
+    # Sinh Lô Hàng FEFO (ngày tương đối so với end_date = hôm nay)
+    def _d(offset):
+        """Helper: end_date + offset ngày -> 'YYYY-MM-DD'"""
+        return (end_date + timedelta(days=offset)).strftime("%Y-%m-%d")
+
     batches = [
-        {"id": 1, "branch_id": "BRANCH_01", "ingredient_id": "ING13", "batch_code": "LOT-BEEF-01", "quantity_remaining": 6.0, "received_date": "2026-09-15", "expiry_date": "2026-09-18"},
-        {"id": 2, "branch_id": "BRANCH_01", "ingredient_id": "ING24", "batch_code": "LOT-PHO-01", "quantity_remaining": 10.0, "received_date": "2026-09-16", "expiry_date": "2026-09-18"},
-        {"id": 3, "branch_id": "BRANCH_02", "ingredient_id": "ING09", "batch_code": "LOT-ORANGE-01", "quantity_remaining": 4.0, "received_date": "2026-09-14", "expiry_date": "2026-09-21"},
-        {"id": 4, "branch_id": "BRANCH_02", "ingredient_id": "ING11", "batch_code": "LOT-MELON-01", "quantity_remaining": 8.0, "received_date": "2026-09-15", "expiry_date": "2026-09-19"},
-        {"id": 5, "branch_id": "BRANCH_03", "ingredient_id": "ING14", "batch_code": "LOT-SHANK-01", "quantity_remaining": 4.0, "received_date": "2026-09-16", "expiry_date": "2026-09-19"},
-        {"id": 6, "branch_id": "BRANCH_03", "ingredient_id": "ING15", "batch_code": "LOT-CHICK-01", "quantity_remaining": 6.0, "received_date": "2026-09-16", "expiry_date": "2026-09-19"},
-        {"id": 7, "branch_id": "BRANCH_01", "ingredient_id": "ING01", "batch_code": "LOT-COFFEE-01", "quantity_remaining": 12.0, "received_date": "2026-08-01", "expiry_date": "2027-02-01"},
-        {"id": 8, "branch_id": "BRANCH_02", "ingredient_id": "ING08", "batch_code": "LOT-PEACH-01", "quantity_remaining": 20.0, "received_date": "2026-07-01", "expiry_date": "2027-07-01"},
+        {"id": 1, "branch_id": "BRANCH_01", "ingredient_id": "ING13", "batch_code": "LOT-BEEF-01", "quantity_remaining": 6.0, "received_date": _d(-2), "expiry_date": _d(1)},
+        {"id": 2, "branch_id": "BRANCH_01", "ingredient_id": "ING24", "batch_code": "LOT-PHO-01", "quantity_remaining": 10.0, "received_date": _d(-1), "expiry_date": _d(1)},
+        {"id": 3, "branch_id": "BRANCH_02", "ingredient_id": "ING09", "batch_code": "LOT-ORANGE-01", "quantity_remaining": 4.0, "received_date": _d(-3), "expiry_date": _d(4)},
+        {"id": 4, "branch_id": "BRANCH_02", "ingredient_id": "ING11", "batch_code": "LOT-MELON-01", "quantity_remaining": 8.0, "received_date": _d(-2), "expiry_date": _d(2)},
+        {"id": 5, "branch_id": "BRANCH_03", "ingredient_id": "ING14", "batch_code": "LOT-SHANK-01", "quantity_remaining": 4.0, "received_date": _d(-1), "expiry_date": _d(2)},
+        {"id": 6, "branch_id": "BRANCH_03", "ingredient_id": "ING15", "batch_code": "LOT-CHICK-01", "quantity_remaining": 6.0, "received_date": _d(-1), "expiry_date": _d(2)},
+        {"id": 7, "branch_id": "BRANCH_01", "ingredient_id": "ING01", "batch_code": "LOT-COFFEE-01", "quantity_remaining": 12.0, "received_date": _d(-60), "expiry_date": _d(120)},
+        {"id": 8, "branch_id": "BRANCH_02", "ingredient_id": "ING08", "batch_code": "LOT-PEACH-01", "quantity_remaining": 20.0, "received_date": _d(-90), "expiry_date": _d(275)},
     ]
 
     # Lưu CSV
@@ -649,9 +652,6 @@ def generate_big_dataset():
 
     conn.commit()
     conn.close()
-
-    # Đồng bộ sang root foodflow.db
-    shutil.copy2(DB_PATH, ROOT_DB_PATH)
 
     print("=" * 75)
     print(f"NẠP THÀNH CÔNG VÀO SQLITE: {DB_PATH}")

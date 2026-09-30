@@ -49,7 +49,7 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
       code: b.batch_code,
       sha256Hash: b.batch_hash || 'SHA256:VERIFIED_ON_SOLANA_DEVNET',
       txSignature: b.solana_tx || 'SOLANA_DEVNET_TX_CONFIRMED',
-      timestamp: b.received_date || '2026-09-18'
+      timestamp: b.received_date || new Date().toISOString().split('T')[0]
     });
     setIsProofModalOpen(true);
   };
@@ -122,7 +122,7 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {batches.map((b) => {
               const expDate = new Date(b.expiry_date);
-              const today = new Date('2026-09-17');
+              const today = new Date();
               const diffDays = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
               const isNearExp = diffDays <= 3;
 

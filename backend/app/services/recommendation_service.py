@@ -63,12 +63,11 @@ def get_purchase_recommendations(target_date=None, branch_id="BRANCH_01", db_pat
     if not b_forecast:
         b_forecast = {"branch_id": branch_id, "dishes": []}
 
-    # Xác định ngày mục tiêu (mặc định ngày đầu tiên trong dự báo hoặc ngày mai)
+    # Xác định ngày mục tiêu (mặc định ngày mai = today + 1, không lấy từ cache forecast)
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    tomorrow_str = (today + timedelta(days=1)).strftime("%Y-%m-%d")
     if not target_date:
-        if b_forecast.get("dishes") and len(b_forecast["dishes"]) > 0 and b_forecast["dishes"][0].get("daily_forecasts"):
-            target_date = b_forecast["dishes"][0]["daily_forecasts"][0]["date"]
-        else:
-            target_date = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+        target_date = tomorrow_str
 
     # Tổng hợp nhu cầu món ăn cho ngày target_date
     dish_demands = {}

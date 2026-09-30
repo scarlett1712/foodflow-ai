@@ -698,12 +698,15 @@ def parse_tabular_file(file_content: bytes, filename: str) -> pd.DataFrame:
 
 @app.get("/api/sales/template")
 def download_sales_template(format: str = Query("excel", pattern="^(excel|csv)$")):
+    from datetime import datetime, timedelta
+    _today = datetime.now().strftime("%Y-%m-%d")
+    _yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     sample_data = [
-        {"date": "2026-09-17", "branch_id": "BRANCH_01", "dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "category": "Phở & Bún", "quantity": 95, "revenue": 5700000},
-        {"date": "2026-09-17", "branch_id": "BRANCH_01", "dish_id": "D06", "dish_name": "Cơm Gà Xối Mỡ", "category": "Cơm & Bánh Mì", "quantity": 80, "revenue": 4160000},
-        {"date": "2026-09-17", "branch_id": "BRANCH_01", "dish_id": "D15", "dish_name": "Cà Phê Sữa Đá", "category": "Cà Phê", "quantity": 160, "revenue": 4480000},
-        {"date": "2026-09-18", "branch_id": "BRANCH_01", "dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "category": "Phở & Bún", "quantity": 105, "revenue": 6300000},
-        {"date": "2026-09-18", "branch_id": "BRANCH_01", "dish_id": "D06", "dish_name": "Cơm Gà Xối Mỡ", "category": "Cơm & Bánh Mì", "quantity": 88, "revenue": 4576000},
+        {"date": _yesterday, "branch_id": "BRANCH_01", "dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "category": "Phở & Bún", "quantity": 95, "revenue": 5700000},
+        {"date": _yesterday, "branch_id": "BRANCH_01", "dish_id": "D06", "dish_name": "Cơm Gà Xối Mỡ", "category": "Cơm & Bánh Mì", "quantity": 80, "revenue": 4160000},
+        {"date": _yesterday, "branch_id": "BRANCH_01", "dish_id": "D15", "dish_name": "Cà Phê Sữa Đá", "category": "Cà Phê", "quantity": 160, "revenue": 4480000},
+        {"date": _today, "branch_id": "BRANCH_01", "dish_id": "D01", "dish_name": "Phở Bò Tái Nạm", "category": "Phở & Bún", "quantity": 105, "revenue": 6300000},
+        {"date": _today, "branch_id": "BRANCH_01", "dish_id": "D06", "dish_name": "Cơm Gà Xối Mỡ", "category": "Cơm & Bánh Mì", "quantity": 88, "revenue": 4576000},
     ]
     df = pd.DataFrame(sample_data)
 
@@ -1044,9 +1047,14 @@ def download_purchases_template():
     output = io.StringIO()
     writer = csv.writer(output)
     writer.writerow(["date", "branch_id", "ingredient_id", "ingredient_name", "quantity_purchased", "unit", "unit_price", "total_cost", "batch_code", "expiry_date"])
-    writer.writerow(["2026-09-17", "BRANCH_01", "ING13", "Thịt bò nạm/tái tươi", 20.0, "kg", 260000, 5200000, "LOT-BEEF-02", "2026-09-20"])
-    writer.writerow(["2026-09-17", "BRANCH_01", "ING03", "Sữa tươi tiệt trùng", 15.0, "lít", 32000, 480000, "LOT-MILK-02", "2026-09-25"])
-    writer.writerow(["2026-09-17", "BRANCH_01", "ING24", "Bánh phở tươi Hà Nội", 25.0, "kg", 18000, 450000, "LOT-PHO-01", "2026-09-18"])
+    from datetime import datetime, timedelta
+    _today = datetime.now().strftime("%Y-%m-%d")
+    _exp3 = (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%d")
+    _exp8 = (datetime.now() + timedelta(days=8)).strftime("%Y-%m-%d")
+    _exp1 = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    writer.writerow([_today, "BRANCH_01", "ING13", "Thịt bò nạm/tái tươi", 20.0, "kg", 260000, 5200000, "LOT-BEEF-02", _exp3])
+    writer.writerow([_today, "BRANCH_01", "ING03", "Sữa tươi tiệt trùng", 15.0, "lít", 32000, 480000, "LOT-MILK-02", _exp8])
+    writer.writerow([_today, "BRANCH_01", "ING24", "Bánh phở tươi Hà Nội", 25.0, "kg", 18000, 450000, "LOT-PHO-01", _exp1])
     
     response = Response(content=output.getvalue(), media_type="text/csv")
     response.headers["Content-Disposition"] = "attachment; filename=foodflow_purchase_template.csv"
@@ -1450,9 +1458,12 @@ def get_weather_locations():
 def get_forecast(
     n_days: int = Query(7, ge=1, le=14),
     branch_id: Optional[str] = "BRANCH_01",
-    city: Optional[str] = "ho_chi_minh"
+    city: Optional[str] = "ho_chi_minh",
+    response: Response = None
 ):
     try:
+        if response:
+            response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
         return get_forecast_for_next_days(n_days=n_days, branch_id=branch_id, db_path=DB_PATH, city=city)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -1465,8 +1476,10 @@ def get_insights(branch_id: str = "BRANCH_01", city: str = "ho_chi_minh"):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/purchase-recommendations")
-def get_recommendations(branch_id: str = "BRANCH_01", target_date: Optional[str] = None):
+def get_recommendations(branch_id: str = "BRANCH_01", target_date: Optional[str] = None, response: Response = None):
     try:
+        if response:
+            response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
         return get_purchase_recommendations(target_date=target_date, branch_id=branch_id, db_path=DB_PATH)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -1581,8 +1594,10 @@ def notarize_po_endpoint(req: SolanaNotarizePORequest):
     return res
 
 @app.get("/api/dashboard/summary")
-def get_dashboard_summary(branch_id: str = "BRANCH_01"):
+def get_dashboard_summary(branch_id: str = "BRANCH_01", response: Response = None):
     try:
+        if response:
+            response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
         rec_data = get_purchase_recommendations(branch_id=branch_id, db_path=DB_PATH)
         with get_db() as conn:
             cur = conn.cursor()
@@ -1601,9 +1616,11 @@ def get_dashboard_summary(branch_id: str = "BRANCH_01"):
         top_dishes = dish_demands[:5]
         critical_ingredients = [r for r in rec_data.get("recommendations", []) if r["status"] in ["CRITICAL", "WARNING"]][:6]
 
+        now = datetime.now()
         return {
             "branch": rec_data.get("branch"),
-            "tomorrow_date": rec_data.get("target_date"),
+            "tomorrow_date": (now + timedelta(days=1)).strftime("%Y-%m-%d"),
+            "generated_at": now.strftime("%Y-%m-%d %H:%M:%S"),
             "kpis": {
                 "expected_sales_revenue": rec_data.get("summary", {}).get("total_estimated_sales_revenue", 0),
                 "total_dishes_demand": sum(d["expected_demand"] for d in rec_data.get("dish_demands", [])),
@@ -1643,11 +1660,19 @@ def reset_to_demo_data():
     generate_big_dataset()
     # BUG-02 FIX: Đồng bộ schema sau khi generate_data tạo lại bảng (thiếu category_tag, items_json, purchase_history)
     init_db_schema()
+    clear_forecast_cache()
     train_and_evaluate_all()
+    # Pre-warm lại forecast cache với dữ liệu mới theo thời gian thực
+    for b in ["BRANCH_01", "BRANCH_02", "BRANCH_03"]:
+        try:
+            refresh_forecast_cache(n_days=7, branch_id=b, db_path=DB_PATH, city="ho_chi_minh")
+        except Exception:
+            pass
     return {"status": "success", "message": "Đã nạp lại bộ dữ liệu mẫu F&B (3 chi nhánh, 22 món, 35 nguyên liệu, 2 năm lịch sử) thành công!"}
 
 @app.post("/api/data/clear-clean")
 def clear_to_clean_slate():
+    clear_forecast_cache()
     with get_db() as conn:
         cur = conn.cursor()
         cur.execute("DELETE FROM sales")

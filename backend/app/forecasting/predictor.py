@@ -129,11 +129,12 @@ def clear_forecast_cache():
 
 def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
     """
-    Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database.
+    Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database (bắt đầu từ ngày mai = today + 1).
     Hỗ trợ tích hợp Dự báo thời tiết tự động theo từng ngày.
     Có In-Memory TTL Cache + Single-Flight Lock để tránh tính toán trùng lặp.
     """
-    cache_key = f"{branch_id}_{city}_{n_days}"
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    cache_key = f"{branch_id}_{city}_{n_days}_{today_str}"
 
     # 1. Fast path: cache hit (không cần lock)
     hit = _read_cache(cache_key)
@@ -157,7 +158,8 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
 
 def refresh_forecast_cache(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
     """Tính lại bất kể TTL — dùng cho pre-warm/refresh nền."""
-    cache_key = f"{branch_id}_{city}_{n_days}"
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    cache_key = f"{branch_id}_{city}_{n_days}_{today_str}"
     with _get_key_lock(cache_key):
         result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
         _FORECAST_CACHE[cache_key] = (time.time(), result)
@@ -218,19 +220,17 @@ def _execute_raw_forecast(n_days=7, branch_id=None, db_path=DB_PATH, model_path=
     t_model = time.time()
     _log.info(f"[PERF] Model load: {t_model - t_db:.3f}s (model={'loaded' if model else 'NONE'})")
 
-    # Lấy dự báo thời tiết N ngày tới
-    weather_list = get_weather_forecast(city_key=city, days=n_days + 2)
+    # Lấy dự báo thời tiết N ngày tới (bắt đầu từ ngày mai)
+    weather_list = get_weather_forecast(city_key=city, days=n_days)
     t_weather = time.time()
     _log.info(f"[PERF] Weather API: {t_weather - t_model:.3f}s (days={len(weather_list)})")
     weather_by_date = {w["date"]: w for w in weather_list}
 
-
-    # Ngày bắt đầu dự báo
-    if len(df_sales) > 0:
-        last_date_str = df_sales["date"].max()
-        last_date = datetime.strptime(last_date_str, "%Y-%m-%d")
-    else:
-        last_date = datetime.now()
+    # Ngày bắt đầu dự báo luôn là ngày hôm nay theo thời gian thực (real-time)
+    # Để ngày dự báo đầu tiên (Day 1) luôn luôn chính xác là NGÀY MAI (today + 1),
+    # đồng bộ 100% với Dashboard, Weather API, Gợi ý mua hàng và Lịch thực tế
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    last_date = today
 
     branch_results = []
 
@@ -471,6 +471,7 @@ def _execute_raw_forecast(n_days=7, branch_id=None, db_path=DB_PATH, model_path=
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "city": city,
         "forecast_horizon_days": n_days,
+        "weather_forecast": weather_list,
         "branches": branch_results
     }
 

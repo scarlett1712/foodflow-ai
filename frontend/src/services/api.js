@@ -23,6 +23,19 @@ api.interceptors.response.use(
   }
 );
 
+// Cache-busting: gắn _t=timestamp + header no-cache vào mọi GET request để browser không cache response cũ
+api.interceptors.request.use((config) => {
+  if (!config.method || config.method.toLowerCase() === 'get') {
+    config.params = { ...config.params, _t: Date.now() };
+    config.headers = {
+      ...config.headers,
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+    };
+  }
+  return config;
+});
+
 export const getBranches = () => api.get('/branches');
 export const createBranch = (payload) => api.post('/branches', payload);
 export const deleteBranch = (id) => api.delete(`/branches/${id}`);

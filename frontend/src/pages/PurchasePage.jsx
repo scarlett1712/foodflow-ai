@@ -61,7 +61,7 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
       code: item.batch_code || `PO-${item.date}-${item.ingredient_id}`,
       sha256Hash: item.record_hash || 'SHA256:SOLANA_DEVNET_AUDITED_PO',
       txSignature: item.solana_tx || 'SOLANA_DEVNET_CONFIRMED_TX',
-      timestamp: item.date || '2026-09-18',
+      timestamp: item.date || new Date().toISOString().split('T')[0],
       variancePct: item.variance_pct || 0,
       varianceReason: item.variance_reason || '',
       aiVerdict: item.ai_verdict || 'COMPLIANT',

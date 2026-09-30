@@ -23,7 +23,7 @@ import {
 } from 'recharts';
 import DataInsightCard from '../components/DataInsightCard';
 
-export default function DashboardPage({ summary, onNavigateTab, heavyLoading = false }) {
+export default function DashboardPage({ summary, onNavigateTab, heavyLoading = false, lastUpdatedAt = null, onRefresh = null }) {
   if (heavyLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
@@ -59,12 +59,20 @@ export default function DashboardPage({ summary, onNavigateTab, heavyLoading = f
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(num || 0);
   };
 
+  // Ngày mai: ưu tiên nhận từ backend summary (today + 1) để đồng bộ tuyệt đối
+  const tomorrowDate = tomorrow_date || (() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+  })();
+
   const chartData = recent_revenue_trend?.map((item) => ({
     date: item.date.slice(5),
     revenue: item.daily_revenue / 1000000, // Triệu VNĐ
   })) || [];
 
   const isDataEmpty = (!top_dishes_tomorrow || top_dishes_tomorrow.length === 0) && (!recent_revenue_trend || recent_revenue_trend.length === 0);
+
 
   return (
     <div className="space-y-6">
@@ -75,7 +83,7 @@ export default function DashboardPage({ summary, onNavigateTab, heavyLoading = f
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900">Bảng Điều Hành Dự Báo & Nhập Hàng</h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              {tomorrow_date ? `Ngày mai: ${tomorrow_date}` : 'Chưa có lịch sử'}
+              Ngày mai: {tomorrowDate}
             </span>
           </div>
           <p className="text-sm text-slate-500 mt-1">
