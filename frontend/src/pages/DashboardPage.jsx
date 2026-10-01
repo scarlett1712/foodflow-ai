@@ -23,11 +23,31 @@ import {
 } from 'recharts';
 import DataInsightCard from '../components/DataInsightCard';
 
-export default function DashboardPage({ summary, onNavigateTab }) {
+export default function DashboardPage({ summary, onNavigateTab, heavyLoading = false, lastUpdatedAt = null, onRefresh = null }) {
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính dự báo AI…</h3>
+        <p className="text-sm text-slate-500 text-center">Dữ liệu tổng quan đang được AI xử lý, các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
+
   if (!summary) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        </div>
+        <h3 className="text-base font-semibold text-slate-700">Chưa có dữ liệu Tổng quan chi nhánh</h3>
+        <p className="text-sm text-slate-500 text-center">Dữ liệu có thể đang được tính toán hoặc chưa hoàn thành tải về.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition shadow-sm"
+        >
+          🔄 Tải lại trang
+        </button>
       </div>
     );
   }
@@ -39,12 +59,20 @@ export default function DashboardPage({ summary, onNavigateTab }) {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(num || 0);
   };
 
+  // Ngày mai: ưu tiên nhận từ backend summary (today + 1) để đồng bộ tuyệt đối
+  const tomorrowDate = tomorrow_date || (() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+  })();
+
   const chartData = recent_revenue_trend?.map((item) => ({
     date: item.date.slice(5),
     revenue: item.daily_revenue / 1000000, // Triệu VNĐ
   })) || [];
 
   const isDataEmpty = (!top_dishes_tomorrow || top_dishes_tomorrow.length === 0) && (!recent_revenue_trend || recent_revenue_trend.length === 0);
+
 
   return (
     <div className="space-y-6">
@@ -55,7 +83,7 @@ export default function DashboardPage({ summary, onNavigateTab }) {
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900">Bảng Điều Hành Dự Báo & Nhập Hàng</h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              {tomorrow_date ? `Ngày mai: ${tomorrow_date}` : 'Chưa có lịch sử'}
+              Ngày mai: {tomorrowDate}
             </span>
           </div>
           <p className="text-sm text-slate-500 mt-1">

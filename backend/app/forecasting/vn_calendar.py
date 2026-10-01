@@ -18,6 +18,8 @@ except ImportError:
 TET_DATES = {
     2025: pd.Timestamp("2025-01-29"),   # Ất Tỵ — verified bằng lunarcalendar
     2026: pd.Timestamp("2026-02-17"),   # Bính Ngọ — verified bằng lunarcalendar
+    2027: pd.Timestamp("2027-02-06"),   # Đinh Mùi — verified bằng lunarcalendar
+    2028: pd.Timestamp("2028-01-26"),   # Mậu Thân — verified bằng lunarcalendar
 }
 
 def get_tet_date(year: int) -> pd.Timestamp:

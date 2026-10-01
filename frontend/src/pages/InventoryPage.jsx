@@ -25,6 +25,13 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
   const [selectedProof, setSelectedProof] = useState(null);
   const [isProofModalOpen, setIsProofModalOpen] = useState(false);
 
+  // Reset pagination và filter khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    setSelectedTag('ALL');
+    setSearchTerm('');
+  }, [branchId]);
+
   if (!inventoryData || !inventoryData.items) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -42,7 +49,7 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
       code: b.batch_code,
       sha256Hash: b.batch_hash || 'SHA256:VERIFIED_ON_SOLANA_DEVNET',
       txSignature: b.solana_tx || 'SOLANA_DEVNET_TX_CONFIRMED',
-      timestamp: b.received_date || '2026-09-18'
+      timestamp: b.received_date || new Date().toISOString().split('T')[0]
     });
     setIsProofModalOpen(true);
   };
@@ -115,7 +122,7 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {batches.map((b) => {
               const expDate = new Date(b.expiry_date);
-              const today = new Date('2026-09-17');
+              const today = new Date();
               const diffDays = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
               const isNearExp = diffDays <= 3;
 
@@ -128,8 +135,8 @@ export default function InventoryPage({ inventoryData, branchId, onRefresh, onOp
                       : 'bg-slate-50 border-slate-200'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-slate-900 truncate">{b.ingredient_name}</span>
+                  <div className="flex items-start justify-between gap-1.5 mb-1.5">
+                    <span className="text-xs font-bold text-slate-900 leading-tight break-words flex-1 pr-1" title={b.ingredient_name}>{b.ingredient_name}</span>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
                       isNearExp ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
                     }`}>

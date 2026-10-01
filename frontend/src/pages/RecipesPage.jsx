@@ -15,9 +15,17 @@ import {
 import { createDishWithRecipe, deleteDish, smartAddRecipeItem, deleteRecipeItem } from '../services/api';
 import Pagination from '../components/Pagination';
 
-export default function RecipesPage({ dishes = [], recipes = [], ingredients = [], onRefresh }) {
+export default function RecipesPage({ dishes = [], recipes = [], ingredients = [], branchId, branchName, onRefresh }) {
   const [selectedDishId, setSelectedDishId] = useState(dishes?.[0]?.id || '');
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Reset khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    if (dishes?.length > 0) {
+      setSelectedDishId(dishes[0].id);
+    }
+  }, [branchId, dishes?.length]);
   
   // Modal states
   const [showAddDishModal, setShowAddDishModal] = useState(false);
@@ -220,7 +228,14 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
       {/* Header */}
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Thực Đơn & Định Lượng Món Ăn (Recipes / BOM)</h1>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h1 className="text-xl font-bold text-slate-900">Thực Đơn & Định Lượng Món Ăn (Recipes / BOM)</h1>
+            {branchName && (
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                🏪 {branchName} ({dishes.length} món)
+              </span>
+            )}
+          </div>
           <p className="text-sm text-slate-500 mt-1">
             Khai báo món ăn và định lượng nguyên liệu cấu thành. Khi nhập nguyên liệu mới, hệ thống sẽ <strong>tự động tạo nguyên liệu vào kho</strong>.
           </p>

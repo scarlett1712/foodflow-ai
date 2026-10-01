@@ -15,7 +15,7 @@ import Pagination from '../components/Pagination';
 export default function PreordersPage({ preorders, dishes, branchId, onRefresh }) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [customerName, setCustomerName] = useState('');
-  const [date, setDate] = useState('2026-09-18');
+  const [date, setDate] = useState(() => new Date().toISOString().split('T')[0]);
   const [note, setNote] = useState('');
   const [orderItems, setOrderItems] = useState([
     { dish_id: dishes?.[0]?.id || 'D01', quantity: 10 }
@@ -23,6 +23,14 @@ export default function PreordersPage({ preorders, dishes, branchId, onRefresh }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
+  // Reset pagination và món mặc định khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    if (dishes?.length > 0) {
+      setOrderItems([{ dish_id: dishes[0].id, quantity: 10 }]);
+    }
+  }, [branchId, dishes?.length]);
 
   const paginatedPreorders = (preorders || []).slice((currentPage - 1) * pageSize, currentPage * pageSize);
 

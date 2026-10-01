@@ -1,0 +1,1429 @@
+﻿date,branch_id,dish_id,dish_name,category,quantity,revenue
+2026-06-01,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-06-01,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,71,21229000
+2026-06-01,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,34,13226000
+2026-06-01,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-06-01,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-06-01,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,22,1738000
+2026-06-01,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-01,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-01,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,38,2242000
+2026-06-01,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,43,1505000
+2026-06-01,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,104,3640000
+2026-06-01,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,56,1568000
+2026-06-02,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,54,12366000
+2026-06-02,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,73,21827000
+2026-06-02,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,32,12448000
+2026-06-02,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,35,3115000
+2026-06-02,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-06-02,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-06-02,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-02,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-02,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,40,2360000
+2026-06-02,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,38,1330000
+2026-06-02,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,100,3500000
+2026-06-02,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,53,1484000
+2026-06-03,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,55,12595000
+2026-06-03,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,71,21229000
+2026-06-03,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-06-03,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-06-03,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,32,3808000
+2026-06-03,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,23,1817000
+2026-06-03,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-06-03,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,19,2185000
+2026-06-03,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,30,1770000
+2026-06-03,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,41,1435000
+2026-06-03,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,95,3325000
+2026-06-03,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-04,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,54,12366000
+2026-06-04,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,66,19734000
+2026-06-04,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,37,14393000
+2026-06-04,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,35,3115000
+2026-06-04,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-06-04,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,25,1975000
+2026-06-04,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-04,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-06-04,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,41,2419000
+2026-06-04,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,44,1540000
+2026-06-04,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,108,3780000
+2026-06-04,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,53,1484000
+2026-06-05,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,83,19007000
+2026-06-05,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,124,37076000
+2026-06-05,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,63,24507000
+2026-06-05,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,64,5696000
+2026-06-05,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,50,5950000
+2026-06-05,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,49,3871000
+2026-06-05,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,43,3827000
+2026-06-05,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,35,4025000
+2026-06-05,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,70,4130000
+2026-06-05,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,76,2660000
+2026-06-05,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,214,7490000
+2026-06-05,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,93,2604000
+2026-06-06,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,98,22442000
+2026-06-06,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,131,39169000
+2026-06-06,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,58,22562000
+2026-06-06,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,59,5251000
+2026-06-06,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,55,6545000
+2026-06-06,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,37,2923000
+2026-06-06,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,47,4183000
+2026-06-06,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-06-06,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,64,3776000
+2026-06-06,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,73,2555000
+2026-06-06,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,216,7560000
+2026-06-06,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,104,2912000
+2026-06-07,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,92,21068000
+2026-06-07,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,126,37674000
+2026-06-07,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,63,24507000
+2026-06-07,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,58,5162000
+2026-06-07,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,55,6545000
+2026-06-07,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,40,3160000
+2026-06-07,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,46,4094000
+2026-06-07,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,41,4715000
+2026-06-07,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,62,3658000
+2026-06-07,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,67,2345000
+2026-06-07,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,177,6195000
+2026-06-07,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,80,2240000
+2026-06-08,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-06-08,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,76,22724000
+2026-06-08,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,38,14782000
+2026-06-08,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-06-08,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,31,3689000
+2026-06-08,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-08,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-06-08,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-06-08,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,40,2360000
+2026-06-08,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,40,1400000
+2026-06-08,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,111,3885000
+2026-06-08,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,53,1484000
+2026-06-09,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,57,13053000
+2026-06-09,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,74,22126000
+2026-06-09,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-06-09,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,38,3382000
+2026-06-09,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-06-09,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-09,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,25,2225000
+2026-06-09,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,20,2300000
+2026-06-09,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,39,2301000
+2026-06-09,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,48,1680000
+2026-06-09,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,111,3885000
+2026-06-09,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-10,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,42,9618000
+2026-06-10,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,78,23322000
+2026-06-10,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-06-10,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,37,3293000
+2026-06-10,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-06-10,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-10,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-06-10,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,20,2300000
+2026-06-10,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,38,2242000
+2026-06-10,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,48,1680000
+2026-06-10,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,101,3535000
+2026-06-10,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,51,1428000
+2026-06-11,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,53,12137000
+2026-06-11,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,67,20033000
+2026-06-11,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-06-11,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,35,3115000
+2026-06-11,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,33,3927000
+2026-06-11,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-11,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-06-11,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-06-11,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,43,2537000
+2026-06-11,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,39,1365000
+2026-06-11,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,103,3605000
+2026-06-11,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,54,1512000
+2026-06-12,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,101,23129000
+2026-06-12,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,116,34684000
+2026-06-12,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,72,28008000
+2026-06-12,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,66,5874000
+2026-06-12,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,58,6902000
+2026-06-12,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,44,3476000
+2026-06-12,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,47,4183000
+2026-06-12,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,38,4370000
+2026-06-12,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,60,3540000
+2026-06-12,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,71,2485000
+2026-06-12,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,206,7210000
+2026-06-12,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,103,2884000
+2026-06-13,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,85,19465000
+2026-06-13,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,137,40963000
+2026-06-13,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,58,22562000
+2026-06-13,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,61,5429000
+2026-06-13,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,53,6307000
+2026-06-13,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,45,3555000
+2026-06-13,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-06-13,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,39,4485000
+2026-06-13,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,61,3599000
+2026-06-13,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,73,2555000
+2026-06-13,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,219,7665000
+2026-06-13,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,93,2604000
+2026-06-14,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,84,19236000
+2026-06-14,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,146,43654000
+2026-06-14,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,67,26063000
+2026-06-14,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,67,5963000
+2026-06-14,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,58,6902000
+2026-06-14,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,44,3476000
+2026-06-14,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,48,4272000
+2026-06-14,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,46,5290000
+2026-06-14,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,68,4012000
+2026-06-14,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,69,2415000
+2026-06-14,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,212,7420000
+2026-06-14,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,100,2800000
+2026-06-15,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,53,12137000
+2026-06-15,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,78,23322000
+2026-06-15,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-06-15,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,38,3382000
+2026-06-15,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,27,3213000
+2026-06-15,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-06-15,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-06-15,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-15,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-06-15,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-06-15,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,97,3395000
+2026-06-15,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-16,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,52,11908000
+2026-06-16,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,66,19734000
+2026-06-16,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,37,14393000
+2026-06-16,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-06-16,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-06-16,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-06-16,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-06-16,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-16,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,41,2419000
+2026-06-16,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,48,1680000
+2026-06-16,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,100,3500000
+2026-06-16,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-17,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,53,12137000
+2026-06-17,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,89,26611000
+2026-06-17,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,30,11670000
+2026-06-17,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-06-17,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-06-17,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-17,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-06-17,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-06-17,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,47,2773000
+2026-06-17,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,43,1505000
+2026-06-17,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,109,3815000
+2026-06-17,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,51,1428000
+2026-06-18,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-06-18,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,76,22724000
+2026-06-18,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-06-18,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,41,3649000
+2026-06-18,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,26,3094000
+2026-06-18,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,31,2449000
+2026-06-18,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-18,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-06-18,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,37,2183000
+2026-06-18,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,45,1575000
+2026-06-18,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,133,4655000
+2026-06-18,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,49,1372000
+2026-06-19,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,80,18320000
+2026-06-19,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,130,38870000
+2026-06-19,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,70,27230000
+2026-06-19,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,67,5963000
+2026-06-19,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,58,6902000
+2026-06-19,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,42,3318000
+2026-06-19,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,42,3738000
+2026-06-19,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,39,4485000
+2026-06-19,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,75,4425000
+2026-06-19,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,74,2590000
+2026-06-19,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,180,6300000
+2026-06-19,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,90,2520000
+2026-06-20,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,101,23129000
+2026-06-20,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,159,47541000
+2026-06-20,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,71,27619000
+2026-06-20,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,66,5874000
+2026-06-20,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,48,5712000
+2026-06-20,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,40,3160000
+2026-06-20,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,48,4272000
+2026-06-20,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-06-20,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-06-20,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,68,2380000
+2026-06-20,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,194,6790000
+2026-06-20,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,85,2380000
+2026-06-21,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,83,19007000
+2026-06-21,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,144,43056000
+2026-06-21,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,55,21395000
+2026-06-21,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,63,5607000
+2026-06-21,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,55,6545000
+2026-06-21,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,48,3792000
+2026-06-21,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,48,4272000
+2026-06-21,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,43,4945000
+2026-06-21,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,66,3894000
+2026-06-21,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,67,2345000
+2026-06-21,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,203,7105000
+2026-06-21,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,102,2856000
+2026-06-22,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-06-22,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,79,23621000
+2026-06-22,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,45,17505000
+2026-06-22,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-06-22,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,33,3927000
+2026-06-22,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-06-22,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-22,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-06-22,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-06-22,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,40,1400000
+2026-06-22,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,104,3640000
+2026-06-22,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-23,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,57,13053000
+2026-06-23,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,68,20332000
+2026-06-23,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,29,11281000
+2026-06-23,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,34,3026000
+2026-06-23,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,31,3689000
+2026-06-23,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-06-23,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-06-23,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-23,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,36,2124000
+2026-06-23,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,38,1330000
+2026-06-23,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,110,3850000
+2026-06-23,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-06-24,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-06-24,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-06-24,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-06-24,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-06-24,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,31,3689000
+2026-06-24,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-24,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-06-24,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-06-24,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,33,1947000
+2026-06-24,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,45,1575000
+2026-06-24,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,110,3850000
+2026-06-24,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,52,1456000
+2026-06-25,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,51,11679000
+2026-06-25,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,79,23621000
+2026-06-25,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-06-25,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,41,3649000
+2026-06-25,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-06-25,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-25,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-06-25,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,20,2300000
+2026-06-25,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,40,2360000
+2026-06-25,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,45,1575000
+2026-06-25,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,124,4340000
+2026-06-25,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,58,1624000
+2026-06-26,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,100,22900000
+2026-06-26,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,130,38870000
+2026-06-26,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,72,28008000
+2026-06-26,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,59,5251000
+2026-06-26,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,55,6545000
+2026-06-26,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,45,3555000
+2026-06-26,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,46,4094000
+2026-06-26,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,47,5405000
+2026-06-26,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,72,4248000
+2026-06-26,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,61,2135000
+2026-06-26,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,226,7910000
+2026-06-26,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,89,2492000
+2026-06-27,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,92,21068000
+2026-06-27,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,144,43056000
+2026-06-27,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,71,27619000
+2026-06-27,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,55,4895000
+2026-06-27,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,49,5831000
+2026-06-27,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,46,3634000
+2026-06-27,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,54,4806000
+2026-06-27,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,47,5405000
+2026-06-27,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,79,4661000
+2026-06-27,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,60,2100000
+2026-06-27,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,230,8050000
+2026-06-27,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,78,2184000
+2026-06-28,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,104,23816000
+2026-06-28,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,142,42458000
+2026-06-28,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,63,24507000
+2026-06-28,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,76,6764000
+2026-06-28,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,57,6783000
+2026-06-28,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,37,2923000
+2026-06-28,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-06-28,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,38,4370000
+2026-06-28,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,70,4130000
+2026-06-28,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,70,2450000
+2026-06-28,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,242,8470000
+2026-06-28,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,82,2296000
+2026-06-29,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,56,12824000
+2026-06-29,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,88,26312000
+2026-06-29,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,34,13226000
+2026-06-29,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-06-29,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,32,3808000
+2026-06-29,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-06-29,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-06-29,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-06-29,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,38,2242000
+2026-06-29,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,52,1820000
+2026-06-29,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,116,4060000
+2026-06-29,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,54,1512000
+2026-06-30,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,52,11908000
+2026-06-30,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,73,21827000
+2026-06-30,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-06-30,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,41,3649000
+2026-06-30,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,33,3927000
+2026-06-30,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-06-30,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-06-30,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-06-30,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,43,2537000
+2026-06-30,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,45,1575000
+2026-06-30,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,117,4095000
+2026-06-30,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,58,1624000
+2026-07-01,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,54,12366000
+2026-07-01,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,72,21528000
+2026-07-01,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,34,13226000
+2026-07-01,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-07-01,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-07-01,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-07-01,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-07-01,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-07-01,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,49,2891000
+2026-07-01,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-07-01,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,96,3360000
+2026-07-01,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,53,1484000
+2026-07-02,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,55,12595000
+2026-07-02,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,69,20631000
+2026-07-02,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-07-02,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-07-02,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,31,3689000
+2026-07-02,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-07-02,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-07-02,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-07-02,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,41,2419000
+2026-07-02,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,43,1505000
+2026-07-02,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,107,3745000
+2026-07-02,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,59,1652000
+2026-07-03,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,88,20152000
+2026-07-03,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,146,43654000
+2026-07-03,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,74,28786000
+2026-07-03,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,70,6230000
+2026-07-03,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,61,7259000
+2026-07-03,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,42,3318000
+2026-07-03,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,54,4806000
+2026-07-03,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,39,4485000
+2026-07-03,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,68,4012000
+2026-07-03,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,80,2800000
+2026-07-03,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,235,8225000
+2026-07-03,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,94,2632000
+2026-07-04,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,85,19465000
+2026-07-04,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,147,43953000
+2026-07-04,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,66,25674000
+2026-07-04,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,61,5429000
+2026-07-04,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,52,6188000
+2026-07-04,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,45,3555000
+2026-07-04,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,41,3649000
+2026-07-04,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,43,4945000
+2026-07-04,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-07-04,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,70,2450000
+2026-07-04,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,239,8365000
+2026-07-04,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,98,2744000
+2026-07-05,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,89,20381000
+2026-07-05,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,133,39767000
+2026-07-05,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,74,28786000
+2026-07-05,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,58,5162000
+2026-07-05,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,53,6307000
+2026-07-05,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,42,3318000
+2026-07-05,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-07-05,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-07-05,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-07-05,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,80,2800000
+2026-07-05,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,225,7875000
+2026-07-05,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,92,2576000
+2026-07-06,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-07-06,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,83,24817000
+2026-07-06,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-07-06,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,46,4094000
+2026-07-06,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-07-06,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-07-06,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-07-06,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-07-06,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-07-06,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,40,1400000
+2026-07-06,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,118,4130000
+2026-07-06,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,58,1624000
+2026-07-07,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,61,13969000
+2026-07-07,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,93,27807000
+2026-07-07,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-07-07,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-07-07,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,32,3808000
+2026-07-07,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-07-07,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,24,2136000
+2026-07-07,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-07-07,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,37,2183000
+2026-07-07,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,37,1295000
+2026-07-07,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,93,3255000
+2026-07-07,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,49,1372000
+2026-07-08,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,60,13740000
+2026-07-08,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,73,21827000
+2026-07-08,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-07-08,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,38,3382000
+2026-07-08,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-07-08,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,25,1975000
+2026-07-08,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-07-08,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-07-08,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,39,2301000
+2026-07-08,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-07-08,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,112,3920000
+2026-07-08,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-07-09,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,56,12824000
+2026-07-09,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,71,21229000
+2026-07-09,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-07-09,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-07-09,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-07-09,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-07-09,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-07-09,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-07-09,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,40,2360000
+2026-07-09,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-07-09,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,113,3955000
+2026-07-09,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,63,1764000
+2026-07-10,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,94,21526000
+2026-07-10,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,139,41561000
+2026-07-10,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,65,25285000
+2026-07-10,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,71,6319000
+2026-07-10,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,53,6307000
+2026-07-10,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,46,3634000
+2026-07-10,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,43,3827000
+2026-07-10,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,45,5175000
+2026-07-10,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,64,3776000
+2026-07-10,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,70,2450000
+2026-07-10,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,243,8505000
+2026-07-10,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,85,2380000
+2026-07-11,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,95,21755000
+2026-07-11,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,144,43056000
+2026-07-11,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,65,25285000
+2026-07-11,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,74,6586000
+2026-07-11,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,62,7378000
+2026-07-11,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,38,3002000
+2026-07-11,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,45,4005000
+2026-07-11,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,45,5175000
+2026-07-11,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,64,3776000
+2026-07-11,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,72,2520000
+2026-07-11,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,226,7910000
+2026-07-11,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,101,2828000
+2026-07-12,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,94,21526000
+2026-07-12,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,144,43056000
+2026-07-12,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,67,26063000
+2026-07-12,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,74,6586000
+2026-07-12,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,53,6307000
+2026-07-12,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,46,3634000
+2026-07-12,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,48,4272000
+2026-07-12,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-07-12,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-07-12,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,74,2590000
+2026-07-12,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,206,7210000
+2026-07-12,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,102,2856000
+2026-07-13,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-07-13,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-07-13,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-07-13,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-07-13,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-07-13,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-07-13,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-07-13,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-07-13,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-07-13,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,43,1505000
+2026-07-13,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,113,3955000
+2026-07-13,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,48,1344000
+2026-07-14,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,56,12824000
+2026-07-14,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,83,24817000
+2026-07-14,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-07-14,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-07-14,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-07-14,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-07-14,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-07-14,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-07-14,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,39,2301000
+2026-07-14,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,42,1470000
+2026-07-14,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,119,4165000
+2026-07-14,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-07-15,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,59,13511000
+2026-07-15,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-07-15,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-07-15,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,46,4094000
+2026-07-15,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,31,3689000
+2026-07-15,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-07-15,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,27,2403000
+2026-07-15,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,21,2415000
+2026-07-15,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-07-15,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,52,1820000
+2026-07-15,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,113,3955000
+2026-07-15,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,54,1512000
+2026-07-16,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,62,14198000
+2026-07-16,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,65,19435000
+2026-07-16,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,38,14782000
+2026-07-16,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-07-16,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,32,3808000
+2026-07-16,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,31,2449000
+2026-07-16,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-07-16,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-07-16,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-07-16,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-07-16,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,109,3815000
+2026-07-16,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,51,1428000
+2026-07-17,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,107,24503000
+2026-07-17,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,157,46943000
+2026-07-17,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,77,29953000
+2026-07-17,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,62,5518000
+2026-07-17,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,66,7854000
+2026-07-17,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-07-17,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,52,4628000
+2026-07-17,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-07-17,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,67,3953000
+2026-07-17,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,78,2730000
+2026-07-17,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,211,7385000
+2026-07-17,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,96,2688000
+2026-07-18,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,105,24045000
+2026-07-18,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,128,38272000
+2026-07-18,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,84,32676000
+2026-07-18,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,77,6853000
+2026-07-18,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,51,6069000
+2026-07-18,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,40,3160000
+2026-07-18,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-07-18,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,39,4485000
+2026-07-18,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-07-18,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,60,2100000
+2026-07-18,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,224,7840000
+2026-07-18,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,111,3108000
+2026-07-19,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,88,20152000
+2026-07-19,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,142,42458000
+2026-07-19,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,64,24896000
+2026-07-19,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,72,6408000
+2026-07-19,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,56,6664000
+2026-07-19,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-07-19,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,52,4628000
+2026-07-19,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-07-19,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,76,4484000
+2026-07-19,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,73,2555000
+2026-07-19,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,204,7140000
+2026-07-19,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,99,2772000
+2026-07-20,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,56,12824000
+2026-07-20,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,82,24518000
+2026-07-20,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-07-20,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,41,3649000
+2026-07-20,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-07-20,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-07-20,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-07-20,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,27,3105000
+2026-07-20,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-07-20,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,45,1575000
+2026-07-20,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,137,4795000
+2026-07-20,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,58,1624000
+2026-07-21,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,64,14656000
+2026-07-21,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-07-21,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,33,12837000
+2026-07-21,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-07-21,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,32,3808000
+2026-07-21,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-07-21,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,25,2225000
+2026-07-21,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-07-21,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-07-21,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,49,1715000
+2026-07-21,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,112,3920000
+2026-07-21,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,54,1512000
+2026-07-22,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,53,12137000
+2026-07-22,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,78,23322000
+2026-07-22,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-07-22,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-07-22,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,33,3927000
+2026-07-22,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-07-22,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-07-22,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-07-22,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,43,2537000
+2026-07-22,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,50,1750000
+2026-07-22,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,116,4060000
+2026-07-22,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,60,1680000
+2026-07-23,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-07-23,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,79,23621000
+2026-07-23,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-07-23,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-07-23,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-07-23,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-07-23,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,32,2848000
+2026-07-23,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-07-23,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,43,2537000
+2026-07-23,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,50,1750000
+2026-07-23,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,117,4095000
+2026-07-23,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,61,1708000
+2026-07-24,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,99,22671000
+2026-07-24,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,149,44551000
+2026-07-24,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,68,26452000
+2026-07-24,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,68,6052000
+2026-07-24,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,63,7497000
+2026-07-24,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,45,3555000
+2026-07-24,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,51,4539000
+2026-07-24,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-07-24,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,78,4602000
+2026-07-24,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,72,2520000
+2026-07-24,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,248,8680000
+2026-07-24,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,91,2548000
+2026-07-25,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,90,20610000
+2026-07-25,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,150,44850000
+2026-07-25,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,74,28786000
+2026-07-25,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,71,6319000
+2026-07-25,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,62,7378000
+2026-07-25,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,45,3555000
+2026-07-25,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,54,4806000
+2026-07-25,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-07-25,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,81,4779000
+2026-07-25,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,81,2835000
+2026-07-25,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,241,8435000
+2026-07-25,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,100,2800000
+2026-07-26,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,92,21068000
+2026-07-26,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,144,43056000
+2026-07-26,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,76,29564000
+2026-07-26,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,69,6141000
+2026-07-26,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,58,6902000
+2026-07-26,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,41,3239000
+2026-07-26,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-07-26,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,41,4715000
+2026-07-26,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,67,3953000
+2026-07-26,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,76,2660000
+2026-07-26,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,197,6895000
+2026-07-26,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,104,2912000
+2026-07-27,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,62,14198000
+2026-07-27,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,82,24518000
+2026-07-27,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-07-27,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-07-27,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,33,3927000
+2026-07-27,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,23,1817000
+2026-07-27,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-07-27,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-07-27,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-07-27,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-07-27,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,118,4130000
+2026-07-27,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,60,1680000
+2026-07-28,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-07-28,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,83,24817000
+2026-07-28,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,37,14393000
+2026-07-28,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-07-28,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-07-28,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-07-28,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-07-28,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-07-28,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,41,2419000
+2026-07-28,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,40,1400000
+2026-07-28,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,119,4165000
+2026-07-28,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,52,1456000
+2026-07-29,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,53,12137000
+2026-07-29,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,70,20930000
+2026-07-29,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,35,13615000
+2026-07-29,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,46,4094000
+2026-07-29,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,30,3570000
+2026-07-29,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,25,1975000
+2026-07-29,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-07-29,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-07-29,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-07-29,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,51,1785000
+2026-07-29,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,117,4095000
+2026-07-29,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,52,1456000
+2026-07-30,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-07-30,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-07-30,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,37,14393000
+2026-07-30,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-07-30,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-07-30,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-07-30,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-07-30,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-07-30,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,47,2773000
+2026-07-30,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,50,1750000
+2026-07-30,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,114,3990000
+2026-07-30,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-07-31,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,117,26793000
+2026-07-31,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,166,49634000
+2026-07-31,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,78,30342000
+2026-07-31,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,64,5696000
+2026-07-31,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,76,9044000
+2026-07-31,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,42,3318000
+2026-07-31,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,51,4539000
+2026-07-31,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,41,4715000
+2026-07-31,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,84,4956000
+2026-07-31,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,81,2835000
+2026-07-31,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,208,7280000
+2026-07-31,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,102,2856000
+2026-08-01,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,104,23816000
+2026-08-01,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,146,43654000
+2026-08-01,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,67,26063000
+2026-08-01,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,66,5874000
+2026-08-01,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,56,6664000
+2026-08-01,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,47,3713000
+2026-08-01,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,51,4539000
+2026-08-01,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,47,5405000
+2026-08-01,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,69,4071000
+2026-08-01,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,67,2345000
+2026-08-01,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,221,7735000
+2026-08-01,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,111,3108000
+2026-08-02,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,95,21755000
+2026-08-02,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,178,53222000
+2026-08-02,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,77,29953000
+2026-08-02,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,64,5696000
+2026-08-02,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,54,6426000
+2026-08-02,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,48,3792000
+2026-08-02,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,48,4272000
+2026-08-02,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,52,5980000
+2026-08-02,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,69,4071000
+2026-08-02,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,83,2905000
+2026-08-02,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,263,9205000
+2026-08-02,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,99,2772000
+2026-08-03,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,54,12366000
+2026-08-03,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,82,24518000
+2026-08-03,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-08-03,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,47,4183000
+2026-08-03,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-08-03,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-08-03,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-08-03,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,23,2645000
+2026-08-03,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,36,2124000
+2026-08-03,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,46,1610000
+2026-08-03,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,104,3640000
+2026-08-03,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-08-04,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,68,15572000
+2026-08-04,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,96,28704000
+2026-08-04,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,38,14782000
+2026-08-04,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-08-04,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,36,4284000
+2026-08-04,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-08-04,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-08-04,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-08-04,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,52,3068000
+2026-08-04,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,49,1715000
+2026-08-04,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,114,3990000
+2026-08-04,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,60,1680000
+2026-08-05,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,62,14198000
+2026-08-05,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,77,23023000
+2026-08-05,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-08-05,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,40,3560000
+2026-08-05,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-08-05,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,34,2686000
+2026-08-05,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-08-05,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-08-05,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,41,2419000
+2026-08-05,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,48,1680000
+2026-08-05,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,128,4480000
+2026-08-05,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,57,1596000
+2026-08-06,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,66,15114000
+2026-08-06,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,75,22425000
+2026-08-06,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-08-06,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,51,4539000
+2026-08-06,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,29,3451000
+2026-08-06,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-08-06,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,25,2225000
+2026-08-06,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-08-06,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,44,2596000
+2026-08-06,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,53,1855000
+2026-08-06,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,89,3115000
+2026-08-06,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,50,1400000
+2026-08-07,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,96,21984000
+2026-08-07,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,152,45448000
+2026-08-07,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,70,27230000
+2026-08-07,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,70,6230000
+2026-08-07,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,53,6307000
+2026-08-07,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,46,3634000
+2026-08-07,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-08-07,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,45,5175000
+2026-08-07,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,79,4661000
+2026-08-07,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,88,3080000
+2026-08-07,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,225,7875000
+2026-08-07,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,98,2744000
+2026-08-08,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,102,23358000
+2026-08-08,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,148,44252000
+2026-08-08,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,75,29175000
+2026-08-08,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,63,5607000
+2026-08-08,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,61,7259000
+2026-08-08,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,44,3476000
+2026-08-08,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-08-08,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,39,4485000
+2026-08-08,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,83,4897000
+2026-08-08,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,79,2765000
+2026-08-08,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,260,9100000
+2026-08-08,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,103,2884000
+2026-08-09,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,88,20152000
+2026-08-09,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,139,41561000
+2026-08-09,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,80,31120000
+2026-08-09,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,67,5963000
+2026-08-09,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,54,6426000
+2026-08-09,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,47,3713000
+2026-08-09,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-08-09,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,41,4715000
+2026-08-09,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,74,4366000
+2026-08-09,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,77,2695000
+2026-08-09,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,189,6615000
+2026-08-09,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,106,2968000
+2026-08-10,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,56,12824000
+2026-08-10,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,94,28106000
+2026-08-10,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-08-10,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-08-10,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,38,4522000
+2026-08-10,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-08-10,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-08-10,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-08-10,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,44,2596000
+2026-08-10,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,43,1505000
+2026-08-10,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,121,4235000
+2026-08-10,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,59,1652000
+2026-08-11,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,66,15114000
+2026-08-11,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,89,26611000
+2026-08-11,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,50,19450000
+2026-08-11,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,39,3471000
+2026-08-11,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-08-11,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,27,2133000
+2026-08-11,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,33,2937000
+2026-08-11,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,27,3105000
+2026-08-11,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,48,2832000
+2026-08-11,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-08-11,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,113,3955000
+2026-08-11,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,50,1400000
+2026-08-12,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,68,15572000
+2026-08-12,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,89,26611000
+2026-08-12,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-08-12,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,48,4272000
+2026-08-12,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-08-12,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-08-12,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,26,2314000
+2026-08-12,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-08-12,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,46,2714000
+2026-08-12,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,51,1785000
+2026-08-12,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,129,4515000
+2026-08-12,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,55,1540000
+2026-08-13,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,61,13969000
+2026-08-13,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,100,29900000
+2026-08-13,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,42,16338000
+2026-08-13,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,48,4272000
+2026-08-13,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-08-13,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-08-13,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,34,3026000
+2026-08-13,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-08-13,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-08-13,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-08-13,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,126,4410000
+2026-08-13,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,65,1820000
+2026-08-14,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,96,21984000
+2026-08-14,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,167,49933000
+2026-08-14,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,72,28008000
+2026-08-14,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,68,6052000
+2026-08-14,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,60,7140000
+2026-08-14,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,56,4424000
+2026-08-14,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,56,4984000
+2026-08-14,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,49,5635000
+2026-08-14,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,72,4248000
+2026-08-14,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,81,2835000
+2026-08-14,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,219,7665000
+2026-08-14,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,98,2744000
+2026-08-15,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,110,25190000
+2026-08-15,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,154,46046000
+2026-08-15,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,85,33065000
+2026-08-15,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,71,6319000
+2026-08-15,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,59,7021000
+2026-08-15,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-08-15,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,52,4628000
+2026-08-15,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-08-15,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,85,5015000
+2026-08-15,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,83,2905000
+2026-08-15,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,200,7000000
+2026-08-15,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,103,2884000
+2026-08-16,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,100,22900000
+2026-08-16,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,176,52624000
+2026-08-16,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,72,28008000
+2026-08-16,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,69,6141000
+2026-08-16,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,56,6664000
+2026-08-16,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,44,3476000
+2026-08-16,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,51,4539000
+2026-08-16,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-08-16,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,71,4189000
+2026-08-16,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,70,2450000
+2026-08-16,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,213,7455000
+2026-08-16,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,90,2520000
+2026-08-17,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-08-17,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-08-17,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-08-17,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,47,4183000
+2026-08-17,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-08-17,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-08-17,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,29,2581000
+2026-08-17,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,29,3335000
+2026-08-17,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,46,2714000
+2026-08-17,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,53,1855000
+2026-08-17,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,96,3360000
+2026-08-17,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,58,1624000
+2026-08-18,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,50,11450000
+2026-08-18,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,83,24817000
+2026-08-18,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,42,16338000
+2026-08-18,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-08-18,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-08-18,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-08-18,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,32,2848000
+2026-08-18,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-08-18,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-08-18,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,52,1820000
+2026-08-18,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,127,4445000
+2026-08-18,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,60,1680000
+2026-08-19,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,70,16030000
+2026-08-19,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,83,24817000
+2026-08-19,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-08-19,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,36,3204000
+2026-08-19,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,41,4879000
+2026-08-19,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,30,2370000
+2026-08-19,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-08-19,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-08-19,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-08-19,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,51,1785000
+2026-08-19,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,108,3780000
+2026-08-19,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,63,1764000
+2026-08-20,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-08-20,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,78,23322000
+2026-08-20,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,44,17116000
+2026-08-20,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,38,3382000
+2026-08-20,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-08-20,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-08-20,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,36,3204000
+2026-08-20,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-08-20,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,38,2242000
+2026-08-20,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-08-20,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,123,4305000
+2026-08-20,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,63,1764000
+2026-08-21,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,112,25648000
+2026-08-21,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,132,39468000
+2026-08-21,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,75,29175000
+2026-08-21,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,79,7031000
+2026-08-21,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,68,8092000
+2026-08-21,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,56,4424000
+2026-08-21,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-08-21,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,50,5750000
+2026-08-21,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,89,5251000
+2026-08-21,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,89,3115000
+2026-08-21,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,259,9065000
+2026-08-21,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,111,3108000
+2026-08-22,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,98,22442000
+2026-08-22,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,138,41262000
+2026-08-22,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,84,32676000
+2026-08-22,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,72,6408000
+2026-08-22,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,61,7259000
+2026-08-22,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,47,3713000
+2026-08-22,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-08-22,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,47,5405000
+2026-08-22,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,72,4248000
+2026-08-22,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,82,2870000
+2026-08-22,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,250,8750000
+2026-08-22,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,104,2912000
+2026-08-23,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,98,22442000
+2026-08-23,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,167,49933000
+2026-08-23,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,90,35010000
+2026-08-23,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,70,6230000
+2026-08-23,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,67,7973000
+2026-08-23,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-08-23,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,44,3916000
+2026-08-23,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,43,4945000
+2026-08-23,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,74,4366000
+2026-08-23,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,87,3045000
+2026-08-23,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,250,8750000
+2026-08-23,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,108,3024000
+2026-08-24,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,65,14885000
+2026-08-24,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-08-24,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-08-24,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,42,3738000
+2026-08-24,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-08-24,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,31,2449000
+2026-08-24,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-08-24,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-08-24,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-08-24,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,55,1925000
+2026-08-24,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,138,4830000
+2026-08-24,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,65,1820000
+2026-08-25,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-08-25,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,92,27508000
+2026-08-25,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,43,16727000
+2026-08-25,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,44,3916000
+2026-08-25,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,40,4760000
+2026-08-25,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,35,2765000
+2026-08-25,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,36,3204000
+2026-08-25,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-08-25,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,47,2773000
+2026-08-25,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,53,1855000
+2026-08-25,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,123,4305000
+2026-08-25,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,65,1820000
+2026-08-26,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,61,13969000
+2026-08-26,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-08-26,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,47,18283000
+2026-08-26,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,47,4183000
+2026-08-26,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,36,4284000
+2026-08-26,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-08-26,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-08-26,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-08-26,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,46,2714000
+2026-08-26,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-08-26,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,123,4305000
+2026-08-26,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,56,1568000
+2026-08-27,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-08-27,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,79,23621000
+2026-08-27,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,44,17116000
+2026-08-27,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,49,4361000
+2026-08-27,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-08-27,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,31,2449000
+2026-08-27,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,32,2848000
+2026-08-27,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,22,2530000
+2026-08-27,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-08-27,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,51,1785000
+2026-08-27,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,127,4445000
+2026-08-27,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-08-28,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,97,22213000
+2026-08-28,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,160,47840000
+2026-08-28,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,76,29564000
+2026-08-28,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,68,6052000
+2026-08-28,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,63,7497000
+2026-08-28,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,49,3871000
+2026-08-28,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,61,5429000
+2026-08-28,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,49,5635000
+2026-08-28,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,84,4956000
+2026-08-28,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,85,2975000
+2026-08-28,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,232,8120000
+2026-08-28,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,98,2744000
+2026-08-29,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,93,21297000
+2026-08-29,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,195,58305000
+2026-08-29,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,72,28008000
+2026-08-29,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,73,6497000
+2026-08-29,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,60,7140000
+2026-08-29,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,49,3871000
+2026-08-29,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,53,4717000
+2026-08-29,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,40,4600000
+2026-08-29,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,73,4307000
+2026-08-29,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,74,2590000
+2026-08-29,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,246,8610000
+2026-08-29,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,100,2800000
+2026-08-30,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,100,22900000
+2026-08-30,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,162,48438000
+2026-08-30,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,75,29175000
+2026-08-30,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,80,7120000
+2026-08-30,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,60,7140000
+2026-08-30,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,51,4029000
+2026-08-30,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,50,4450000
+2026-08-30,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,49,5635000
+2026-08-30,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,77,4543000
+2026-08-30,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,86,3010000
+2026-08-30,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,256,8960000
+2026-08-30,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,105,2940000
+2026-08-31,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,64,14656000
+2026-08-31,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-08-31,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,46,17894000
+2026-08-31,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,50,4450000
+2026-08-31,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,38,4522000
+2026-08-31,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-08-31,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,28,2492000
+2026-08-31,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-08-31,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,46,2714000
+2026-08-31,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,54,1890000
+2026-08-31,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,116,4060000
+2026-08-31,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,68,1904000
+2026-09-01,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-09-01,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,74,22126000
+2026-09-01,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-09-01,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,37,3293000
+2026-09-01,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,34,4046000
+2026-09-01,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,30,2370000
+2026-09-01,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-09-01,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,25,2875000
+2026-09-01,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-09-01,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,50,1750000
+2026-09-01,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,140,4900000
+2026-09-01,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,69,1932000
+2026-09-02,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,57,13053000
+2026-09-02,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,98,29302000
+2026-09-02,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,36,14004000
+2026-09-02,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,44,3916000
+2026-09-02,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,41,4879000
+2026-09-02,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,26,2054000
+2026-09-02,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,33,2937000
+2026-09-02,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-09-02,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,47,2773000
+2026-09-02,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,52,1820000
+2026-09-02,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,142,4970000
+2026-09-02,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,59,1652000
+2026-09-03,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-09-03,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,94,28106000
+2026-09-03,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-09-03,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,44,3916000
+2026-09-03,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,36,4284000
+2026-09-03,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-09-03,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,34,3026000
+2026-09-03,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-09-03,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,45,2655000
+2026-09-03,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,54,1890000
+2026-09-03,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,124,4340000
+2026-09-03,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-09-04,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,107,24503000
+2026-09-04,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,152,45448000
+2026-09-04,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,75,29175000
+2026-09-04,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,78,6942000
+2026-09-04,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,57,6783000
+2026-09-04,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,55,4345000
+2026-09-04,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,58,5162000
+2026-09-04,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,42,4830000
+2026-09-04,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,82,4838000
+2026-09-04,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,85,2975000
+2026-09-04,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,267,9345000
+2026-09-04,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,117,3276000
+2026-09-05,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,104,23816000
+2026-09-05,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,152,45448000
+2026-09-05,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,76,29564000
+2026-09-05,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,70,6230000
+2026-09-05,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,59,7021000
+2026-09-05,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,52,4108000
+2026-09-05,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,57,5073000
+2026-09-05,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,45,5175000
+2026-09-05,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,76,4484000
+2026-09-05,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,86,3010000
+2026-09-05,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,242,8470000
+2026-09-05,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,98,2744000
+2026-09-06,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,106,24274000
+2026-09-06,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,158,47242000
+2026-09-06,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,73,28397000
+2026-09-06,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,81,7209000
+2026-09-06,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,67,7973000
+2026-09-06,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,51,4029000
+2026-09-06,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,58,5162000
+2026-09-06,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,49,5635000
+2026-09-06,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,80,4720000
+2026-09-06,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,90,3150000
+2026-09-06,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,286,10010000
+2026-09-06,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,108,3024000
+2026-09-07,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,66,15114000
+2026-09-07,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,96,28704000
+2026-09-07,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-09-07,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-09-07,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,40,4760000
+2026-09-07,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,28,2212000
+2026-09-07,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,36,3204000
+2026-09-07,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-09-07,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,48,2832000
+2026-09-07,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,53,1855000
+2026-09-07,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,144,5040000
+2026-09-07,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,59,1652000
+2026-09-08,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,58,13282000
+2026-09-08,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-09-08,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,41,15949000
+2026-09-08,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,44,3916000
+2026-09-08,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,37,4403000
+2026-09-08,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,32,2528000
+2026-09-08,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-09-08,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,30,3450000
+2026-09-08,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,42,2478000
+2026-09-08,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,47,1645000
+2026-09-08,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,131,4585000
+2026-09-08,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-09-09,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,66,15114000
+2026-09-09,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-09-09,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-09-09,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-09-09,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-09-09,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-09-09,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-09-09,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-09-09,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-09-09,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,57,1995000
+2026-09-09,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,136,4760000
+2026-09-09,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,68,1904000
+2026-09-10,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,68,15572000
+2026-09-10,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,87,26013000
+2026-09-10,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,42,16338000
+2026-09-10,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,41,3649000
+2026-09-10,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,38,4522000
+2026-09-10,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,30,2370000
+2026-09-10,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,33,2937000
+2026-09-10,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-09-10,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,43,2537000
+2026-09-10,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,49,1715000
+2026-09-10,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,124,4340000
+2026-09-10,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,61,1708000
+2026-09-11,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,110,25190000
+2026-09-11,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,148,44252000
+2026-09-11,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,81,31509000
+2026-09-11,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,66,5874000
+2026-09-11,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,52,6188000
+2026-09-11,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,54,4266000
+2026-09-11,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,51,4539000
+2026-09-11,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,46,5290000
+2026-09-11,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,72,4248000
+2026-09-11,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,76,2660000
+2026-09-11,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,247,8645000
+2026-09-11,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,105,2940000
+2026-09-12,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,117,26793000
+2026-09-12,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,169,50531000
+2026-09-12,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,79,30731000
+2026-09-12,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,81,7209000
+2026-09-12,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,69,8211000
+2026-09-12,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-09-12,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,56,4984000
+2026-09-12,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,52,5980000
+2026-09-12,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,93,5487000
+2026-09-12,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,90,3150000
+2026-09-12,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,292,10220000
+2026-09-12,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,117,3276000
+2026-09-13,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,116,26564000
+2026-09-13,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,149,44551000
+2026-09-13,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,74,28786000
+2026-09-13,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,77,6853000
+2026-09-13,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,55,6545000
+2026-09-13,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,49,3871000
+2026-09-13,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,62,5518000
+2026-09-13,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,46,5290000
+2026-09-13,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,85,5015000
+2026-09-13,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,76,2660000
+2026-09-13,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,246,8610000
+2026-09-13,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,118,3304000
+2026-09-14,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,65,14885000
+2026-09-14,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,93,27807000
+2026-09-14,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,49,19061000
+2026-09-14,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,53,4717000
+2026-09-14,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-09-14,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,36,2844000
+2026-09-14,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,31,2759000
+2026-09-14,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,27,3105000
+2026-09-14,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,48,2832000
+2026-09-14,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,58,2030000
+2026-09-14,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,117,4095000
+2026-09-14,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,67,1876000
+2026-09-15,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,67,15343000
+2026-09-15,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,97,29003000
+2026-09-15,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,42,16338000
+2026-09-15,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,52,4628000
+2026-09-15,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,35,4165000
+2026-09-15,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,35,2765000
+2026-09-15,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,33,2937000
+2026-09-15,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-09-15,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-09-15,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,54,1890000
+2026-09-15,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,125,4375000
+2026-09-15,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,61,1708000
+2026-09-16,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,63,14427000
+2026-09-16,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,81,24219000
+2026-09-16,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,49,19061000
+2026-09-16,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,44,3916000
+2026-09-16,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,36,4284000
+2026-09-16,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,35,2765000
+2026-09-16,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,34,3026000
+2026-09-16,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-09-16,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,54,3186000
+2026-09-16,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,52,1820000
+2026-09-16,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,118,4130000
+2026-09-16,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,69,1932000
+2026-09-17,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,69,15801000
+2026-09-17,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,89,26611000
+2026-09-17,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,39,15171000
+2026-09-17,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,53,4717000
+2026-09-17,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,39,4641000
+2026-09-17,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,29,2291000
+2026-09-17,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,34,3026000
+2026-09-17,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-09-17,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,47,2773000
+2026-09-17,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,49,1715000
+2026-09-17,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,123,4305000
+2026-09-17,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,60,1680000
+2026-09-18,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,105,24045000
+2026-09-18,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,175,52325000
+2026-09-18,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,84,32676000
+2026-09-18,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,82,7298000
+2026-09-18,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,70,8330000
+2026-09-18,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,50,3950000
+2026-09-18,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,59,5251000
+2026-09-18,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,51,5865000
+2026-09-18,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,94,5546000
+2026-09-18,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,93,3255000
+2026-09-18,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,288,10080000
+2026-09-18,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,119,3332000
+2026-09-19,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,120,27480000
+2026-09-19,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,142,42458000
+2026-09-19,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,88,34232000
+2026-09-19,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,79,7031000
+2026-09-19,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,65,7735000
+2026-09-19,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,50,3950000
+2026-09-19,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,56,4984000
+2026-09-19,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,50,5750000
+2026-09-19,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,88,5192000
+2026-09-19,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,76,2660000
+2026-09-19,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,264,9240000
+2026-09-19,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,105,2940000
+2026-09-20,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,102,23358000
+2026-09-20,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,171,51129000
+2026-09-20,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,80,31120000
+2026-09-20,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,74,6586000
+2026-09-20,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,60,7140000
+2026-09-20,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-09-20,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,58,5162000
+2026-09-20,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,44,5060000
+2026-09-20,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,77,4543000
+2026-09-20,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,85,2975000
+2026-09-20,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,268,9380000
+2026-09-20,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,101,2828000
+2026-09-21,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,68,15572000
+2026-09-21,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,86,25714000
+2026-09-21,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,53,20617000
+2026-09-21,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-09-21,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,36,4284000
+2026-09-21,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-09-21,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,30,2670000
+2026-09-21,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,29,3335000
+2026-09-21,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,56,3304000
+2026-09-21,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,53,1855000
+2026-09-21,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,132,4620000
+2026-09-21,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,62,1736000
+2026-09-22,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,65,14885000
+2026-09-22,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,103,30797000
+2026-09-22,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,47,18283000
+2026-09-22,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,45,4005000
+2026-09-22,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,43,5117000
+2026-09-22,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,36,2844000
+2026-09-22,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,34,3026000
+2026-09-22,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,26,2990000
+2026-09-22,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,49,2891000
+2026-09-22,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,51,1785000
+2026-09-22,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,135,4725000
+2026-09-22,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,64,1792000
+2026-09-23,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,54,12366000
+2026-09-23,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,99,29601000
+2026-09-23,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,44,17116000
+2026-09-23,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,53,4717000
+2026-09-23,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,38,4522000
+2026-09-23,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,33,2607000
+2026-09-23,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,36,3204000
+2026-09-23,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,28,3220000
+2026-09-23,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,50,2950000
+2026-09-23,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,68,2380000
+2026-09-23,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,129,4515000
+2026-09-23,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,66,1848000
+2026-09-24,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,75,17175000
+2026-09-24,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,87,26013000
+2026-09-24,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,40,15560000
+2026-09-24,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,43,3827000
+2026-09-24,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,40,4760000
+2026-09-24,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,34,2686000
+2026-09-24,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,35,3115000
+2026-09-24,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,24,2760000
+2026-09-24,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,53,3127000
+2026-09-24,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,60,2100000
+2026-09-24,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,130,4550000
+2026-09-24,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,66,1848000
+2026-09-25,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,118,27022000
+2026-09-25,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,172,51428000
+2026-09-25,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,87,33843000
+2026-09-25,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,72,6408000
+2026-09-25,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,64,7616000
+2026-09-25,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,47,3713000
+2026-09-25,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,62,5518000
+2026-09-25,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,51,5865000
+2026-09-25,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,83,4897000
+2026-09-25,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,90,3150000
+2026-09-25,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,230,8050000
+2026-09-25,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,119,3332000
+2026-09-26,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,108,24732000
+2026-09-26,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,169,50531000
+2026-09-26,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,91,35399000
+2026-09-26,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,74,6586000
+2026-09-26,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,71,8449000
+2026-09-26,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,53,4187000
+2026-09-26,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,59,5251000
+2026-09-26,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,52,5980000
+2026-09-26,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,75,4425000
+2026-09-26,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,92,3220000
+2026-09-26,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,264,9240000
+2026-09-26,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,121,3388000
+2026-09-27,FoodFlow Hà Đông,BUFFET_01,Set Buffet Nướng Lẩu Classic,Set Buffet,110,25190000
+2026-09-27,FoodFlow Hà Đông,BUFFET_02,Set Buffet Nướng Lẩu Premium,Set Buffet,163,48737000
+2026-09-27,FoodFlow Hà Đông,BUFFET_03,Set Buffet Hải Sản Thượng Hạng,Set Buffet,86,33454000
+2026-09-27,FoodFlow Hà Đông,DISH_01,Ba Chỉ Bò Mỹ Nướng Bulgogi,Thịt Nướng & Lẩu,79,7031000
+2026-09-27,FoodFlow Hà Đông,DISH_02,Dẻ Sườn Bò Ướp Sốt Chum,Thịt Nướng & Lẩu,59,7021000
+2026-09-27,FoodFlow Hà Đông,DISH_03,Nầm Heo Nướng Sốt Chao,Thịt Nướng & Lẩu,52,4108000
+2026-09-27,FoodFlow Hà Đông,DISH_04,Bạch Tuộc Nướng Sa Tế,Hải Sản,65,5785000
+2026-09-27,FoodFlow Hà Đông,DISH_05,Tôm Càng Xanh Nướng Muối Ớt,Hải Sản,49,5635000
+2026-09-27,FoodFlow Hà Đông,DISH_06,Nước Lẩu Thái Tomyum Chua Cay,Món Nước,78,4602000
+2026-09-27,FoodFlow Hà Đông,DISH_07,Nấm Kim Châm & Rau Lẩu Tổng Hợp,Đồ Ăn Nhẹ,93,3255000
+2026-09-27,FoodFlow Hà Đông,DRINK_01,Bia Tươi Tiger Bạc,Đồ Uống,224,7840000
+2026-09-27,FoodFlow Hà Đông,DRINK_02,Trà Hoa Cúc Mật Ong,Đồ Uống,93,2604000

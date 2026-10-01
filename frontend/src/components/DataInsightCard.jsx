@@ -123,12 +123,18 @@ export default function DataInsightCard({ branchId = 'BRANCH_01', selectedCity =
               </div>
               {menu_engineering?.top_stars?.[0] ? (
                 <div>
-                  <div className="text-sm font-bold text-slate-900 truncate">
+                  <div className="text-sm font-bold text-slate-900 min-h-[2.5rem] flex items-center leading-snug break-words" title={menu_engineering.top_stars[0].dish_name}>
                     {menu_engineering.top_stars[0].dish_name}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1 flex items-center justify-between">
-                    <span>Đóng góp: <strong className="text-emerald-600">{menu_engineering.top_stars[0].revenue_pct}%</strong> DT</span>
-                    <span>~{menu_engineering.top_stars[0].avg_daily_qty} phần/ngày</span>
+                  <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-medium">Đóng góp DT</span>
+                      <span className="font-bold text-emerald-600">{menu_engineering.top_stars[0].revenue_pct}%</span>
+                    </div>
+                    <div className="flex flex-col text-right">
+                      <span className="text-[10px] text-slate-400 font-medium">Bán trung bình</span>
+                      <span className="font-bold text-slate-700">~{menu_engineering.top_stars[0].avg_daily_qty} <span className="font-normal text-[10px] text-slate-400">phần/ngày</span></span>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -142,20 +148,20 @@ export default function DataInsightCard({ branchId = 'BRANCH_01', selectedCity =
                 <span className="flex items-center gap-1.5 text-sky-600">
                   <Sun className="w-4 h-4" /> Độ Nhạy Thời Tiết
                 </span>
-                <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-sm ${
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${
                   weather_sensitivity?.score >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
                 }`}>
                   {weather_sensitivity?.level} ({weather_sensitivity?.score}/100)
                 </span>
               </div>
-              <div className="space-y-1 text-xs">
-                <div className="flex justify-between text-slate-600">
-                  <span>Nắng nóng (&gt;33°C):</span>
-                  <strong className="text-amber-700">{weather_sensitivity?.hot_day_avg_rev?.toLocaleString('vi-VN')} đ/ngày</strong>
+              <div className="space-y-1.5 text-xs pt-1 border-t border-slate-100">
+                <div className="flex justify-between items-center text-slate-600">
+                  <span className="text-[11px]">Nắng nóng (&gt;33°C):</span>
+                  <strong className="text-amber-700 text-xs">{weather_sensitivity?.hot_day_avg_rev?.toLocaleString('vi-VN')} đ</strong>
                 </div>
-                <div className="flex justify-between text-slate-600">
-                  <span>Ngày mưa dông:</span>
-                  <strong className="text-blue-700">{weather_sensitivity?.rainy_day_avg_rev?.toLocaleString('vi-VN')} đ/ngày</strong>
+                <div className="flex justify-between items-center text-slate-600">
+                  <span className="text-[11px]">Ngày mưa dông:</span>
+                  <strong className="text-blue-700 text-xs">{weather_sensitivity?.rainy_day_avg_rev?.toLocaleString('vi-VN')} đ</strong>
                 </div>
               </div>
             </div>
@@ -173,8 +179,9 @@ export default function DataInsightCard({ branchId = 'BRANCH_01', selectedCity =
                   +{day_of_week_pattern?.weekend_lift_pct}%
                   <ArrowUpRight className="w-4 h-4 text-purple-600" />
                 </div>
-                <div className="text-xs text-slate-500 mt-1">
-                  Cao điểm: <strong>{day_of_week_pattern?.peak_day}</strong> | Thấp nhất: <strong>{day_of_week_pattern?.lull_day}</strong>
+                <div className="text-xs text-slate-500 mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <span>Cao điểm: <strong className="text-slate-800">{day_of_week_pattern?.peak_day}</strong></span>
+                  <span>Đáy: <strong className="text-slate-800">{day_of_week_pattern?.lull_day}</strong></span>
                 </div>
               </div>
             </div>
@@ -189,12 +196,18 @@ export default function DataInsightCard({ branchId = 'BRANCH_01', selectedCity =
               </div>
               {menu_engineering?.slow_movers?.[0] ? (
                 <div>
-                  <div className="text-sm font-bold text-slate-900 truncate">
+                  <div className="text-sm font-bold text-slate-900 min-h-[2.5rem] flex items-center leading-snug break-words" title={menu_engineering.slow_movers[0].dish_name}>
                     {menu_engineering.slow_movers[0].dish_name}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1 flex items-center justify-between">
-                    <span>Chỉ chiếm: <strong>{menu_engineering.slow_movers[0].revenue_pct}%</strong> DT</span>
-                    <span>~{menu_engineering.slow_movers[0].avg_daily_qty} phần/ngày</span>
+                  <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-slate-400 font-medium">Tỷ trọng DT</span>
+                      <span className="font-bold text-rose-600">{menu_engineering.slow_movers[0].revenue_pct}%</span>
+                    </div>
+                    <div className="flex flex-col text-right">
+                      <span className="text-[10px] text-slate-400 font-medium">Bán trung bình</span>
+                      <span className="font-bold text-slate-700">~{menu_engineering.slow_movers[0].avg_daily_qty} <span className="font-normal text-[10px] text-slate-400">phần/ngày</span></span>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -227,10 +240,10 @@ export default function DataInsightCard({ branchId = 'BRANCH_01', selectedCity =
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {actionable_recommendations.map((rec, i) => (
-                  <div key={i} className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200 hover:border-purple-300 hover:bg-purple-50/30 transition-all space-y-1.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-bold text-slate-800 truncate">{rec.title}</span>
-                      {getPriorityBadge(rec.priority)}
+                  <div key={i} className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200 hover:border-purple-300 hover:bg-purple-50/30 transition-all space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-xs font-bold text-slate-800 leading-snug flex-1">{rec.title}</span>
+                      <span className="shrink-0">{getPriorityBadge(rec.priority)}</span>
                     </div>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
                       {rec.description}

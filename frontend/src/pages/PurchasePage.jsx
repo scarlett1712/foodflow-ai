@@ -12,7 +12,8 @@ import {
   Check, 
   PackageCheck,
   Calendar,
-  ShieldCheck
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import { getPurchaseHistory, recordManualPurchase } from '../services/api';
 import Pagination from '../components/Pagination';
@@ -20,7 +21,7 @@ import SolanaBadge from '../components/SolanaBadge';
 import SolanaVerificationModal from '../components/SolanaVerificationModal';
 import VarianceExplanationModal from '../components/VarianceExplanationModal';
 
-export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpenPurchaseUploadModal }) {
+export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpenPurchaseUploadModal, heavyLoading = false }) {
   const [subTab, setSubTab] = useState('recommendations'); // 'recommendations' | 'history'
   
   // Recommendations state
@@ -31,6 +32,12 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
   const [isRecordingManual, setIsRecordingManual] = useState(false);
   const [recPage, setRecPage] = useState(1);
   const [recPageSize, setRecPageSize] = useState(10);
+
+  // BUG-06 FIX: Reset checkbox khi đổi chi nhánh → tránh gán nhầm nguyên liệu
+  useEffect(() => {
+    setCheckedItems({});
+    setRecPage(1);
+  }, [branchId]);
 
   // Variance Modal State
   const [isVarianceModalOpen, setIsVarianceModalOpen] = useState(false);
@@ -54,7 +61,7 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
       code: item.batch_code || `PO-${item.date}-${item.ingredient_id}`,
       sha256Hash: item.record_hash || 'SHA256:SOLANA_DEVNET_AUDITED_PO',
       txSignature: item.solana_tx || 'SOLANA_DEVNET_CONFIRMED_TX',
-      timestamp: item.date || '2026-09-18',
+      timestamp: item.date || new Date().toISOString().split('T')[0],
       variancePct: item.variance_pct || 0,
       varianceReason: item.variance_reason || '',
       aiVerdict: item.ai_verdict || 'COMPLIANT',
@@ -83,10 +90,30 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
     }
   }, [subTab, branchId]);
 
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính gợi ý mua hàng AI…</h3>
+        <p className="text-sm text-slate-500 text-center">AI đang phân tích tồn kho và dự báo để đề xuất nhập hàng. Các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
+
   if (!purchaseData || !purchaseData.recommendations) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        </div>
+        <h3 className="text-base font-semibold text-slate-700">Chưa có dữ liệu Đề xuất mua hàng</h3>
+        <p className="text-sm text-slate-500 text-center">Không thể tải danh sách gợi ý nhập kho cho chi nhánh này.</p>
+        <button
+          onClick={onRefresh || (() => window.location.reload())}
+          className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition shadow-sm"
+        >
+          🔄 Tải lại dữ liệu
+        </button>
       </div>
     );
   }
@@ -255,7 +282,7 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
           {/* Upload Purchase CSV Button */}
           <button
             onClick={onOpenPurchaseUploadModal}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer shadow-emerald-600/20"
             title="Tải lên file CSV lịch sử đi chợ để cập nhật tồn kho tự động"
           >
             <UploadCloud className="w-4 h-4" />
@@ -318,168 +345,189 @@ export default function PurchasePage({ purchaseData, branchId, onRefresh, onOpen
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
             
             {/* Filter & Action Toolbar */}
-            <div className="p-5 pb-3 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-1.5">
+            <div className="p-4 sm:p-5 border-b border-slate-100 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3.5">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0 scrollbar-none">
                 <button
                   onClick={() => { setFilterStatus('ALL'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'ALL' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'ALL' ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   Tất cả ({recommendations.length})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('TO_BUY'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'TO_BUY' ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'TO_BUY' ? 'bg-amber-600 text-white shadow-xs' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
                   }`}
                 >
                   Cần Nhập Hàng ({summary.total_items_to_buy})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('CRITICAL'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'CRITICAL' ? 'bg-red-600 text-white' : 'bg-red-50 text-red-700 hover:bg-red-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'CRITICAL' ? 'bg-red-600 text-white shadow-xs' : 'bg-red-50 text-red-700 hover:bg-red-100'
                   }`}
                 >
                   Thiếu Khẩn Cấp ({summary.critical_shortage_items})
                 </button>
                 <button
                   onClick={() => { setFilterStatus('SUFFICIENT'); setRecPage(1); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                    filterStatus === 'SUFFICIENT' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    filterStatus === 'SUFFICIENT' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
                   }`}
                 >
                   Đủ / Tồn Dư ({recommendations.length - summary.total_items_to_buy})
                 </button>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className="relative">
+              <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap justify-between sm:justify-end">
+                <div className="relative flex-1 sm:flex-initial">
                   <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   <input
                     type="text"
                     placeholder="Tìm nguyên liệu..."
                     value={searchTerm}
                     onChange={(e) => { setSearchTerm(e.target.value); setRecPage(1); }}
-                    className="pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-48"
+                    className="pl-9 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-48"
                   />
                 </div>
 
-                <button
-                  onClick={handleExportText}
-                  className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-                  title="Sao chép danh sách đi chợ"
-                >
-                  <Download className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleExportText}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                    title="Sao chép danh sách đi chợ"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
 
-                <button
-                  onClick={handlePrint}
-                  className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-                  title="In phiếu đi chợ"
-                >
-                  <Printer className="w-4 h-4" />
-                </button>
+                  <button
+                    onClick={handlePrint}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                    title="In phiếu đi chợ"
+                  >
+                    <Printer className="w-4 h-4" />
+                  </button>
 
-                <button
-                  onClick={handleConfirmStockIn}
-                  disabled={isRecordingManual}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-all cursor-pointer"
-                  title="Xác nhận đã mua và tự động cộng dồn số lượng vào kho"
-                >
-                  <PackageCheck className="w-4 h-4" />
-                  <span>{isRecordingManual ? 'Đang cập nhật kho...' : 'Xác Nhận Nhập Kho'}</span>
-                </button>
+                  <button
+                    onClick={handleConfirmStockIn}
+                    disabled={isRecordingManual}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
+                    title="Xác nhận đã mua và tự động cộng dồn số lượng vào kho"
+                  >
+                    <PackageCheck className="w-4 h-4" />
+                    <span>{isRecordingManual ? 'Đang cập nhật kho...' : 'Xác Nhận Nhập Kho'}</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Recommendations Table */}
-            <div className="w-full">
-              <table className="w-full text-left text-xs table-fixed">
-                <thead>
-                  <tr className="border-b border-slate-200 font-bold text-slate-500 uppercase bg-slate-50/80">
-                    <th className="py-2.5 px-2 w-[4%] text-center">Mua</th>
-                    <th className="py-2.5 px-2 w-[22%]">Nguyên Liệu</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Cần Dùng</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Tồn Kho</th>
-                    <th className="py-2.5 px-2 w-[9%] text-right">Thiếu Hụt</th>
-                    <th className="py-2.5 px-2 w-[14%] text-right bg-emerald-50/70 text-emerald-900 font-bold">CẦN MUA</th>
-                    <th className="py-2.5 px-2 w-[10%] text-right">Đơn Giá</th>
-                    <th className="py-2.5 px-2 w-[11%] text-right">Thành Tiền</th>
-                    <th className="py-2.5 px-2 w-[12%] text-center">Trạng Thái</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {paginatedRecs.map((item) => {
-                    const isChecked = !!checkedItems[item.ingredient_id];
-                    return (
-                      <tr 
-                        key={item.ingredient_id} 
-                        className={`hover:bg-slate-50/80 transition-colors ${
-                          isChecked ? 'bg-slate-50 opacity-60 line-through' : ''
-                        }`}
-                      >
-                        <td className="py-2.5 px-2 text-center align-middle">
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleToggleCheck(item.ingredient_id)}
-                            className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer w-4 h-4"
-                          />
-                        </td>
-                        <td className="py-2.5 px-2 font-semibold text-slate-900 break-words leading-tight align-middle">
-                          {item.ingredient_name}
-                          <span className="block text-[10px] font-normal text-slate-400">Mã: {item.ingredient_id} • {item.unit}</span>
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
-                          {item.required_quantity} {item.unit}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
-                          {item.current_stock} {item.unit}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-medium text-red-600 align-middle">
-                          {item.shortage > 0 ? `${item.shortage} ${item.unit}` : '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-right bg-emerald-50/60 align-middle">
-                          <span className={`text-xs font-bold ${
-                            item.recommended_purchase > 0 ? 'text-emerald-700' : 'text-slate-400 font-normal'
-                          }`}>
-                            {item.recommended_purchase > 0 ? `${item.recommended_purchase} ${item.unit}` : '0'}
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-2 text-right text-slate-500 align-middle">
-                          {formatVND(item.cost_per_unit)}
-                        </td>
-                        <td className="py-2.5 px-2 text-right font-semibold text-slate-900 align-middle">
-                          {item.estimated_cost > 0 ? formatVND(item.estimated_cost) : '-'}
-                        </td>
-                        <td className="py-2.5 px-2 text-center align-middle">
-                          <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-tight ${
-                            item.status === 'CRITICAL' ? 'bg-red-100 text-red-700 border border-red-200' :
-                            item.status === 'WARNING' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                            item.status === 'EXCESS' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                            'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                          }`}>
-                            {item.status === 'CRITICAL' && <AlertTriangle className="w-3 h-3 shrink-0" />}
-                            {item.status === 'SUFFICIENT' && <CheckCircle2 className="w-3 h-3 shrink-0" />}
-                            <span className="truncate">{item.status_text}</span>
-                          </span>
-                        </td>
+            {/* Recommendations Table or Empty BOM Guide */}
+            {recommendations.length === 0 ? (
+              <div className="py-12 px-6 text-center space-y-4 bg-slate-50/70 rounded-xl my-4 mx-4 border border-dashed border-slate-300">
+                <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto shadow-xs">
+                  <Sparkles className="w-7 h-7" />
+                </div>
+                <div className="max-w-lg mx-auto space-y-2">
+                  <h4 className="text-base font-bold text-slate-800">Chưa có công thức định lượng (BOM) cho món ăn của quán</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Mô hình AI đã dự báo thành công nhu cầu các món ăn ngày mai, nhưng cần thêm <strong>công thức định lượng (Recipe / BOM)</strong> để quy đổi ra khối lượng nguyên liệu (thịt bò, tôm, sốt, rau...) cần mua đi chợ.
+                  </p>
+                  <p className="text-xs text-emerald-800 font-medium bg-emerald-50 py-2 px-3 rounded-lg border border-emerald-200">
+                    💡 Hãy bấm nút <strong>"Nhập File Excel / CSV"</strong> ở góc trên và tải file công thức định lượng để kích hoạt tính toán mua hàng tự động!
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="w-full">
+                  <table className="w-full text-left text-xs table-fixed">
+                    <thead>
+                      <tr className="border-b border-slate-200 font-bold text-slate-500 uppercase bg-slate-50/80">
+                        <th className="py-2.5 px-2 w-[4%] text-center">Mua</th>
+                        <th className="py-2.5 px-2 w-[22%]">Nguyên Liệu</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Cần Dùng</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Tồn Kho</th>
+                        <th className="py-2.5 px-2 w-[9%] text-right">Thiếu Hụt</th>
+                        <th className="py-2.5 px-2 w-[14%] text-right bg-emerald-50/70 text-emerald-900 font-bold">CẦN MUA</th>
+                        <th className="py-2.5 px-2 w-[10%] text-right">Đơn Giá</th>
+                        <th className="py-2.5 px-2 w-[11%] text-right">Thành Tiền</th>
+                        <th className="py-2.5 px-2 w-[12%] text-center">Trạng Thái</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {paginatedRecs.map((item) => {
+                        const isChecked = !!checkedItems[item.ingredient_id];
+                        return (
+                          <tr 
+                            key={item.ingredient_id} 
+                            className={`hover:bg-slate-50/80 transition-colors ${
+                              isChecked ? 'bg-slate-50 opacity-60 line-through' : ''
+                            }`}
+                          >
+                            <td className="py-2.5 px-2 text-center align-middle">
+                              <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={() => handleToggleCheck(item.ingredient_id)}
+                                className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer w-4 h-4"
+                              />
+                            </td>
+                            <td className="py-2.5 px-2 font-semibold text-slate-900 break-words leading-tight align-middle">
+                              {item.ingredient_name}
+                              <span className="block text-[10px] font-normal text-slate-400">Mã: {item.ingredient_id} • {item.unit}</span>
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
+                              {item.required_quantity} {item.unit}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-slate-700 align-middle">
+                              {item.current_stock} {item.unit}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-medium text-red-600 align-middle">
+                              {item.shortage > 0 ? `${item.shortage} ${item.unit}` : '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-right bg-emerald-50/60 align-middle">
+                              <span className={`text-xs font-bold ${
+                                item.recommended_purchase > 0 ? 'text-emerald-700' : 'text-slate-400 font-normal'
+                              }`}>
+                                {item.recommended_purchase > 0 ? `${item.recommended_purchase} ${item.unit}` : '0'}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-2 text-right text-slate-500 align-middle">
+                              {formatVND(item.cost_per_unit)}
+                            </td>
+                            <td className="py-2.5 px-2 text-right font-semibold text-slate-900 align-middle">
+                              {item.estimated_cost > 0 ? formatVND(item.estimated_cost) : '-'}
+                            </td>
+                            <td className="py-2.5 px-2 text-center align-middle">
+                              <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold leading-tight ${
+                                item.status === 'CRITICAL' ? 'bg-red-100 text-red-700 border border-red-200' :
+                                item.status === 'WARNING' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
+                                item.status === 'EXCESS' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
+                                'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                              }`}>
+                                {item.status === 'CRITICAL' && <AlertTriangle className="w-3 h-3 shrink-0" />}
+                                {item.status === 'SUFFICIENT' && <CheckCircle2 className="w-3 h-3 shrink-0" />}
+                                <span className="truncate">{item.status_text}</span>
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
 
-            <Pagination
-              totalItems={filteredRecs.length}
-              pageSize={recPageSize}
-              currentPage={recPage}
-              onPageChange={setRecPage}
-              onPageSizeChange={setRecPageSize}
-            />
+                <Pagination
+                  totalItems={filteredRecs.length}
+                  pageSize={recPageSize}
+                  currentPage={recPage}
+                  onPageChange={setRecPage}
+                  onPageSizeChange={setRecPageSize}
+                />
+              </>
+            )}
           </div>
         </>
       ) : (

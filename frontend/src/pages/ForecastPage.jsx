@@ -13,7 +13,8 @@ import {
   CloudLightning,
   Snowflake,
   Thermometer,
-  Droplets
+  Droplets,
+  AlertTriangle
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -37,17 +38,37 @@ const CITY_OPTIONS = [
   { id: 'da_lat', name: 'Đà Lạt (Lâm Đồng)', region: 'Tây Nguyên' },
 ];
 
-export default function ForecastPage({ forecastData, branchId, selectedCity = 'ho_chi_minh', onCityChange }) {
+export default function ForecastPage({ forecastData, branchId, selectedCity = 'ho_chi_minh', onCityChange, heavyLoading = false }) {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDishId, setSelectedDishId] = useState('D01');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  if (heavyLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
+        <h3 className="text-base font-semibold text-slate-700">Đang tính dự báo AI…</h3>
+        <p className="text-sm text-slate-500 text-center">Mô hình XGBoost đang dự báo nhu cầu kết hợp thời tiết. Các tab khác đã sẵn sàng.</p>
+      </div>
+    );
+  }
+
   if (!forecastData || !forecastData.branches) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+      <div className="flex flex-col items-center justify-center h-64 space-y-3 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        </div>
+        <h3 className="text-base font-semibold text-slate-700">Chưa có dữ liệu Dự báo nhu cầu</h3>
+        <p className="text-sm text-slate-500 text-center">Mô hình AI đang khởi động hoặc chưa hoàn tất tính toán dự báo thời tiết.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition shadow-sm"
+        >
+          🔄 Tải lại trang
+        </button>
       </div>
     );
   }
@@ -71,7 +92,17 @@ export default function ForecastPage({ forecastData, branchId, selectedCity = 'h
     );
   }
 
-  const categories = ['ALL', 'Phở & Bún', 'Cơm & Bánh Mì', 'Ăn Vặt', 'Cà Phê', 'Trà & Trái Cây', 'Hải Sản', 'Món Nước', 'Món Khô'];
+  // Reset state khi đổi chi nhánh
+  React.useEffect(() => {
+    setCurrentPage(1);
+    setSelectedCategory('ALL');
+    setSearchTerm('');
+    if (allDishes.length > 0) {
+      setSelectedDishId(allDishes[0].dish_id);
+    }
+  }, [branchId, allDishes.length]);
+
+  const categories = ['ALL', ...new Set(allDishes.map((d) => d.category).filter(Boolean))];
 
   const filteredDishes = allDishes.filter((d) => {
     const matchCat = selectedCategory === 'ALL' || d.category === selectedCategory;
@@ -184,7 +215,7 @@ export default function ForecastPage({ forecastData, branchId, selectedCity = 'h
                     <span className="text-xs font-bold text-slate-900">{day.temperature || 32}°C</span>
                   </div>
 
-                  <div className="text-[11px] text-slate-600 font-medium truncate mb-1" title={day.weather_desc}>
+                  <div className="text-[11px] text-slate-600 font-medium line-clamp-2 min-h-[2rem] leading-tight flex items-center mb-1" title={day.weather_desc}>
                     {day.weather_desc || 'Nắng đẹp'}
                   </div>
 

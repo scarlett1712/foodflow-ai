@@ -11,6 +11,21 @@ import unittest
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
+import httpx
+import starlette.testclient
+from starlette.testclient import _is_asgi3, _WrapASGI2, _TestClientTransport, _AsyncBackend
+
+# BUG-005 FIX: Patch starlette TestClient for httpx >= 0.28 compatibility
+def _patched_testclient_init(self, app, base_url="http://testserver", raise_server_exceptions=True, root_path="", backend="asyncio", backend_options=None, cookies=None, headers=None, follow_redirects=True):
+    self.async_backend = _AsyncBackend(backend=backend, backend_options=backend_options or {})
+    self.app = app if _is_asgi3(app) else _WrapASGI2(app)
+    self.app_state = {}
+    transport = _TestClientTransport(self.app, portal_factory=self._portal_factory, raise_server_exceptions=raise_server_exceptions, root_path=root_path, app_state=self.app_state)
+    headers = headers or {}
+    headers.setdefault("user-agent", "testclient")
+    httpx.Client.__init__(self, base_url=base_url, headers=headers, transport=transport, follow_redirects=follow_redirects, cookies=cookies)
+
+starlette.testclient.TestClient.__init__ = _patched_testclient_init
 from fastapi.testclient import TestClient
 
 # Thêm đường dẫn project vào sys.path

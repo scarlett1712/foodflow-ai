@@ -229,8 +229,31 @@ def notarize_purchase_order_onchain(po_data: Dict[str, Any]) -> Dict[str, Any]:
 def verify_onchain_record(expected_hash: str, tx_signature: str) -> Dict[str, Any]:
     """
     Xác thực tính toàn vẹn giữa dữ liệu kiểm toán và chữ ký on-chain.
+    BUG-013 FIX: Kiểm tra thực tế hash thay vì luôn trả True.
     """
     try:
+        # Kiểm tra cơ bản: hash và signature phải hợp lệ
+        if not expected_hash or len(expected_hash) < 16:
+            return {
+                "verified": False,
+                "network": "Solana Devnet",
+                "authority": AUTHORITY_PUBKEY_STR,
+                "tx_signature": tx_signature,
+                "expected_hash": expected_hash,
+                "message": "Hash không hợp lệ hoặc quá ngắn. Không thể xác thực!",
+                "is_mock": True
+            }
+        if not tx_signature or not tx_signature.startswith("FOODFLOW_"):
+            return {
+                "verified": False,
+                "network": "Solana Devnet",
+                "authority": AUTHORITY_PUBKEY_STR,
+                "tx_signature": tx_signature,
+                "expected_hash": expected_hash,
+                "message": "Chữ ký giao dịch không hợp lệ. Không phải giao dịch FoodFlow!",
+                "is_mock": True
+            }
+        
         return {
             "verified": True,
             "network": "Solana Devnet",
@@ -238,7 +261,9 @@ def verify_onchain_record(expected_hash: str, tx_signature: str) -> Dict[str, An
             "tx_signature": tx_signature,
             "expected_hash": expected_hash,
             "explorer_url": f"{SOLANA_EXPLORER_BASE}/{tx_signature}?cluster=devnet",
-            "message": "Bản ghi hợp lệ 100%! Khớp với chữ ký xác thực bất biến trên Solana Devnet."
+            "message": "Bản ghi hợp lệ — Khớp với chữ ký xác thực trên Solana Devnet (mock verification).",
+            "is_mock": True,
+            "warning": "Đây là xác thực mô phỏng (mock). Để xác thực thực tế, cần kết nối RPC Solana Devnet."
         }
     except Exception as e:
         return {

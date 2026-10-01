@@ -20,7 +20,7 @@ export default function Sidebar({ currentTab, onSelectTab, branchMeta }) {
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 min-h-[calc(100vh-4rem)] border-r border-slate-800">
+    <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 sticky top-16 h-[calc(100vh-4rem)] border-r border-slate-800 overflow-y-auto self-start z-30">
       <div className="p-4">
         
         {/* Active Branch Info Card */}

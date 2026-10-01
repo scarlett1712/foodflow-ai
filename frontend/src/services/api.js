@@ -4,7 +4,36 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://foodflow-ai-cuha.o
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 90000,
+  timeout: 180000,  // PERF FIX: 180s — cold start (53s) + forecast computation (60s) + safety margin
+});
+
+// Retry interceptor: tự động retry 1 lần khi gặp timeout hoặc network error
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config || config.__retryCount >= 1) return Promise.reject(error);
+    
+    const isRetryable = !error.response || error.code === 'ECONNABORTED' || error.response?.status >= 500;
+    if (!isRetryable) return Promise.reject(error);
+    
+    config.__retryCount = (config.__retryCount || 0) + 1;
+    console.warn(`Retrying request (${config.__retryCount}/1):`, config.url);
+    return api(config);
+  }
+);
+
+// Cache-busting: gắn _t=timestamp + header no-cache vào mọi GET request để browser không cache response cũ
+api.interceptors.request.use((config) => {
+  if (!config.method || config.method.toLowerCase() === 'get') {
+    config.params = { ...config.params, _t: Date.now() };
+    config.headers = {
+      ...config.headers,
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+    };
+  }
+  return config;
 });
 
 export const getBranches = () => api.get('/branches');
@@ -37,7 +66,13 @@ export const smartTagIngredients = (names) => api.post('/ingredients/smart-tag',
 export const createIngredient = (payload, branchId = 'BRANCH_01') => api.post(`/ingredients?branch_id=${branchId}`, payload);
 export const deleteIngredient = (id) => api.delete(`/ingredients/${id}`);
 
-export const getDishes = (category = null) => api.get(category ? `/dishes?category=${category}` : '/dishes');
+export const getDishes = (category = null, branchId = null) => {
+  const params = new URLSearchParams();
+  if (category) params.append('category', category);
+  if (branchId) params.append('branch_id', branchId);
+  const qs = params.toString();
+  return api.get(qs ? `/dishes?${qs}` : '/dishes');
+};
 export const createDish = (payload) => api.post('/dishes', payload);
 export const createDishWithRecipe = (payload) => api.post('/dishes/with-recipe', payload);
 export const deleteDish = (dishId) => api.delete(`/dishes/${dishId}`);

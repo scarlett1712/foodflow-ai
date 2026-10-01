@@ -51,8 +51,10 @@ export default function App() {
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isRetraining, setIsRetraining] = useState(false);
   const [lastRetrainInfo, setLastRetrainInfo] = useState(null);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState(null); // P3: timestamp cập nhật lần cuối
 
   // Load Branches initially
   const fetchBranches = async () => {
@@ -71,40 +73,85 @@ export default function App() {
     fetchBranches();
   }, []);
 
-  // Load all branch data whenever selectedBranch or selectedCity changes
-  const fetchAllBranchData = async (branchId, city = selectedCity) => {
-    try {
-      setLoading(true);
-      const results = await Promise.allSettled([
-        getDashboardSummary(branchId),
-        getForecast(branchId, 7, city),
-        getPurchaseRecommendations(branchId),
-        getInventory(branchId),
-        getDishes(),
-        getRecipes(),
-        getIngredients(),
-        getPreorders(branchId),
-      ]);
+  // P0-3: Trạng thái loading riêng cho nhóm nặng (skeleton thay vì block toàn bộ UI)
+  const [heavyLoading, setHeavyLoading] = useState({ summary: true, forecast: true, purchase: true });
 
-      if (results[0].status === 'fulfilled') setSummaryData(results[0].value.data);
-      if (results[1].status === 'fulfilled') setForecastData(results[1].value.data);
-      if (results[2].status === 'fulfilled') setPurchaseData(results[2].value.data);
-      if (results[3].status === 'fulfilled') setInventoryData(results[3].value.data);
-      if (results[4].status === 'fulfilled') setDishesData(results[4].value.data);
-      if (results[5].status === 'fulfilled') setRecipesData(results[5].value.data);
-      if (results[6].status === 'fulfilled') setIngredientsData(results[6].value.data);
-      if (results[7].status === 'fulfilled') setPreordersData(results[7].value.data);
-    } catch (err) {
-      console.error('Error fetching dashboard data:', err);
-    } finally {
-      setLoading(false);
-    }
+  // Load all branch data — P0-3: Tách nhóm NHẸ (chặn UI) và NẶNG (tự cập nhật khi xong)
+  const fetchAllBranchData = (branchId, city = selectedCity) => {
+    setError(null);
+    setLoading(true);  // Chỉ chờ nhóm NHẸ
+
+    // === NHÓM NHẸ: inventory, dishes, recipes, ingredients, preorders ===
+    Promise.allSettled([
+      getInventory(branchId),
+      getDishes(null, branchId),
+      getRecipes(),
+      getIngredients(),
+      getPreorders(branchId),
+    ]).then(([inv, dishes, recipes, ings, po]) => {
+      setInventoryData(inv.status === 'fulfilled' ? inv.value.data : null);
+      setDishesData(dishes.status === 'fulfilled' ? dishes.value.data : []);
+      setRecipesData(recipes.status === 'fulfilled' ? recipes.value.data : []);
+      setIngredientsData(ings.status === 'fulfilled' ? ings.value.data : []);
+      setPreordersData(po.status === 'fulfilled' ? po.value.data : []);
+    }).catch(err => {
+      console.error('Error fetching light data:', err);
+      setError('Lỗi tải dữ liệu: ' + (err.message || 'Không xác định'));
+    }).finally(() => setLoading(false));
+
+    // === NHÓM NẶNG: mỗi cái tự cập nhật khi xong, KHÔNG chặn UI ===
+    setHeavyLoading({ summary: true, forecast: true, purchase: true });
+
+    getDashboardSummary(branchId)
+      .then(r => setSummaryData(r.data))
+      .catch(() => setSummaryData(null))
+      .finally(() => setHeavyLoading(p => ({ ...p, summary: false })));
+
+    getForecast(branchId, 7, city)
+      .then(r => setForecastData(r.data))
+      .catch(() => setForecastData(null))
+      .finally(() => setHeavyLoading(p => ({ ...p, forecast: false })));
+
+    getPurchaseRecommendations(branchId)
+      .then(r => setPurchaseData(r.data))
+      .catch(() => setPurchaseData(null))
+      .finally(() => {
+        setHeavyLoading(p => ({ ...p, purchase: false }));
+        setLastUpdatedAt(new Date()); // P3: ghi nhận thời điểm cập nhật xong
+      });
+  };
+
+  // P1: Hàm chỉ refresh nhóm NẶNG (không reload inventory/dishes/etc) — dùng cho polling
+  const refreshHeavyData = (branchId = selectedBranch, city = selectedCity) => {
+    if (document.visibilityState !== 'visible') return; // chỉ refresh khi tab đang active
+    getDashboardSummary(branchId)
+      .then(r => setSummaryData(r.data))
+      .catch(() => {});
+    getForecast(branchId, 7, city)
+      .then(r => setForecastData(r.data))
+      .catch(() => {});
+    getPurchaseRecommendations(branchId)
+      .then(r => {
+        setPurchaseData(r.data);
+        setLastUpdatedAt(new Date());
+      })
+      .catch(() => {});
   };
 
   useEffect(() => {
     if (selectedBranch) {
       fetchAllBranchData(selectedBranch, selectedCity);
     }
+  }, [selectedBranch, selectedCity]);
+
+  // P1: Auto-polling mỗi 15 phút, chỉ khi tab active
+  const POLL_INTERVAL_MS = 15 * 60 * 1000; // 15 phút
+  useEffect(() => {
+    if (!selectedBranch) return;
+    const intervalId = setInterval(() => {
+      refreshHeavyData(selectedBranch, selectedCity);
+    }, POLL_INTERVAL_MS);
+    return () => clearInterval(intervalId); // cleanup khi unmount hoặc branch/city thay đổi
   }, [selectedBranch, selectedCity]);
 
   // Handle Retrain AI
@@ -178,11 +225,28 @@ export default function App() {
         />
 
         {/* Content Area */}
-        <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
           {loading ? (
             <div className="flex flex-col items-center justify-center h-96 space-y-3">
               <div className="animate-spin rounded-full h-10 w-10 border-4 border-emerald-600 border-t-transparent"></div>
               <p className="text-sm font-medium text-slate-500">Đang tải dữ liệu FoodFlow AI...</p>
+            </div>
+          ) : error ? (
+            /* ERROR FALLBACK UI — FIX: Thay vì infinite spinner, hiển thị lỗi + nút retry */
+            <div className="flex flex-col items-center justify-center h-96 space-y-4">
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-700">Không thể tải dữ liệu</h3>
+              <p className="text-sm text-slate-500 text-center max-w-md">{error}</p>
+              <button
+                onClick={() => fetchAllBranchData(selectedBranch, selectedCity)}
+                className="px-5 py-2.5 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
+              >
+                🔄 Thử lại
+              </button>
             </div>
           ) : (
             <>
@@ -190,6 +254,9 @@ export default function App() {
                 <DashboardPage
                   summary={summaryData}
                   onNavigateTab={setCurrentTab}
+                  heavyLoading={heavyLoading.summary}
+                  lastUpdatedAt={lastUpdatedAt}
+                  onRefresh={() => refreshHeavyData(selectedBranch, selectedCity)}
                 />
               )}
 
@@ -199,6 +266,7 @@ export default function App() {
                   branchId={selectedBranch}
                   selectedCity={selectedCity}
                   onCityChange={setSelectedCity}
+                  heavyLoading={heavyLoading.forecast}
                 />
               )}
 
@@ -208,6 +276,7 @@ export default function App() {
                   branchId={selectedBranch}
                   onRefresh={() => fetchAllBranchData(selectedBranch)}
                   onOpenPurchaseUploadModal={() => setIsPurchaseUploadModalOpen(true)}
+                  heavyLoading={heavyLoading.purchase}
                 />
               )}
 
@@ -225,6 +294,8 @@ export default function App() {
                   dishes={dishesData}
                   recipes={recipesData}
                   ingredients={ingredientsData}
+                  branchId={selectedBranch}
+                  branchName={activeBranchMeta?.name}
                   onRefresh={() => fetchAllBranchData(selectedBranch)}
                 />
               )}

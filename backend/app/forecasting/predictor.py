@@ -11,16 +11,23 @@ Dịch vụ dự báo nhu cầu tương lai (Universal Weather-Aware Forecast Se
 
 import os
 import sys
+import json
 import sqlite3
+import time
+import threading
+import logging
 import joblib
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from typing import Dict, Any, Tuple
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
+_log = logging.getLogger("foodflow.forecast")
 
 from .features import (
     build_features_for_dish,
@@ -70,21 +77,98 @@ def _compute_tet_features_for_date(target_date):
     }
 
 
+# PERF FIX: Cache model trong RAM - chi doc dia 1 lan duy nhat
+_MODEL_CACHE = {"model": None, "path": None}
+
 def _load_universal_model(model_path=MODEL_PATH):
-    """Tải model Universal XGBoost."""
+    """Tai model Universal XGBoost voi application-level cache."""
+    if _MODEL_CACHE["model"] is not None and _MODEL_CACHE["path"] == model_path:
+        return _MODEL_CACHE["model"]
     if os.path.exists(model_path):
         try:
-            return joblib.load(model_path)
+            model = joblib.load(model_path)
+            _MODEL_CACHE["model"] = model
+            _MODEL_CACHE["path"] = model_path
+            return model
         except Exception:
             return None
     return None
 
 
+# ==========================================
+# PERFORMANCE FIX: In-Memory TTL Cache + Single-Flight Lock cho Forecast
+# Khi Frontend gọi cùng lúc 3 API (dashboard/summary, forecast, purchase-recommendations),
+# chỉ 1 phép tính duy nhất được thực hiện, 2 API còn lại chờ lock rồi lấy cache.
+# ==========================================
+_FORECAST_CACHE: Dict[str, Tuple[float, Any]] = {}
+CACHE_TTL = 1800  # PERF FIX: 30 phút (tăng từ 600s) — pre-warm sẽ refresh trước khi hết hạn
+
+# P0-1: Single-flight lock chống stampede (thundering herd)
+_KEY_LOCKS: Dict[str, threading.Lock] = {}
+_KEY_LOCKS_GUARD = threading.Lock()
+
+
+def _get_key_lock(key: str) -> threading.Lock:
+    """Lấy hoặc tạo lock riêng cho mỗi cache_key."""
+    with _KEY_LOCKS_GUARD:
+        return _KEY_LOCKS.setdefault(key, threading.Lock())
+
+
+def _read_cache(key: str):
+    """Đọc cache entry nếu còn hạn TTL, trả None nếu miss."""
+    entry = _FORECAST_CACHE.get(key)
+    if entry and time.time() - entry[0] < CACHE_TTL:
+        return entry[1]
+    return None
+
+
+def clear_forecast_cache():
+    """Xóa cache dự báo khi có dữ liệu mới được tải lên hoặc cập nhật."""
+    _FORECAST_CACHE.clear()
+
+
 def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
     """
-    Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database.
+    Sinh dự báo cho n_days ngày tiếp theo cho các chi nhánh trong Database (bắt đầu từ ngày mai = today + 1).
     Hỗ trợ tích hợp Dự báo thời tiết tự động theo từng ngày.
+    Có In-Memory TTL Cache + Single-Flight Lock để tránh tính toán trùng lặp.
     """
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    cache_key = f"{branch_id}_{city}_{n_days}_{today_str}"
+
+    # 1. Fast path: cache hit (không cần lock)
+    hit = _read_cache(cache_key)
+    if hit is not None:
+        return hit
+
+    # 2. Slow path: lấy lock per-key → double-checked locking
+    with _get_key_lock(cache_key):
+        # Kiểm tra lại: request khác có thể đã tính xong trong lúc chờ lock
+        hit = _read_cache(cache_key)
+        if hit is not None:
+            _log.info(f"[PERF] Cache hit after lock wait (key={cache_key})")
+            return hit
+
+        # 3. Thực sự tính toán (chỉ 1 request duy nhất tới đây)
+        _log.info(f"[PERF] Cache miss — computing forecast (key={cache_key})")
+        result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
+        _FORECAST_CACHE[cache_key] = (time.time(), result)  # ghi thời điểm HOÀN THÀNH
+        return result
+
+
+def refresh_forecast_cache(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
+    """Tính lại bất kể TTL — dùng cho pre-warm/refresh nền."""
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    cache_key = f"{branch_id}_{city}_{n_days}_{today_str}"
+    with _get_key_lock(cache_key):
+        result = _execute_raw_forecast(n_days, branch_id, db_path, model_path, city)
+        _FORECAST_CACHE[cache_key] = (time.time(), result)
+        return result
+
+
+def _execute_raw_forecast(n_days=7, branch_id=None, db_path=DB_PATH, model_path=MODEL_PATH, city="ho_chi_minh"):
+    t0 = time.time()
+
     conn = sqlite3.connect(db_path)
     
     # Query branches động
@@ -112,11 +196,14 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
     preorders_rows = cur.fetchall()
     conn.close()
 
+    t_db = time.time()
+    _log.info(f"[PERF] DB queries: {t_db - t0:.3f}s (branches={len(df_branches)}, sales={len(df_sales)}, dishes={len(df_dishes)})")
+
     preorders_dict = {}
     for row in preorders_rows:
         b_id, p_date, d_id, qty, items_json = row
         if items_json:
-            import json
+            # BUG-009 FIX: import json đã được di chuyển ra đầu file
             try:
                 items = json.loads(items_json)
                 for itm in items:
@@ -130,13 +217,20 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
 
     # Load Universal Model
     model = _load_universal_model(model_path)
+    t_model = time.time()
+    _log.info(f"[PERF] Model load: {t_model - t_db:.3f}s (model={'loaded' if model else 'NONE'})")
 
-    # Lấy dự báo thời tiết N ngày tới
-    weather_list = get_weather_forecast(city_key=city, days=n_days + 2)
+    # Lấy dự báo thời tiết N ngày tới (bắt đầu từ ngày mai)
+    weather_list = get_weather_forecast(city_key=city, days=n_days)
+    t_weather = time.time()
+    _log.info(f"[PERF] Weather API: {t_weather - t_model:.3f}s (days={len(weather_list)})")
     weather_by_date = {w["date"]: w for w in weather_list}
 
-    # Ngày bắt đầu dự báo: neo theo ngày hiện tại thực tế (datetime.now()) để dự báo đúng ngày mai theo thời gian thực
-    last_date = datetime.now()
+    # Ngày bắt đầu dự báo luôn là ngày hôm nay theo thời gian thực (real-time)
+    # Để ngày dự báo đầu tiên (Day 1) luôn luôn chính xác là NGÀY MAI (today + 1),
+    # đồng bộ 100% với Dashboard, Weather API, Gợi ý mua hàng và Lịch thực tế
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    last_date = today
 
     branch_results = []
 
@@ -147,56 +241,114 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
 
         dish_forecasts = []
 
-        for _, d_row in df_dishes.iterrows():
+        # ---------------------------------------------------------------
+        # PERF FIX: Pre-compute per-day features OUTSIDE dish loop
+        # (weather, calendar, tet) - same for all 22 dishes on same day
+        # ---------------------------------------------------------------
+        day_features = []
+        for i in range(1, n_days + 1):
+            target_date = last_date + timedelta(days=i)
+            date_str = target_date.strftime("%Y-%m-%d")
+            month_day = target_date.strftime("%m-%d")
+            dow = target_date.weekday()
+            is_wknd = 1 if dow in [5, 6] else 0
+            is_hol = 1 if month_day in VIETNAM_HOLIDAYS else 0
+            hol_name = VIETNAM_HOLIDAYS.get(month_day, "")
+
+            # Weather - computed once per day, not 22x
+            w_info = weather_by_date.get(date_str)
+            if not w_info and len(weather_list) > 0:
+                w_info = weather_list[min(i - 1, len(weather_list) - 1)]
+
+            temp_val = w_info["temperature"] if w_info else 32.0
+            precip_val = w_info["precipitation_mm"] if w_info else 0.0
+            is_rain_val = w_info["is_rainy"] if w_info else 0
+            cond_val = w_info["weather_condition"] if w_info else classify_weather(temp_val, precip_val)
+            cond_desc = w_info["weather_desc"] if w_info else get_weather_description(cond_val)
+
+            # Tet features - computed once per day
+            tet_features = _compute_tet_features_for_date(target_date)
+
+            day_features.append({
+                "target_date": target_date,
+                "date_str": date_str,
+                "dow": dow,
+                "is_wknd": is_wknd,
+                "is_hol": is_hol,
+                "hol_name": hol_name,
+                "temp_val": temp_val,
+                "precip_val": precip_val,
+                "is_rain_val": is_rain_val,
+                "cond_val": cond_val,
+                "cond_desc": cond_desc,
+                "tet_features": tet_features,
+            })
+
+        # BRANCH ISOLATION: Lọc các món thực sự thuộc chi nhánh này (qua lịch sử bán hàng hoặc đơn đặt trước)
+        branch_sales_dish_ids = set(df_sales[df_sales["branch_id"] == b_id]["dish_id"].unique())
+        for (p_bid, _, p_did) in preorders_dict.keys():
+            if p_bid == b_id and p_did:
+                branch_sales_dish_ids.add(p_did)
+
+        if len(branch_sales_dish_ids) > 0:
+            df_target_dishes = df_dishes[df_dishes["id"].isin(branch_sales_dish_ids)]
+        else:
+            df_target_dishes = df_dishes
+
+        for _, d_row in df_target_dishes.iterrows():
             d_id = d_row["id"]
             d_name = d_row["name"]
-            d_cat = normalize_category(d_row.get("category", "Khác"))
+            d_cat = normalize_category(d_row.get("category", "Khac"))
             d_price = float(d_row.get("price", 50000.0) or 50000.0)
 
-            # Lọc lịch sử của chi nhánh + món ăn này
+            # Filter sales history for this branch+dish
             sim_df = df_sales[(df_sales["branch_id"] == b_id) & (df_sales["dish_id"] == d_id)].copy()
             sim_df = sim_df.sort_values("date").reset_index(drop=True)
 
+            # PERF FIX: Track quantity history as list (not pd.concat)
+            # Use statistics.stdev (ddof=1, matches pandas .std()) for rolling_std_7
+            import statistics
+            sim_quantities = sim_df["quantity"].tolist()
+            sim_dates = pd.to_datetime(sim_df["date"]).dt.dayofweek.tolist() if len(sim_df) > 0 else []
+
             daily_list = []
 
-            for i in range(1, n_days + 1):
-                target_date = last_date + timedelta(days=i)
-                date_str = target_date.strftime("%Y-%m-%d")
-                month_day = target_date.strftime("%m-%d")
-                dow = target_date.weekday()
-                is_wknd = 1 if dow in [5, 6] else 0
-                is_hol = 1 if month_day in VIETNAM_HOLIDAYS else 0
-                hol_name = VIETNAM_HOLIDAYS.get(month_day, "")
+            for day_info in day_features:
+                date_str = day_info["date_str"]
+                dow = day_info["dow"]
+                is_wknd = day_info["is_wknd"]
+                is_hol = day_info["is_hol"]
+                hol_name = day_info["hol_name"]
+                temp_val = day_info["temp_val"]
+                precip_val = day_info["precip_val"]
+                is_rain_val = day_info["is_rain_val"]
+                cond_val = day_info["cond_val"]
+                cond_desc = day_info["cond_desc"]
+                tet_features = day_info["tet_features"]
+                target_date = day_info["target_date"]
 
-                # Thời tiết ngày này
-                w_info = weather_by_date.get(date_str)
-                if not w_info and len(weather_list) > 0:
-                    w_info = weather_list[min(i - 1, len(weather_list) - 1)]
-                
-                temp_val = w_info["temperature"] if w_info else 32.0
-                precip_val = w_info["precipitation_mm"] if w_info else 0.0
-                is_rain_val = w_info["is_rainy"] if w_info else 0
-                cond_val = w_info["weather_condition"] if w_info else classify_weather(temp_val, precip_val)
-                cond_desc = w_info["weather_desc"] if w_info else get_weather_description(cond_val)
+                # Time-series stats from list (matching original pandas logic)
+                n_hist = len(sim_quantities)
+                if n_hist >= 7:
+                    lag_1 = float(sim_quantities[-1])
+                    lag_7 = float(sim_quantities[-7])
+                    lag_14 = float(sim_quantities[-14]) if n_hist >= 14 else lag_7
+                    lag_28 = float(sim_quantities[-28]) if n_hist >= 28 else lag_14
 
-                # Thống kê chuỗi thời gian
-                if len(sim_df) >= 7:
-                    lag_1 = float(sim_df["quantity"].iloc[-1])
-                    lag_7 = float(sim_df["quantity"].iloc[-7]) if len(sim_df) >= 7 else lag_1
-                    lag_14 = float(sim_df["quantity"].iloc[-14]) if len(sim_df) >= 14 else lag_7
-                    lag_28 = float(sim_df["quantity"].iloc[-28]) if len(sim_df) >= 28 else lag_14
-
-                    rolling_7 = float(sim_df["quantity"].tail(7).mean())
-                    rolling_14 = float(sim_df["quantity"].tail(14).mean())
-                    rolling_28 = float(sim_df["quantity"].tail(28).mean())
-                    rolling_std_7 = float(sim_df["quantity"].tail(7).std() or 0.0)
-                elif len(sim_df) > 0:
-                    mean_val = float(sim_df["quantity"].mean())
+                    tail_7 = sim_quantities[-7:]
+                    tail_14 = sim_quantities[-14:]
+                    tail_28 = sim_quantities[-28:]
+                    rolling_7 = sum(tail_7) / len(tail_7)
+                    rolling_14 = sum(tail_14) / len(tail_14)
+                    rolling_28 = sum(tail_28) / len(tail_28)
+                    # statistics.stdev uses ddof=1 (same as pandas .std())
+                    rolling_std_7 = statistics.stdev(tail_7) if len(tail_7) >= 2 else 0.0
+                elif n_hist > 0:
+                    mean_val = sum(sim_quantities) / n_hist
                     lag_1 = lag_7 = lag_14 = lag_28 = mean_val
                     rolling_7 = rolling_14 = rolling_28 = mean_val
                     rolling_std_7 = 0.0
                 else:
-                    # Cold start: chưa có dữ liệu lịch sử
                     lag_1 = lag_7 = lag_14 = lag_28 = 20.0
                     rolling_7 = rolling_14 = rolling_28 = 20.0
                     rolling_std_7 = 0.0
@@ -204,9 +356,6 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
                 trend_momentum = (lag_1 + 1.0) / (rolling_7 + 1.0)
                 growth_ratio = (rolling_7 + 1.0) / (rolling_28 + 1.0)
                 volatility = rolling_std_7 / (rolling_7 + 1.0)
-
-                # Tết features
-                tet_features = _compute_tet_features_for_date(target_date)
 
                 feat_dict = {
                     "category": d_cat,
@@ -241,9 +390,10 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
                 feat_vec = prepare_categorical_dtypes(feat_vec)
 
                 # Baseline prediction
-                if len(sim_df) > 0:
-                    same_dow = sim_df[pd.to_datetime(sim_df["date"]).dt.dayofweek == dow]["quantity"].tail(4)
-                    base_val = int(round(same_dow.mean() if len(same_dow) > 0 else rolling_7))
+                if n_hist > 0:
+                    same_dow_vals = [sim_quantities[k] for k in range(len(sim_dates)) if sim_dates[k] == dow]
+                    same_dow_tail4 = same_dow_vals[-4:] if len(same_dow_vals) >= 4 else same_dow_vals
+                    base_val = int(round(sum(same_dow_tail4) / len(same_dow_tail4))) if len(same_dow_tail4) > 0 else int(round(rolling_7))
                 else:
                     base_val = 20
 
@@ -273,14 +423,12 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
                     "is_weekend": bool(is_wknd),
                     "is_holiday": bool(is_hol),
                     "holiday_name": hol_name,
-                    # Weather info
                     "weather_condition": cond_val,
                     "weather_desc": cond_desc,
                     "temperature": temp_val,
                     "precipitation_mm": precip_val,
                     "is_rainy": bool(is_rain_val),
                     "weather_impact_reason": w_impact_reason,
-                    # Predictions & Aliases
                     "baseline_quantity": base_val,
                     "xgb_quantity": xgb_val,
                     "xgb_forecast": xgb_val,
@@ -297,26 +445,9 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
                     "is_tet_period": bool(tet_features["is_tat_nien_period"] or tet_features["is_tet"])
                 })
 
-                # Append vào sim_df cho các ngày tiếp theo trong rolling
-                sim_row = pd.DataFrame([{
-                    "date": date_str,
-                    "branch_id": b_id,
-                    "branch_name": b_name,
-                    "dish_id": d_id,
-                    "dish_name": d_name,
-                    "category": d_cat,
-                    "quantity": xgb_val,
-                    "revenue": xgb_val * d_price,
-                    "event_flag": "none",
-                    "weather_condition": cond_val,
-                    "temperature": temp_val,
-                    "precipitation_mm": precip_val,
-                    "is_rainy": is_rain_val,
-                    "is_weekend": is_wknd,
-                    "is_holiday": is_hol,
-                    "day_of_week": dow
-                }])
-                sim_df = pd.concat([sim_df, sim_row], ignore_index=True)
+                # PERF FIX: Append to list instead of pd.concat (O(1) vs O(n))
+                sim_quantities.append(xgb_val)
+                sim_dates.append(dow)
 
             dish_forecasts.append({
                 "dish_id": d_id,
@@ -333,10 +464,14 @@ def get_forecast_for_next_days(n_days=7, branch_id=None, db_path=DB_PATH, model_
             "dishes": dish_forecasts
         })
 
+    t_pred = time.time()
+    _log.info(f"[PERF] Prediction loop: {t_pred - t_weather:.3f}s | TOTAL: {t_pred - t0:.3f}s (branches={len(df_branches)}, dishes={len(df_dishes)}, days={n_days})")
+
     return {
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "city": city,
         "forecast_horizon_days": n_days,
+        "weather_forecast": weather_list,
         "branches": branch_results
     }
 

@@ -12,6 +12,7 @@ export default function UploadPurchaseModal({ isOpen, onClose, onUploaded, branc
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [varianceReason, setVarianceReason] = useState('');
 
   if (!isOpen) return null;
 
@@ -61,8 +62,6 @@ export default function UploadPurchaseModal({ isOpen, onClose, onUploaded, branc
     reader.readAsText(file);
   };
 
-  const [varianceReason, setVarianceReason] = useState('');
-
   const QUICK_REASONS = [
     { label: '🌩️ Bão giá thị trường', text: 'Nhà cung cấp điều chỉnh tăng giá do biến động thị trường và chi phí vận chuyển nông sản.' },
     { label: '🎉 Nhập tiệc đột xuất', text: 'Nhà hàng nhận đặt thêm tiệc lớn đột xuất cuối tuần nên cần nhập dôi dư nguyên liệu dự trữ.' },
@@ -87,8 +86,12 @@ export default function UploadPurchaseModal({ isOpen, onClose, onUploaded, branc
 
       setUploadSuccess(true);
       setTimeout(() => {
-        onUploaded();
+        if (onUploaded) onUploaded();
         onClose();
+        setSelectedFile(null);
+        setPreviewRows([]);
+        setUploadSuccess(false);
+        setVarianceReason('');
       }, 1500);
     } catch (err) {
       setErrorMessage(err.response?.data?.detail || 'Lỗi tải lên dữ liệu đi chợ: ' + err.message);
