@@ -12,8 +12,20 @@ import {
   AlertCircle,
   ShoppingBag
 } from 'lucide-react';
-import { createDishWithRecipe, deleteDish, smartAddRecipeItem, deleteRecipeItem } from '../services/api';
+import { createDishWithRecipe, deleteDish, smartAddRecipeItem, deleteRecipeItem, smartTagDish } from '../services/api';
 import Pagination from '../components/Pagination';
+
+const DISH_CATEGORY_OPTIONS = [
+  { value: "Món Nước", label: "🍜 Món Nước (Phở, Bún, Miến, Mì, Cháo, Lẩu...)" },
+  { value: "Món Khô", label: "🍚 Món Khô (Cơm, Bánh mì, Bún chả, Gỏi cuốn...)" },
+  { value: "Cà Phê", label: "☕ Cà Phê (Đen, Sữa, Bạc xỉu, Muối, Latte...)" },
+  { value: "Trà & Trái Cây", label: "🧋 Trà & Trái Cây (Trà sữa, Sinh tố, Nước ép...)" },
+  { value: "Đồ Ăn Nhẹ", label: "🍟 Đồ Ăn Nhẹ (Gà rán, Khoai chiên, Nem rán...)" },
+  { value: "Bánh & Tráng Miệng", label: "🍰 Bánh & Tráng Miệng (Chè, Bánh ngọt, Flan...)" },
+  { value: "Hải Sản", label: "🦐 Hải Sản (Tôm, Cua, Mực, Ốc, Cá...)" },
+  { value: "Món Nướng & Lẩu", label: "🥩 Món Nướng & Lẩu (BBQ, Lẩu Thái...)" },
+  { value: "Khác", label: "🧂 Khác" }
+];
 
 export default function RecipesPage({ dishes = [], recipes = [], ingredients = [], branchId, branchName, onRefresh }) {
   const [selectedDishId, setSelectedDishId] = useState(dishes?.[0]?.id || '');
@@ -34,9 +46,16 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
   const [showAddDishModal, setShowAddDishModal] = useState(false);
   const [showAddIngredientModal, setShowAddIngredientModal] = useState(false);
   
+  // AI Tag Suggestion Popup State
+  const [showAiTagModal, setShowAiTagModal] = useState(false);
+  const [aiTagData, setAiTagData] = useState(null);
+  const [pendingDishPayload, setPendingDishPayload] = useState(null);
+  const [selectedTagForAi, setSelectedTagForAi] = useState('');
+  const [isAnalyzingTag, setIsAnalyzingTag] = useState(false);
+
   // Combined Add Dish + Recipe Form State
   const [newDishName, setNewDishName] = useState('');
-  const [newDishCategory, setNewDishCategory] = useState('Phở & Bún');
+  const [newDishCategory, setNewDishCategory] = useState('');
   const [newDishPrice, setNewDishPrice] = useState('50000');
   const [dishIngredientsList, setDishIngredientsList] = useState([
     { ingredient_name: '', quantity: '0.15', unit: 'kg', cost_per_unit: '50000' }
@@ -59,7 +78,7 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
   // Open Add Dish Modal with clean default rows
   const handleOpenAddDishModal = () => {
     setNewDishName('');
-    setNewDishCategory('Phở & Bún');
+    setNewDishCategory('');
     setNewDishPrice('50000');
     setDishIngredientsList([
       { ingredient_name: '', quantity: '0.15', unit: 'kg', cost_per_unit: '50000' }
@@ -103,6 +122,27 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
     setDishIngredientsList(updated);
   };
 
+  // Thực thi lưu món vào backend
+  const executeSaveDish = async (payload) => {
+    try {
+      setIsSubmittingDish(true);
+      const res = await createDishWithRecipe(payload);
+
+      setShowAddDishModal(false);
+      setShowAiTagModal(false);
+      setNewDishName('');
+      setNewDishCategory('');
+      if (res.data?.dish_id) {
+        setSelectedDishId(res.data.dish_id);
+      }
+      if (onRefresh) await onRefresh();
+    } catch (err) {
+      alert('Lỗi tạo món & nguyên liệu: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setIsSubmittingDish(false);
+    }
+  };
+
   // Handle Create Dish with Recipes combined
   const handleCreateDishWithRecipe = async (e) => {
     e.preventDefault();
@@ -121,26 +161,44 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
         cost_per_unit: parseFloat(it.cost_per_unit) || 50000,
       }));
 
-    try {
-      setIsSubmittingDish(true);
-      const res = await createDishWithRecipe({
-        name: newDishName.trim(),
-        category: newDishCategory,
-        price: parseFloat(newDishPrice) || 0,
-        ingredients: validIngredients,
-      });
+    const payload = {
+      name: newDishName.trim(),
+      category: newDishCategory.trim(),
+      price: parseFloat(newDishPrice) || 0,
+      ingredients: validIngredients,
+    };
 
-      setShowAddDishModal(false);
-      setNewDishName('');
-      if (res.data?.dish_id) {
-        setSelectedDishId(res.data.dish_id);
+    // Nếu người dùng CHƯA chọn tag (để trống) -> Cho AI phân tích và hiển thị popup thông báo
+    if (!newDishCategory || newDishCategory.trim() === '') {
+      try {
+        setIsAnalyzingTag(true);
+        const res = await smartTagDish({
+          name: newDishName.trim(),
+          ingredients: validIngredients.map(i => i.ingredient_name),
+          price: parseFloat(newDishPrice) || 0
+        });
+        const suggested = res.data?.suggested_category || 'Món Khô';
+        setAiTagData(res.data);
+        setSelectedTagForAi(suggested);
+        setPendingDishPayload(payload);
+        setShowAiTagModal(true);
+      } catch (err) {
+        setAiTagData({
+          suggested_category: 'Món Khô',
+          reason: 'AI gợi ý danh mục cơ bản cho món ăn.',
+          confidence: 0.85
+        });
+        setSelectedTagForAi('Món Khô');
+        setPendingDishPayload(payload);
+        setShowAiTagModal(true);
+      } finally {
+        setIsAnalyzingTag(false);
       }
-      if (onRefresh) await onRefresh();
-    } catch (err) {
-      alert('Lỗi tạo món & nguyên liệu: ' + (err.response?.data?.detail || err.message));
-    } finally {
-      setIsSubmittingDish(false);
+      return;
     }
+
+    // Nếu người dùng ĐÃ chọn tag -> Lưu trực tiếp
+    await executeSaveDish(payload);
   };
 
   // Handle Delete Dish
@@ -501,18 +559,19 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Phân Loại Món</label>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="font-semibold text-slate-700">Phân Loại Món</label>
+                      <span className="text-[10px] text-emerald-600 font-medium">✨ Để trống để AI tự đoán</span>
+                    </div>
                     <select
                       value={newDishCategory}
                       onChange={(e) => setNewDishCategory(e.target.value)}
                       className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs font-medium focus:outline-none cursor-pointer"
                     >
-                      <option value="Phở & Bún">Phở & Bún</option>
-                      <option value="Cơm & Bánh Mì">Cơm & Bánh Mì</option>
-                      <option value="Ăn Vặt">Ăn Vặt / Khai Vị</option>
-                      <option value="Cà Phê">Cà Phê</option>
-                      <option value="Trà & Trái Cây">Trà & Trái Cây</option>
-                      <option value="Khác">Khác</option>
+                      <option value="">-- Để trống (AI tự phân tích khi Lưu) --</option>
+                      {DISH_CATEGORY_OPTIONS.map(opt => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
                     </select>
                   </div>
 
@@ -647,15 +706,151 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
                 </button>
                 <button
                   type="submit"
-                  disabled={isSubmittingDish}
+                  disabled={isSubmittingDish || isAnalyzingTag}
                   className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold cursor-pointer shadow-md shadow-emerald-600/20 inline-flex items-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
-                  <span>{isSubmittingDish ? 'Đang lưu món & tạo kho...' : 'Lưu Món Ăn & Toàn Bộ Định Lượng'}</span>
+                  <span>{isAnalyzingTag ? 'AI đang phân tích tag...' : isSubmittingDish ? 'Đang lưu món & tạo kho...' : 'Lưu Món Ăn & Toàn Bộ Định Lượng'}</span>
                 </button>
               </div>
 
             </form>
+
+          </div>
+        </div>
+      )}
+
+      {/* Modal AI Suggestion: Hiển thị popup khi người dùng chưa chọn tag */}
+      {showAiTagModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 border border-slate-100">
+            
+            {/* Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2.5 bg-gradient-to-tr from-violet-600 to-indigo-500 text-white rounded-2xl shadow-md shadow-violet-500/20">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900">AI Phân Tích Danh Mục Món</h3>
+                  <p className="text-xs text-slate-500">Gợi ý phân loại tự động để dự báo nhu cầu chính xác hơn</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowAiTagModal(false)} 
+                className="text-slate-400 hover:text-slate-600 p-1.5 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Dish Info Summary */}
+            <div className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl space-y-1.5 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium">Món ăn:</span>
+                <span className="font-bold text-slate-900 text-sm">{pendingDishPayload?.name}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500 font-medium">Giá bán:</span>
+                <span className="font-semibold text-emerald-700">{Number(pendingDishPayload?.price || 0).toLocaleString('vi-VN')} đ</span>
+              </div>
+              {pendingDishPayload?.ingredients?.length > 0 && (
+                <div className="pt-1 border-t border-slate-200/60 text-[11px] text-slate-600">
+                  <span className="font-semibold text-slate-700">Nguyên liệu: </span>
+                  {pendingDishPayload.ingredients.map(i => i.ingredient_name).join(', ')}
+                </div>
+              )}
+            </div>
+
+            {/* AI Recommendation Highlight Box */}
+            <div className="p-4 bg-gradient-to-br from-violet-50 via-indigo-50/40 to-emerald-50/50 border border-violet-200/80 rounded-2xl space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-violet-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-violet-600" />
+                  Tag AI Đề Xuất Phù Hợp:
+                </span>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-violet-600 text-white shadow-xs">
+                  {Math.round((aiTagData?.confidence || 0.95) * 100)}% Phù hợp
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="px-3.5 py-1.5 rounded-xl bg-white border border-violet-300 text-violet-800 font-bold text-sm shadow-xs">
+                  {aiTagData?.suggested_category || 'Món Khô'}
+                </span>
+              </div>
+
+              <p className="text-xs text-violet-800 leading-relaxed">
+                {aiTagData?.reason || 'Dựa trên tên món và nguyên liệu, AI gợi ý danh mục này để tối ưu thuật toán dự báo thời tiết và chu kỳ bán hàng.'}
+              </p>
+            </div>
+
+            {/* Tag Selection Options (if user wants to customize) */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-700">
+                Hoặc chọn phân loại khác theo ý bạn:
+              </label>
+              <div className="grid grid-cols-3 gap-1.5">
+                {[
+                  "Món Nước",
+                  "Món Khô",
+                  "Cà Phê",
+                  "Trà & Trái Cây",
+                  "Đồ Ăn Nhẹ",
+                  "Bánh & Tráng Miệng",
+                  "Hải Sản",
+                  "Món Nướng & Lẩu",
+                  "Khác"
+                ].map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => setSelectedTagForAi(tag)}
+                    className={`py-1.5 px-2 rounded-xl text-xs font-medium border transition-all cursor-pointer truncate text-center ${
+                      selectedTagForAi === tag
+                        ? 'bg-violet-600 text-white border-violet-600 shadow-xs font-bold'
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-violet-50 hover:border-violet-300'
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  executeSaveDish({ ...pendingDishPayload, category: '' });
+                }}
+                className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-all cursor-pointer text-center"
+              >
+                Vẫn Bỏ Trống Tag (Lưu Ngay)
+              </button>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => setShowAiTagModal(false)}
+                  className="px-3.5 py-2.5 text-xs font-semibold text-slate-500 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                >
+                  Quay lại
+                </button>
+                <button
+                  type="button"
+                  disabled={isSubmittingDish}
+                  onClick={() => {
+                    executeSaveDish({ ...pendingDishPayload, category: selectedTagForAi || aiTagData?.suggested_category || 'Món Khô' });
+                  }}
+                  className="flex-1 sm:flex-none px-5 py-2.5 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-violet-600/20 inline-flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Áp Dụng Tag & Lưu Món</span>
+                </button>
+              </div>
+            </div>
 
           </div>
         </div>

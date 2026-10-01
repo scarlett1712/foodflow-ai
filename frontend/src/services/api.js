@@ -75,6 +75,7 @@ export const getDishes = (category = null, branchId = null) => {
 };
 export const createDish = (payload) => api.post('/dishes', payload);
 export const createDishWithRecipe = (payload) => api.post('/dishes/with-recipe', payload);
+export const smartTagDish = (payload) => api.post('/dishes/smart-tag', payload);
 export const deleteDish = (dishId) => api.delete(`/dishes/${dishId}`);
 
 export const getRecipes = (dishId = null) => api.get(dishId ? `/recipes?dish_id=${dishId}` : '/recipes');

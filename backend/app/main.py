@@ -230,10 +230,15 @@ class IngredientCreate(BaseModel):
 class SmartTagRequest(BaseModel):
     names: List[str]
 
+class DishSmartTagRequest(BaseModel):
+    name: str
+    ingredients: Optional[List[str]] = []
+    price: Optional[float] = 0.0
+
 class DishCreate(BaseModel):
     id: str
     name: str
-    category: str
+    category: Optional[str] = "Chưa phân loại"
     price: float
 
     @field_validator('price')
@@ -273,7 +278,7 @@ class DishIngredientInput(BaseModel):
 class DishWithRecipeCreate(BaseModel):
     id: Optional[str] = None
     name: str
-    category: str
+    category: Optional[str] = "Chưa phân loại"
     price: float
     ingredients: List[DishIngredientInput] = []
 
@@ -429,6 +434,136 @@ def smart_tag_ingredients(req: SmartTagRequest):
         tag = classify_ingredient_tag(name)
         results.append({"name": name, "suggested_tag": tag})
     return {"status": "success", "tags": results}
+
+def classify_dish_category(name: str, ingredients: Optional[List[Any]] = None, price: Optional[float] = 0.0) -> Dict[str, Any]:
+    name_clean = name.strip() if name else ""
+    name_lower = name_clean.lower()
+    
+    raw_ings = ingredients or []
+    ings_list = []
+    for item in raw_ings:
+        if isinstance(item, str):
+            ings_list.append(item.lower().strip())
+        elif isinstance(item, dict):
+            val = item.get("ingredient_name") or item.get("name") or ""
+            if val:
+                ings_list.append(str(val).lower().strip())
+        elif hasattr(item, "ingredient_name"):
+            val = getattr(item, "ingredient_name")
+            if val:
+                ings_list.append(str(val).lower().strip())
+    ings_text = " ".join(ings_list)
+
+    # 1. Cà phê
+    if any(k in name_lower for k in ["cà phê", "cafe", "coffee", "bạc xỉu", "cappuccino", "espresso", "latte", "americano", "macchiato", "mocha", "cold brew", "phin"]):
+        return {
+            "suggested_category": "Cà Phê",
+            "reason": f"Dựa vào tên món '{name_clean}', AI nhận diện đây là thức uống thuộc nhóm Cà Phê.",
+            "confidence": 0.95,
+            "alternatives": ["Trà & Trái Cây", "Đồ Ăn Nhẹ", "Bánh & Tráng Miệng"]
+        }
+    
+    # 2. Trà & Trái Cây / Đồ uống
+    if any(k in name_lower for k in ["trà ", "trà", "milk tea", "trà sữa", "boba", "nước ép", "sinh tố", "juice", "smoothie", "tắc", "chanh", "đào", "vải", "dâu", "xoài", "matcha", "soda", "đá xay"]):
+        return {
+            "suggested_category": "Trà & Trái Cây",
+            "reason": f"Tên món '{name_clean}' chứa đặc trưng dòng thức uống trà / trái cây giải khát.",
+            "confidence": 0.94,
+            "alternatives": ["Cà Phê", "Bánh & Tráng Miệng", "Đồ Ăn Nhẹ"]
+        }
+
+    # 3. Món Nướng & Lẩu
+    if any(k in name_lower for k in ["lẩu", "nướng", "bbq", "hotpot", "nầm nướng", "bò nướng", "sườn nướng", "lẩu thái", "lẩu riêu", "lẩu gà", "lẩu bò"]):
+        return {
+            "suggested_category": "Món Nướng & Lẩu",
+            "reason": f"Món '{name_clean}' có phương thức chế biến nướng hoặc lẩu nóng.",
+            "confidence": 0.93,
+            "alternatives": ["Món Nước", "Hải Sản", "Món Khô"]
+        }
+
+    # 4. Hải Sản
+    if any(k in name_lower for k in ["tôm", "cua", "ghẹ", "mực", "bạch tuộc", "cá hồi", "ốc", "sò", "hàu", "ngao", "nghêu", "hải sản", "tôm hùm", "bề bề"]) and not any(k in name_lower for k in ["bún", "phở", "mì", "cơm", "lẩu"]):
+        return {
+            "suggested_category": "Hải Sản",
+            "reason": f"Món '{name_clean}' chủ đạo là nguyên liệu hải sản tươi sống.",
+            "confidence": 0.90,
+            "alternatives": ["Món Nướng & Lẩu", "Đồ Ăn Nhẹ", "Món Khô"]
+        }
+
+    # 5. Bánh & Tráng Miệng
+    if any(k in name_lower for k in ["bánh ngọt", "bánh kem", "chè", "kem", "flan", "pudding", "tiramisu", "mousse", "tart", "cupcake", "sữa chua", "chè thái", "chè bưởi", "tráng miệng"]):
+        return {
+            "suggested_category": "Bánh & Tráng Miệng",
+            "reason": f"Món '{name_clean}' thuộc nhóm đồ ngọt / món tráng miệng sau ăn.",
+            "confidence": 0.92,
+            "alternatives": ["Đồ Ăn Nhẹ", "Trà & Trái Cây", "Khác"]
+        }
+
+    # 6. Đồ Ăn Nhẹ / Khai Vị
+    if any(k in name_lower for k in ["khoai tây", "khoai lang", "gà rán", "nem rán", "chả giò", "xúc xích", "phô mai que", "bánh tráng", "cá viên", "bò viên", "khô bò", "khô gà", "snack", "bắp xào", "chả lụa", "ăn vặt"]):
+        return {
+            "suggested_category": "Đồ Ăn Nhẹ",
+            "reason": f"Món '{name_clean}' là món ăn nhẹ / khai vị / ăn vặt phổ biến.",
+            "confidence": 0.90,
+            "alternatives": ["Món Khô", "Món Nướng & Lẩu", "Khác"]
+        }
+
+    # 7. Món Nước (nước dùng)
+    if any(k in name_lower for k in ["phở", "bún", "miến", "mì", "hủ tiếu", "cháo", "súp", "soup", "canh", "bánh canh", "ramen", "udon", "hoành thánh", "sủi cảo", "bún bò", "bún riêu", "bún cá", "mì vằn thắn"]) and not any(k in name_lower for k in ["bún chả", "bún đậu", "bún thịt nướng", "bún trộn", "bún khô", "mì xào", "mì trộn", "miến xào"]):
+        return {
+            "suggested_category": "Món Nước",
+            "reason": f"Món '{name_clean}' thuộc nhóm món có nước dùng (phở, bún nước, cháo, súp).",
+            "confidence": 0.96,
+            "alternatives": ["Món Khô", "Món Nướng & Lẩu", "Khác"]
+        }
+
+    # 8. Món Khô
+    if any(k in name_lower for k in ["cơm", "bánh mì", "bún chả", "bún đậu", "bún thịt nướng", "bún trộn", "bún khô", "mì xào", "mì trộn", "miến xào", "xôi", "gỏi", "nộm", "cuốn", "nem cuốn", "gỏi cuốn", "bánh cuốn", "bánh xèo", "sandwich", "burger", "steak", "bò né", "cơm tấm", "cơm rang", "cơm gà"]):
+        return {
+            "suggested_category": "Món Khô",
+            "reason": f"Món '{name_clean}' là món chính dạng khô (cơm, bánh mì, bún trộn, món cuốn).",
+            "confidence": 0.95,
+            "alternatives": ["Món Nước", "Đồ Ăn Nhẹ", "Khác"]
+        }
+
+    # 9. Dựa theo nguyên liệu cấu thành
+    if any(k in ings_text for k in ["cà phê", "coffee", "bột cà phê"]):
+        return {
+            "suggested_category": "Cà Phê",
+            "reason": f"Nguyên liệu định lượng chứa cà phê nguyên chất.",
+            "confidence": 0.85,
+            "alternatives": ["Trà & Trái Cây", "Khác"]
+        }
+    if any(k in ings_text for k in ["bánh phở", "nước dùng", "xương hầm"]):
+        return {
+            "suggested_category": "Món Nước",
+            "reason": f"Nguyên liệu định lượng có bánh phở/nước dùng.",
+            "confidence": 0.85,
+            "alternatives": ["Món Khô", "Khác"]
+        }
+    if any(k in ings_text for k in ["gạo", "cơm", "bánh mì", "tinh bột"]):
+        return {
+            "suggested_category": "Món Khô",
+            "reason": f"Nguyên liệu định lượng chứa tinh bột dạng khô.",
+            "confidence": 0.85,
+            "alternatives": ["Món Nước", "Khác"]
+        }
+
+    return {
+        "suggested_category": "Món Khô",
+        "reason": f"AI nhận diện món '{name_clean}' phù hợp với nhóm thực đơn món chính F&B.",
+        "confidence": 0.70,
+        "alternatives": ["Món Nước", "Đồ Ăn Nhẹ", "Khác"]
+    }
+
+@app.post("/api/dishes/smart-tag")
+def smart_tag_dish(req: DishSmartTagRequest):
+    res = classify_dish_category(req.name, req.ingredients, req.price)
+    return {
+        "status": "success",
+        "name": req.name,
+        **res
+    }
 
 @app.get("/api/ingredients")
 def get_ingredients():
