@@ -478,22 +478,6 @@ def delete_ingredient(ingredient_id: str):
 def get_dishes(category: Optional[str] = None, branch_id: Optional[str] = None):
     with get_db() as conn:
         cur = conn.cursor()
-        if branch_id and branch_id != "ALL":
-            cur.execute("""
-                SELECT DISTINCT d.* FROM dishes d
-                WHERE d.id IN (
-                    SELECT DISTINCT dish_id FROM sales WHERE branch_id = ?
-                    UNION
-                    SELECT DISTINCT dish_id FROM preorders WHERE branch_id = ?
-                )
-                ORDER BY d.id ASC
-            """, (branch_id, branch_id))
-            rows = [dict(r) for r in cur.fetchall()]
-            if rows:
-                if category and category != "ALL":
-                    rows = [r for r in rows if r["category"] == category]
-                return rows
-
         if category and category != "ALL":
             cur.execute("SELECT * FROM dishes WHERE category = ? ORDER BY id ASC", (category,))
         else:
@@ -518,9 +502,12 @@ def create_dish_with_recipe(dish: DishWithRecipeCreate):
         # 1. Sinh dish_id nếu chưa có
         dish_id = dish.id
         if not dish_id or dish_id.strip() == "":
-            cur.execute("SELECT count(*) FROM dishes")
-            c = cur.fetchone()[0] + 1
-            dish_id = f"D_{c:02d}"
+            cur.execute("SELECT id FROM dishes")
+            existing_ids = set(r[0] for r in cur.fetchall())
+            c = 1
+            while f"D{c:02d}" in existing_ids or f"D_{c:02d}" in existing_ids:
+                c += 1
+            dish_id = f"D{c:02d}"
         
         # 2. Lưu món ăn
         cur.execute("INSERT OR REPLACE INTO dishes (id, name, category, price) VALUES (?, ?, ?, ?)",

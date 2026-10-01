@@ -19,13 +19,16 @@ export default function RecipesPage({ dishes = [], recipes = [], ingredients = [
   const [selectedDishId, setSelectedDishId] = useState(dishes?.[0]?.id || '');
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Reset khi đổi chi nhánh
+  // Đồng bộ món đang chọn khi danh sách món thay đổi hoặc đổi chi nhánh
   React.useEffect(() => {
-    setCurrentPage(1);
     if (dishes?.length > 0) {
-      setSelectedDishId(dishes[0].id);
+      if (!selectedDishId || !dishes.find(d => d.id === selectedDishId)) {
+        setSelectedDishId(dishes[0].id);
+      }
+    } else {
+      setSelectedDishId('');
     }
-  }, [branchId, dishes?.length]);
+  }, [dishes, branchId]);
   
   // Modal states
   const [showAddDishModal, setShowAddDishModal] = useState(false);
