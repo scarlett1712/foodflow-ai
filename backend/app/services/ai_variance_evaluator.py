@@ -3,16 +3,19 @@ backend/app/services/ai_variance_evaluator.py
 Service phân tích chênh lệch đi chợ thực tế vs AI Baseline, thẩm định tính hợp lý của lý do giải trình và đề xuất chiến lược thích ứng mô hình dự báo.
 """
 
+import os
 import sqlite3
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "foodflow.db")
 
 def evaluate_purchase_variance(
     items: List[Dict[str, Any]],
     branch_id: str = "BRANCH_01",
     reason: str = "",
     target_date: Optional[str] = None,
-    db_path: str = "foodflow.db"
+    db_path: str = DB_PATH
 ) -> Dict[str, Any]:
     """
     Phân tích so sánh đơn mua hàng thực tế với định mức AI & Giá vốn chuẩn:

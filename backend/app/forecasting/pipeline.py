@@ -70,14 +70,24 @@ def load_data_from_db(db_path=DB_PATH):
     conn.close()
     return df
 
-def train_and_evaluate_all():
+def train_and_evaluate_all(db_path=DB_PATH):
     print("=" * 85)
     print("HUẤN LUYỆN UNIVERSAL F&B DEMAND MODEL (TỔNG QUÁT CHO MỌI QUÁN / MỌI MÓN / DATASET MỚI)")
     print("=" * 85)
 
-    df_all = load_data_from_db()
+    df_all = load_data_from_db(db_path)
+    if df_all is None or df_all.empty or len(df_all) == 0:
+        print("-> Cảnh báo: Bảng sales chưa có dữ liệu để huấn luyện mô hình.")
+        return pd.DataFrame()
+
     unique_dates = sorted(df_all["date"].unique())
-    split_idx = int(len(unique_dates) * 0.85) # ~620 ngày train, ~110 ngày test
+    if len(unique_dates) < 2:
+        print("-> Cảnh báo: Dữ liệu chưa đủ ngày để phân tách train/test.")
+        return pd.DataFrame()
+
+    split_idx = max(1, int(len(unique_dates) * 0.85))
+    if split_idx >= len(unique_dates):
+        split_idx = len(unique_dates) - 1
     split_date = unique_dates[split_idx]
 
     print(f"-> Tổng số ngày: {len(unique_dates)} ngày ({unique_dates[0]} -> {unique_dates[-1]})")

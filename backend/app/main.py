@@ -1657,11 +1657,14 @@ def trigger_retrain():
 @app.post("/api/data/reset-demo")
 def reset_to_demo_data():
     from scripts.generate_data import generate_big_dataset
-    generate_big_dataset()
+    generate_big_dataset(db_path=DB_PATH)
     # BUG-02 FIX: Đồng bộ schema sau khi generate_data tạo lại bảng (thiếu category_tag, items_json, purchase_history)
     init_db_schema()
     clear_forecast_cache()
-    train_and_evaluate_all()
+    try:
+        train_and_evaluate_all(db_path=DB_PATH)
+    except Exception as e:
+        logger.warning(f"Huấn luyện sau reset demo thất bại: {e}")
     # Pre-warm lại forecast cache với dữ liệu mới theo thời gian thực
     for b in ["BRANCH_01", "BRANCH_02", "BRANCH_03"]:
         try:
@@ -1687,6 +1690,14 @@ def clear_to_clean_slate():
         # Tạo 1 chi nhánh trống khởi đầu
         cur.execute("INSERT INTO branches (id, name, address, type) VALUES ('BRANCH_01', 'Quán Của Tôi (Chưa có dữ liệu)', 'Việt Nam', 'Mô Hình F&B Mới')")
         conn.commit()
+    # Đồng bộ sang root foodflow.db nếu có
+    try:
+        root_db = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "foodflow.db")
+        if os.path.exists(root_db) and os.path.abspath(root_db) != os.path.abspath(DB_PATH):
+            import shutil
+            shutil.copy2(DB_PATH, root_db)
+    except Exception:
+        pass
     return {"status": "success", "message": "Đã làm trống 100% dữ liệu! Hệ thống sẵn sàng để bạn tự tạo chi nhánh, món ăn, nguyên liệu và tải file doanh số lên."}
 
 if __name__ == "__main__":

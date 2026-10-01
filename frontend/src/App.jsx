@@ -60,12 +60,15 @@ export default function App() {
   const fetchBranches = async () => {
     try {
       const res = await getBranches();
-      setBranches(res.data || []);
-      if (res.data?.length > 0 && !res.data.find(b => b.id === selectedBranch)) {
-        setSelectedBranch(res.data[0].id);
+      const list = res.data || [];
+      setBranches(list);
+      if (list.length > 0 && !list.find(b => b.id === selectedBranch)) {
+        setSelectedBranch(list[0].id);
       }
+      return list;
     } catch (e) {
       console.error('Error fetching branches:', e);
+      return [];
     }
   };
 
@@ -173,10 +176,12 @@ export default function App() {
     try {
       setLoading(true);
       await resetDemoData();
-      await fetchBranches();
-      await fetchAllBranchData(selectedBranch);
+      const list = await fetchBranches();
+      const nextBranch = list.length > 0 ? list[0].id : 'BRANCH_01';
+      setSelectedBranch(nextBranch);
+      fetchAllBranchData(nextBranch);
     } catch (e) {
-      alert('Lỗi nạp demo: ' + e.message);
+      alert('Lỗi nạp demo: ' + (e.response?.data?.detail || e.message));
     } finally {
       setLoading(false);
     }
@@ -186,10 +191,12 @@ export default function App() {
     try {
       setLoading(true);
       await clearCleanData();
-      await fetchBranches();
-      await fetchAllBranchData(selectedBranch);
+      const list = await fetchBranches();
+      const nextBranch = list.length > 0 ? list[0].id : 'BRANCH_01';
+      setSelectedBranch(nextBranch);
+      fetchAllBranchData(nextBranch);
     } catch (e) {
-      alert('Lỗi xóa dữ liệu: ' + e.message);
+      alert('Lỗi xóa dữ liệu: ' + (e.response?.data?.detail || e.message));
     } finally {
       setLoading(false);
     }

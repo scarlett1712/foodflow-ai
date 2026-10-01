@@ -40,8 +40,9 @@ from backend.app.forecasting.vn_calendar import (
 )
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
-# DB duy nhất: root foodflow.db — nơi server FastAPI đọc
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "foodflow.db")
+# DB chuẩn: backend/foodflow.db — nơi server FastAPI và ML pipeline đọc
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend", "foodflow.db")
+ROOT_DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "foodflow.db")
 os.makedirs(DATA_DIR, exist_ok=True)
 
 # 1. Danh sách Chi Nhánh (Branches)
@@ -294,11 +295,14 @@ def generate_smooth_weather_series(start_date, total_days):
     return weather_series
 
 
-def generate_big_dataset():
+def generate_big_dataset(db_path=None):
     print("=" * 75)
     print("BẮT ĐẦU SINH DỮ LIỆU ĐA DẠNG v3 (3 CHI NHÁNH, 22 MÓN, 730 NGÀY)")
     print("Cải tiến: +Làm mượt Thời tiết & Khí hậu, +Event spikes, +Tết VN, nhiễu 12%")
     print("=" * 75)
+
+    target_db = db_path or DB_PATH
+    os.makedirs(os.path.dirname(os.path.abspath(target_db)), exist_ok=True)
 
     end_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     start_date = end_date - timedelta(days=729)
@@ -501,7 +505,7 @@ def generate_big_dataset():
     save_csv("preorders.csv", ["id", "branch_id", "date", "customer_name", "dish_id", "dish_name", "quantity", "note"], preorders)
 
     # Nạp SQLite DB
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(target_db)
     cur = conn.cursor()
 
     # Tạo bảng
@@ -653,8 +657,15 @@ def generate_big_dataset():
     conn.commit()
     conn.close()
 
+    # Đồng bộ sang ROOT_DB_PATH nếu target_db khác ROOT_DB_PATH
+    try:
+        if os.path.abspath(target_db) != os.path.abspath(ROOT_DB_PATH):
+            shutil.copy2(target_db, ROOT_DB_PATH)
+    except Exception as e:
+        print(f"Warning: Không thể sao chép sang ROOT_DB_PATH: {e}")
+
     print("=" * 75)
-    print(f"NẠP THÀNH CÔNG VÀO SQLITE: {DB_PATH}")
+    print(f"NẠP THÀNH CÔNG VÀO SQLITE: {target_db}")
     print(f"Tổng kết: 3 Chi Nhánh | 22 Món | 35 Nguyên Liệu | {len(sales_rows)} Bản ghi Sales (730 ngày)")
     print(f"Cải tiến v3: Làm mượt thời tiết (Smooth Transition), Weather Dynamics, Tết VN, Nhiễu 12%")
     print("=" * 75)

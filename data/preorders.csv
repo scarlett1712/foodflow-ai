@@ -1,7 +1,7 @@
 ﻿id,branch_id,date,customer_name,dish_id,dish_name,quantity,note
-1,BRANCH_01,2026-10-01,Công ty TechCorp (Họp sáng),D15,Cà Phê Sữa Đá Sài Gòn,25,Giao lúc 8h30
-2,BRANCH_01,2026-10-01,Ngân hàng VietFin (Tiệc trưa),D08,Cơm Tấm Sườn Bì Chả,30,Giao lúc 11h30
-3,BRANCH_02,2026-10-01,CLB Guitar Sinh Viên (Offline),D20,Trà Sữa Trân Châu Ô Long,40,Nhận tại quán lúc 14h00
-4,BRANCH_02,2026-10-01,Sinh nhật bạn Minh Anh,D14,Gà Rán Giòn Cay (2 miếng),20,Bàn số 5 lúc 18h30
-5,BRANCH_03,2026-10-01,Gia đình bác Hùng (Họp mặt),D01,Phở Bò Tái Nạm,18,Bàn VIP 1 lúc 7h30 sáng
-6,BRANCH_03,2026-10-01,Đoàn khách du lịch Đà Nẵng,D03,Bún Chả Hà Nội,35,Giao lúc 12h00
+1,BRANCH_01,2026-10-02,Công ty TechCorp (Họp sáng),D15,Cà Phê Sữa Đá Sài Gòn,25,Giao lúc 8h30
+2,BRANCH_01,2026-10-02,Ngân hàng VietFin (Tiệc trưa),D08,Cơm Tấm Sườn Bì Chả,30,Giao lúc 11h30
+3,BRANCH_02,2026-10-02,CLB Guitar Sinh Viên (Offline),D20,Trà Sữa Trân Châu Ô Long,40,Nhận tại quán lúc 14h00
+4,BRANCH_02,2026-10-02,Sinh nhật bạn Minh Anh,D14,Gà Rán Giòn Cay (2 miếng),20,Bàn số 5 lúc 18h30
+5,BRANCH_03,2026-10-02,Gia đình bác Hùng (Họp mặt),D01,Phở Bò Tái Nạm,18,Bàn VIP 1 lúc 7h30 sáng
+6,BRANCH_03,2026-10-02,Đoàn khách du lịch Đà Nẵng,D03,Bún Chả Hà Nội,35,Giao lúc 12h00
